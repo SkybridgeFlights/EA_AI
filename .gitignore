@@ -1,5 +1,6 @@
 .venv/
 venv/
+node_modules/
 __pycache__/
 *.pyc
 *.pyo
@@ -8,6 +9,6 @@ __pycache__/
 artifacts/
 runs/
 logs/
-.env
-.idea/
-.vscode/
+%APPDATA%/
+%USERPROFILE%/
+AppData/
