@@ -1,0 +1,64 @@
+INFO:     Will watch for changes in these directories: ['C:\\EA_AI']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [34520] using WatchFiles
+INFO:     Started server process [38036]
+INFO:     Waiting for application startup.
+[AUTO] started: every 60s -> C:\Users\Wajd Shaaban\AppData\Roaming\MetaQuotes\Terminal\Common\Files\ai_signals
+INFO:     Application startup complete.
+[selfcal] started
+[selfcal] wrote live_config.json {'AI_MinConfidence': 0.5, 'InpATR_SL_Mult': 1.8, 'InpRR': 1.2, 'NewsFilterLevel': 'off'}
+[writer] wrote ini -> path=C:\Users\Wajd Shaaban\AppData\Roaming\MetaQuotes\Terminal\Common\Files\ai_signals\xauusd_signal.ini bytes=468 dir=BUY conf=0.509
+INFO:     127.0.0.1:54487 - "GET /dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54487 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54487 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52254 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54487 - "GET /api/dashboard/summary?last_n=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/dashboard/health HTTP/1.1" 200 OK
+
+
+
+
+
+

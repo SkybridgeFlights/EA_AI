@@ -1,0 +1,9 @@
+stage: &id001
+  name: tighten
+  dd: 15.0
+  pf: 1.15
+  wm: -10.0
+  tr: 160
+attempts:
+- stage_cfg: *id001
+  valid_trials: 25

@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "updated_at": "2026-04-02T17:32:02Z",
+  "policy_version": "20260402_173202Z",
+  "shadow": false,
+  "core_metrics": {
+    "pf": 0.0,
+    "wr": 0.0,
+    "maxdd": 0.0,
+    "trades": 0,
+    "pnl_today": 0.0
+  },
+  "scope": {
+    "symbol": "XAUUSD",
+    "tf": "M15",
+    "spread_bucket": "mid",
+    "regime": "range"
+  },
+  "params": {
+    "ai_min_confidence": 0.65,
+    "rr": 2.4,
+    "risk_pct": 1.0,
+    "ts_start": 200.0,
+    "ts_step": 120.0,
+    "be_trig": 120.0,
+    "be_offs": 30.0,
+    "BE_MinR": 0.3,
+    "BE_MinGainPtsExtra": 10.0,
+    "BE_SpreadMul": 1.8,
+    "TS_MinDeltaModifyPts": 25.0,
+    "TS_CooldownBars": 3,
+    "MinSL_Gap_ATR": 0.3,
+    "MinSL_Gap_SprdMul": 2.0,
+    "max_spread_pts": 350,
+    "max_trades_per_day": 2,
+    "use_calendar": true,
+    "cal_no_trade_before_min": 5,
+    "cal_no_trade_after_min": 5,
+    "cal_min_impact": 2,
+    "stability_mode": "EARLY",
+    "regime_override": "STRONG_TREND"
+  }
+}

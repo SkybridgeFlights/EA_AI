@@ -1,0 +1,10 @@
+{
+  "finished": true,
+  "finish_reason": "test passed in",
+  "log_path": "C:\\Users\\Wajd Shaaban\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\Tester\\logs\\20260227.log",
+  "report_prefix": "C:\\tradealpha_research\\temp\\wfo_runs\\fold_2_4c1c1fb345\\train_020\\report.htm",
+  "report_path": null,
+  "final_balance": 7847.08,
+  "test_passed": true,
+  "ts": 1772231754.9473605
+}

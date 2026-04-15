@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(MT5_PATH=\"$APPDATA/MetaQuotes/Terminal/Common/Files/live_config.json\")",
+      "Bash(cp \"C:/EA_AI/runtime/live_config.json\" \"$MT5_PATH\")",
+      "Bash(echo \"Copied OK: $MT5_PATH\")",
+      "Bash(find /c/EA_AI -maxdepth 4 \\\\\\(-name *.mq5 -o -name *.ex5 -o -name *.set \\\\\\))",
+      "Bash(ls /c/EA_AI/.venv/Scripts/python*)",
+      "Bash(powershell -Command \"\n\\\\$content = Get-Content 'C:\\\\\\\\EA_AI\\\\\\\\scripts\\\\\\\\setup_scheduler.ps1' -Raw\n\\\\$errors = \\\\$null\n[System.Management.Automation.Language.Parser]::ParseInput\\(\\\\$content, [ref]\\\\$null, [ref]\\\\$errors\\) | Out-Null\nif \\(\\\\$errors.Count -eq 0\\) { Write-Host 'Syntax OK' }\nelse { \\\\$errors | ForEach-Object { Write-Host \\\\\"ERROR: \\\\$_\\\\\" } }\n\")",
+      "Bash(\"C:\\\\Users\\\\Wajd Shaaban\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe\" -m venv .venv)",
+      "Bash(.venv/Scripts/python.exe --version)",
+      "Bash(.venv/Scripts/pip install:*)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\\\EA_AI\\\\scripts\\\\setup_scheduler.ps1\" 2>&1)",
+      "Bash(MT5_COMMON=\"$APPDATA/MetaQuotes/Terminal/Common/Files\")",
+      "Bash(mkdir -p \"$MT5_COMMON\")",
+      "Bash(cp \"C:/EA_AI/EA_V9_WFO_BEST.set\" \"$MT5_COMMON/EA_V9_WFO_BEST.set\")",
+      "Bash(.venv/Scripts/python.exe -m tools.selfcal_runner --once)",
+      "Bash(.venv/Scripts/python.exe -c \":*)",
+      "Bash(.venv\\\\Scripts\\\\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000)",
+      "Bash(.venv/Scripts/python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000)",
+      "Bash(cmd.exe:*)",
+      "Bash(netstat -ano)",
+      "Bash(kill -9 1953)",
+      "Bash(curl -s http://127.0.0.1:8000/)",
+      "Bash(kill -9 1871)",
+      "Bash(powershell.exe:*)",
+      "Bash(grep -rn \"C:\\\\\\\\\\\\\\\\Users\\\\|C:/Users\\\\|AppData\\\\|hardcoded\\\\|%APPDATA%\\\\|%USERPROFILE%\" /c/EA_AI/app /c/EA_AI/tools /c/EA_AI/scripts)",
+      "Bash(grep -rn \"C:\\\\\\\\\\\\\\\\Users\\\\|C:/Users\\\\|AppData\\\\|%APPDATA%\\\\|%USERPROFILE%\\\\|r\\\\\"C:\\\\\\\\\\\\\\\\\" /c/EA_AI --include=\"*.py\")",
+      "Bash(ls:*)",
+      "Bash(xargs grep:*)",
+      "Bash(find /c/EA_AI -name \"*.py\" -exec grep -l \"XGBClassifier\\\\|feature_names_in_\" {} \\\\;)",
+      "Bash(python3:*)",
+      "Bash(.venv/Scripts/python.exe -m py_compile app/ml/features.py app/ml/model.py)"
+    ]
+  }
+}

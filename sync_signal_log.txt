@@ -1,0 +1,4 @@
+  File "C:\EA_AI\tools\sync_ai_signals.py", line 12
+    if sig
+          ^
+SyntaxError: expected ':'

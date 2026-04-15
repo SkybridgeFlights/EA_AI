@@ -1,0 +1,23 @@
+{
+  "ini_path": "out_v9_tick\\_runs\\sanity_tick\\run.ini",
+  "mt5_terminal": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+  "run_meta": {
+    "cmd": [
+      "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+      "/config:out_v9_tick\\_runs\\sanity_tick\\run.ini"
+    ],
+    "rc": 0,
+    "elapsed": 0.5327343940734863,
+    "stdout_len": 0,
+    "stderr_len": 0
+  },
+  "report_prefix_from_ini": "C:\\tradealpha_research\\out_v9_tick\\_runs\\sanity_tick\\report",
+  "local_report_candidates": [
+    "C:\\tradealpha_research\\out_v9_tick\\_runs\\sanity_tick\\report.html",
+    "C:\\tradealpha_research\\out_v9_tick\\_runs\\sanity_tick\\report.htm",
+    "C:\\tradealpha_research\\out_v9_tick\\_runs\\sanity_tick\\report.xml"
+  ],
+  "found_report": null,
+  "found_recent_logs": [],
+  "hint": "If found_report is None AND rc is 0 with very small elapsed, MT5 likely exited before starting tester. Check MT5 Strategy Tester -> Journal. Also verify Expert name matches EXACTLY and EA exists in MQL5\\Experts."
+}

@@ -1,0 +1,280 @@
+# Project Audit Report
+
+- Root: `C:\EA_AI`
+- Generated: `2026-02-14T17:52:37`
+- Files: **245** (Python: **76**)
+- Findings: HIGH=0, MEDIUM=2, LOW=86, INFO=3
+
+## HIGH Findings (0)
+
+_None_
+
+## MEDIUM Findings (2)
+
+- **[XGBOOST]** `app\ml\registry.py` — Potential XGBoost serialization compatibility issue (joblib/pickle load).
+  - Hint: Prefer saving/loading via Booster.save_model / Booster.load_model (JSON/UBJ) for long-term stability.
+- **[XGBOOST]** `tools\project_audit.py` — Potential XGBoost serialization compatibility issue (joblib/pickle load).
+  - Hint: Prefer saving/loading via Booster.save_model / Booster.load_model (JSON/UBJ) for long-term stability.
+
+## LOW Findings (86)
+
+- **[PORTABILITY]** `app\analytics\jsonl_loader.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `app\analytics\news_performance.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `app\core\policy_engine.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `app\data\news_store.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `app\main.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `app\services\aggregator.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `app\services\writer.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `artifacts\ingest_report_20251109.txt` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `audit_report.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `code.txt` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `logs\_check_tmp\dbg.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `logs\_check_tmp\root.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `logs\_check_tmp\selfcal_once.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `logs\_check_tmp\sig_gen.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `logs\_check_tmp\summary.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `logs\_check_tmp\test_read.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `logs\server_log.txt` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `models\active_model.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\.package-lock.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\amdefine\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\amdefine\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\ansi-regex\readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\ansi-styles\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\ansi-styles\readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\chalk\readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\cli-progress\CHANGES.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\cli-progress\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\cli-progress\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\color-convert\CHANGELOG.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\color-convert\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\color-name\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\color-name\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\commander\CHANGELOG.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\commander\Readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\commander\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\dayjs\CHANGELOG.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\dayjs\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\dayjs\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\debug\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\debug\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\dukascopy-node\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\dukascopy-node\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\emoji-regex\LICENSE-MIT.txt` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\emoji-regex\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\emoji-regex\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\fastest-validator\CHANGELOG.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\fastest-validator\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\fastest-validator\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\fs-extra\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\fs-extra\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\graceful-fs\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\graceful-fs\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\has-flag\readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\is-fullwidth-code-point\readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\jsonfile\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\long\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\long\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\lzma-purejs-requirejs\FORMAT.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\lzma-purejs-requirejs\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\lzma-purejs-requirejs\node_modules\commander\Readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\lzma-purejs-requirejs\node_modules\commander\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\lzma-purejs-requirejs\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\ms\readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\node-fetch\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\node-fetch\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\python-struct\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\python-struct\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\string-width\readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\strip-ansi\readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\supports-color\readme.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\tr46\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\universalify\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\universalify\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\webidl-conversions\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\webidl-conversions\package.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `node_modules\whatwg-url\README.md` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `package-lock.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `runtime\live_config.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `runtime\live_config_backup_20251011_220607.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `runtime\status.json` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `server_log.txt` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `tools\build_feature_store.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `tools\project_audit.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `tools\selfcal_runner.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `tools\sync_jsonl_from_mt5.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+- **[PORTABILITY]** `tools\train_model_xgb.py` — Hard-coded absolute path detected.
+  - Hint: Move paths to config/env (settings) and build them via Path().
+
+## INFO Findings (3)
+
+- **[PANDAS]** `app\ml\features.py` — Custom _extract_field found; ensure correct handling for duplicate column names and MultiIndex.
+  - Hint: Add explicit guards for DataFrame-vs-Series and duplicate column names.
+- **[PANDAS]** `tools\project_audit.py` — RecursionError mention in code/comments; investigate recursion guards.
+  - Hint: Add explicit guards for DataFrame-vs-Series and duplicate column names.
+- **[PANDAS]** `tools\project_audit.py` — Using drop_duplicates(keep=False) can be expensive on huge columns; ensure it's necessary.
+  - Hint: Add explicit guards for DataFrame-vs-Series and duplicate column names.
+
+## Files Index (Python)
+
+- `app\__init__.py`  (functions=0, classes=0)
+- `app\_init_.py`  (functions=0, classes=0)
+- `app\analytics\__init__.py`  (functions=0, classes=0)
+- `app\analytics\jsonl_loader.py`  (functions=5, classes=0)
+- `app\analytics\metrics.py`  (functions=5, classes=1)
+- `app\analytics\news_performance.py`  (functions=12, classes=1)
+- `app\config.py`  (functions=2, classes=1)
+- `app\config\settings.py`  (functions=2, classes=1)
+- `app\core\__init__.py`  (functions=0, classes=0)
+- `app\core\live_schema.py`  (functions=6, classes=0)
+- `app\core\live_writer.py`  (functions=5, classes=0)
+- `app\core\policy_engine.py`  (functions=19, classes=2)
+- `app\daemons\signal_loop.py`  (functions=4, classes=0)
+- `app\dashboard.py`  (functions=29, classes=0)
+- `app\data\__init__.py`  (functions=0, classes=0)
+- `app\data\news_store.py`  (functions=3, classes=0)
+- `app\deps.py`  (functions=2, classes=0)
+- `app\extensions.py`  (functions=7, classes=0)
+- `app\ingest\__init__.py`  (functions=0, classes=0)
+- `app\ingest\deals_adapter.py`  (functions=7, classes=0)
+- `app\ingest\quality_check.py`  (functions=1, classes=0)
+- `app\main.py`  (functions=12, classes=0)
+- `app\ml\_init_.py`  (functions=0, classes=0)
+- `app\ml\features.py`  (functions=11, classes=0)
+- `app\ml\model.py`  (functions=9, classes=0)
+- `app\ml\registry.py`  (functions=6, classes=0)
+- `app\models\__init__.py`  (functions=0, classes=0)
+- `app\models\live_config.py`  (functions=0, classes=5)
+- `app\models\policy.py`  (functions=0, classes=5)
+- `app\routes\_init_.py`  (functions=0, classes=0)
+- `app\routes\data.py`  (functions=2, classes=0)
+- `app\routes\signals.py`  (functions=8, classes=2)
+- `app\routes\train.py`  (functions=4, classes=0)
+- `app\selfcal\__init__.py`  (functions=0, classes=0)
+- `app\selfcal\decision_rules.py`  (functions=8, classes=2)
+- `app\selfcal\reporting.py`  (functions=8, classes=0)
+- `app\services\__init__.py`  (functions=0, classes=0)
+- `app\services\_init_.py`  (functions=0, classes=0)
+- `app\services\aggregator.py`  (functions=10, classes=0)
+- `app\services\backtest.py`  (functions=7, classes=4)
+- `app\services\calibrator.py`  (functions=11, classes=0)
+- `app\services\signal_daemon.py`  (functions=5, classes=0)
+- `app\services\writer.py`  (functions=25, classes=1)
+- `app\services\writer_guard.py`  (functions=2, classes=0)
+- `app\utils\__init__.py`  (functions=0, classes=0)
+- `app\utils\mirror_service.py`  (functions=1, classes=0)
+- `backtest.py`  (functions=2, classes=0)
+- `fetch_duka.py`  (functions=2, classes=0)
+- `mt5_set_builder.py`  (functions=9, classes=0)
+- `test_pipeline.py`  (functions=1, classes=0)
+- `test_yf.py`  (functions=0, classes=0)
+- `tools\autotrain_job.py`  (functions=6, classes=0)
+- `tools\bt_ea_like.py`  (functions=5, classes=0)
+- `tools\build_feature_store.py`  (functions=21, classes=0)
+- `tools\build_signal_csv.py`  (functions=2, classes=0)
+- `tools\check_signals_stats.py`  (functions=1, classes=0)
+- `tools\convert_mt5_csv.py`  (functions=3, classes=0)
+- `tools\data_fetch.py`  (functions=3, classes=0)
+- `tools\diag_signals.py`  (functions=14, classes=1)
+- `tools\generate_ai_replay_csv_xgb.py`  (functions=4, classes=0)
+- `tools\optimize_auto.py`  (functions=39, classes=1)
+- `tools\optimize_full.py`  (functions=23, classes=4)
+- `tools\project_audit.py`  (functions=22, classes=2)
+- `tools\promote_live.py`  (functions=5, classes=0)
+- `tools\replay_signals.py`  (functions=0, classes=0)
+- `tools\run_calibration.py`  (functions=0, classes=0)
+- `tools\run_topn.py`  (functions=4, classes=0)
+- `tools\selfcal_runner.py`  (functions=5, classes=0)
+- `tools\sync_ai_signals.py`  (functions=0, classes=0)
+- `tools\sync_deals_to_jsonl.py`  (functions=14, classes=1)
+- `tools\sync_jsonl_from_mt5.py`  (functions=5, classes=0)
+- `tools\train_model_xgb.py`  (functions=10, classes=0)
+- `tools\update_news_weights.py`  (functions=1, classes=0)
+- `tools\walk_forward.py`  (functions=11, classes=0)
+- `web\__init__.py`  (functions=0, classes=0)
+- `web\main.py`  (functions=5, classes=1)

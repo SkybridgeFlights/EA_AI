@@ -1,0 +1,22 @@
+{
+  "symbol": "XAUUSD",
+  "tf": "H1",
+  "updated_at": "2026-04-02T17:32:07Z",
+  "bar_time": "2026-03-26T19:00:00Z",
+  "regime": "STRONG_TREND",
+  "confidence": 0.9995,
+  "probabilities": {
+    "HIGH_VOL": 0.0002,
+    "RANGE": 0.0,
+    "STRONG_TREND": 0.9995,
+    "WEAK_TREND": 0.0002
+  },
+  "features": {
+    "atr_norm": 0.0088,
+    "vol_ratio": 0.966,
+    "adx_14": 42.6638,
+    "di_diff": -21.9268,
+    "ema_ratio_l": -0.0129,
+    "bb_width": 0.0458
+  }
+}

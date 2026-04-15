@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-04-02T17:32:04Z",
+  "policy_version": "20260402_173204Z",
+  "shadow": false,
+  "policy": {
+    "version": "1.0",
+    "updated_at": "2026-04-02T17:32:04Z",
+    "policy_version": "20260402_173204Z",
+    "shadow": false,
+    "scope": {
+      "symbol": "XAUUSD",
+      "tf": "M15",
+      "spread_bucket": "mid",
+      "regime": "range"
+    },
+    "params": {
+      "ai_min_confidence": 0.65,
+      "rr": 2.4,
+      "risk_pct": 1.0,
+      "ts_start": 200.0,
+      "ts_step": 120.0,
+      "be_trig": 120.0,
+      "be_offs": 30.0,
+      "BE_MinR": 0.3,
+      "BE_MinGainPtsExtra": 10.0,
+      "BE_SpreadMul": 1.8,
+      "TS_MinDeltaModifyPts": 25.0,
+      "TS_CooldownBars": 3,
+      "MinSL_Gap_ATR": 0.3,
+      "MinSL_Gap_SprdMul": 2.0,
+      "max_spread_pts": 350,
+      "max_trades_per_day": 2,
+      "use_calendar": true,
+      "cal_no_trade_before_min": 5,
+      "cal_no_trade_after_min": 5,
+      "cal_min_impact": 2,
+      "stability_mode": "EARLY",
+      "regime_override": "STRONG_TREND"
+    },
+    "explain": {
+      "pf": 0.0,
+      "wr": 0.0,
+      "maxdd": 0.0,
+      "trades": 0,
+      "pf_7d": null,
+      "wr_7d": null,
+      "maxdd_7d": null,
+      "pnl_7d": null,
+      "pf_30d": null,
+      "wr_30d": null,
+      "maxdd_30d": null,
+      "pnl_30d": null,
+      "stability_mode": "EARLY",
+      "median_spread": null,
+      "regime": "range",
+      "micro_guard": false,
+      "rules": null,
+      "news_weights_updated_at": "2025-11-30T10:20:41Z",
+      "news_weights": {
+        "none": 0.92
+      },
+      "regime_override": "STRONG_TREND",
+      "regime_confidence": 0.9995,
+      "regime_bar_time": "2026-03-26T19:00:00Z"
+    }
+  },
+  "core_metrics": {
+    "pf": 0.0,
+    "wr": 0.0,
+    "maxdd": 0.0,
+    "trades": 0,
+    "pnl_today": 0.0
+  },
+  "legacy": {
+    "AI_MinConfidence": 0.65,
+    "InpRR": 2.4,
+    "RiskPct": 1.0,
+    "TS_Start": 200.0,
+    "TS_Step": 120.0,
+    "BE_Trig": 120.0,
+    "BE_Offs": 30.0,
+    "BE_MinR": 0.3,
+    "BE_MinGainPtsExtra": 10.0,
+    "BE_SpreadMul": 1.8,
+    "TS_MinDeltaModifyPts": 25.0,
+    "TS_CooldownBars": 3,
+    "MinSL_Gap_ATR": 0.3,
+    "MinSL_Gap_SprdMul": 2.0,
+    "MaxSpreadPts": 350,
+    "MaxTradesPerDay": 2,
+    "UseCalendar": true,
+    "Cal_NoTrade_BeforeMin": 5,
+    "Cal_NoTrade_AfterMin": 5,
+    "Cal_MinImpact": 2
+  },
+  "_write_meta": {
+    "ok": true,
+    "live_path": "C:\\EA_AI\\runtime\\live_config.json",
+    "mirror_path": "C:\\Users\\Wajd Shaaban\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common\\Files\\live_config.json",
+    "checksum": "0d5c85227268bb0d4e0a54554322a8c69321f6988d0bd4a37e12f3d10f220606",
+    "policy_version": "20260402_173204Z",
+    "shadow": false,
+    "params": {
+      "rr": 2.4,
+      "risk_pct": 1.0,
+      "ai_min_confidence": 0.65
+    }
+  }
+}

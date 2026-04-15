@@ -1,0 +1,29 @@
+[data] forcing fresh fetch from MT5 (cache ignored)
+[mt5] resolved symbol: requested='XAUUSDr' -> chosen='XAUUSDr'
+[data] source=mt5 symbol=XAUUSDr tf=H1 -> rows=51806
+[data] source=mt5 -> rows=51806 | stats={'rows_in': 51806, 'dup_removed': 0, 'nan_rows': 0, 'spike_rows': 0}
+[data] cleaned saved -> C:\EA_AI\artifacts\clean_price.csv
+[data] rows= 51806 from= 2014-01-14 00:00:00+00:00 to= 2025-10-14 20:00:00+00:00
+[data] NA counts: {'Open': 0, 'High': 0, 'Low': 0, 'Close': 0}
+[data] time_step_top: {Timedelta('0 days 01:00:00'): 48617, Timedelta('0 days 02:00:00'): 1699, Timedelta('1 days 00:00:00'): 808, Timedelta('2 days 02:00:00'): 324, Timedelta('2 days 00:00:00'): 160}
+[data] median_200d_vol=0.001624
+[loop] 1/1
+[grid] loop=1 phase=random pf=164.615 wr=91.5% trades=12855 score=93.2780
+[grid] loop=1 phase=random pf=172.694 wr=91.6% trades=12888 score=107.8337
+[grid] loop=1 phase=random pf=176.942 wr=91.5% trades=12912 score=109.3863
+[grid] loop=1 phase=random pf=178.883 wr=91.5% trades=12893 score=119.9089
+[grid] loop=1 phase=random pf=173.133 wr=91.5% trades=12907 score=108.1929
+[grid] loop=1 phase=random pf=168.107 wr=91.6% trades=12872 score=108.5770
+[grid] loop=1 phase=random pf=162.149 wr=91.5% trades=12828 score=90.5556
+[grid] loop=1 phase=random pf=175.987 wr=91.5% trades=12900 score=125.9838
+[grid] loop=1 phase=random pf=171.666 wr=91.5% trades=12909 score=106.8445
+[grid] loop=1 phase=random pf=0.004 wr=7.7% trades=12912 score=-8087.1142
+[grid] loop=1 phase=random pf=173.367 wr=91.5% trades=12918 score=96.9972
+[grid] loop=1 phase=random pf=161.957 wr=91.5% trades=12855 score=108.0953
+[grid] loop=1 phase=random pf=178.689 wr=91.6% trades=12903 score=133.3114
+[grid] loop=1 phase=random pf=163.025 wr=91.5% trades=12853 score=101.0369
+[grid] loop=1 phase=random pf=164.154 wr=91.5% trades=12827 score=126.1017
+[grid] loop=1 phase=random pf=162.800 wr=91.5% trades=12863 score=116.9403
+[grid] loop=1 phase=random pf=163.709 wr=91.5% trades=12874 score=101.7083
+[grid] loop=1 phase=random pf=174.322 wr=91.5% trades=12856 score=106.8783
+[grid] loop=1 phase=random pf=173.991 wr=91.5% trades=12878 score=72.4530

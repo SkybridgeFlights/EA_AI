@@ -1,0 +1,79 @@
+{
+  "score": 163.09,
+  "profit_pct": 63.17,
+  "max_dd_pct": 0.0,
+  "sharpe": 14.644,
+  "trades": 89,
+  "winrate": 100.0,
+  "avg_r": 0.46,
+  "regimes": {
+    "trend": 750,
+    "range": 7592,
+    "highvol": 112,
+    "neutral": 0
+  },
+  "params": {
+    "ma_fast": 30,
+    "ma_slow": 74,
+    "rsi_per": 20,
+    "rsi_buy_max": 57,
+    "rsi_sell_min": 41,
+    "atr_per": 28,
+    "atr_mult": 2.1694,
+    "rr": 1.9354,
+    "max_spread_pts": 350,
+    "spread_sl_factor": 3.3367,
+    "commission_per_lot": 7.2378,
+    "risk_pct": 1.1145,
+    "regime": {
+      "use_regime": true,
+      "rd_atr_per": 14,
+      "rd_highvol_mult": 1.8771,
+      "rd_slope_lookback": 1,
+      "rd_slope_thresh_pts": 48.0847,
+      "rd_median_window": 200,
+      "tr_rr": 2.4,
+      "tr_ts_start": 250,
+      "tr_ts_step": 80,
+      "tr_be_trig": 80,
+      "tr_be_offs": 15,
+      "tr_risk_mult": 1.2,
+      "rg_rr": 1.6,
+      "rg_ts_start": 180,
+      "rg_ts_step": 60,
+      "rg_be_trig": 60,
+      "rg_be_offs": 10,
+      "rg_risk_mult": 0.9,
+      "hv_rr": 2.8,
+      "hv_ts_start": 350,
+      "hv_ts_step": 120,
+      "hv_be_trig": 120,
+      "hv_be_offs": 30,
+      "hv_risk_mult": 0.7
+    },
+    "governor": {
+      "use_rg": true,
+      "daily_soft_pct": 3.0,
+      "daily_hard_pct": 5.0,
+      "eq_dd_halt_pct": 12.0,
+      "max_exposure_lots": 5.0,
+      "scale_by_atr": true,
+      "risk_min_pct": 0.2,
+      "risk_max_pct": 1.2,
+      "atr_norm_pts": 800.0
+    },
+    "__score": 163.08999999999997
+  },
+  "walk_forward": {
+    "wf_segments": 6,
+    "wf_avg_profit": 8.82,
+    "wf_avg_dd": 0.0,
+    "wf_avg_sharpe": 13.761
+  },
+  "monte_carlo": {
+    "mc_mean": 50.38507623337032,
+    "mc_p05": 48.018600815623415,
+    "mc_p95": 52.85426004413512
+  },
+  "mt5_env": {}
+}

@@ -1,0 +1,16 @@
+stage: &id001
+  name: tighten
+  dd: 15.0
+  pf: 1.15
+  wm: -10.0
+  tr: 160
+attempts:
+- stage_cfg: *id001
+  valid_trials: 0
+- stage_cfg:
+    name: tighten_relax1
+    dd: 16.5
+    pf: 1.1199999999999999
+    wm: -11.0
+    tr: 140
+  valid_trials: 176

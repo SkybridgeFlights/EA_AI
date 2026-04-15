@@ -1,0 +1,7787 @@
+The following is a digest of the repository "tradealpha_research".
+This digest is designed to be easily parsed by Large Language Models.
+
+--- SUMMARY ---
+Repository: tradealpha_research
+Files Analyzed: 56
+Total Text Size: 180.6 KB
+Estimated Tokens (text only): ~58.054
+
+--- DIRECTORY STRUCTURE ---
+tradealpha_research/
+├── configs/
+│   ├── _RUN_CURRENT.set
+│   ├── best_tick_final.set
+│   ├── phaseA_search.yaml
+│   └── tick_base.ini
+├── data/
+│   └── XAUUSDr_H1_2021-01-01_2025-12-31.parquet [binary]
+├── out_diag_mt5/
+│   └── mt5_diag_result.json
+├── out_v9_tick/
+│   └── _runs/
+│       └── sanity_tick/
+│           └── run.ini
+├── out_wfo/
+│   ├── stage_1_explore/
+│   │   ├── effective_config.yaml
+│   │   └── stage_meta.yaml
+│   ├── stage_2_tighten/
+│   │   ├── effective_config.yaml
+│   │   └── stage_meta.yaml
+│   ├── stage_3_company/
+│   │   ├── effective_config.yaml
+│   │   └── stage_meta.yaml
+│   └── stage_4_montecarlo/
+│       ├── cfg_01_params.json
+│       ├── cfg_02_params.json
+│       ├── cfg_03_params.json
+│       ├── cfg_04_params.json
+│       ├── cfg_05_params.json
+│       ├── cfg_06_params.json
+│       ├── cfg_07_params.json
+│       ├── cfg_08_params.json
+│       ├── cfg_09_params.json
+│       ├── cfg_10_params.json
+│       ├── final_config.json
+│       └── final_config.set
+├── src/
+│   ├── core/
+│   │   ├── base_config.py
+│   │   ├── fold_generator.py
+│   │   ├── ini_builder.py
+│   │   ├── mt5_executor.py
+│   │   ├── parameter_grid.py
+│   │   ├── set_builder.py
+│   │   ├── single_run_test.py
+│   │   └── test_set_builder.py
+│   ├── backtest_tech.py
+│   ├── data_mt5.py
+│   ├── diagnose_and_run_mt5.py
+│   ├── export_final_set.py
+│   ├── indicators.py
+│   ├── metrics.py
+│   ├── monte_carlo.py
+│   ├── mt5_probe.py
+│   ├── mt5_runner.py
+│   ├── mt5_symbol_info.py
+│   ├── objective_wfo.py
+│   ├── objective.py
+│   ├── optimize_phaseA.py
+│   ├── pipeline_auto_wfo_mc.py
+│   ├── pipeline_auto_wfo.py
+│   ├── pipeline_auto.py
+│   ├── pipeline_v9_tick_wfo_mc.py
+│   ├── report_parser.py
+│   ├── set_writer.py
+│   ├── setfile.py
+│   └── wfo.py
+├── parameter_grid.json
+└── test_output.set [binary]
+
+
+--- FILE CONTENTS ---
+============================================================
+FILE: configs/_RUN_CURRENT.set
+============================================================
+TradeMode=2
+UseMA=true
+InpMAfast=29
+InpMAslow=89
+InpMA_Method=1
+InpMA_Price=1
+UseRSI=true
+InpRSI_Period=11
+InpRSI_BuyMax=61
+InpRSI_SellMin=54
+InpATR_Period=23
+InpATR_SL_Mult=1.6
+InpRR=3.0
+InpMaxSpreadPts=350
+InpRiskPct=0.55
+MaxTradesPerDay=9
+UseDailyLossStop=true
+DailyLossPct=3.5
+UseTrailingStop=true
+TS_StartPts=525
+TS_StepPts=50
+UseBreakEven=true
+BE_TriggerPts=170
+BE_OffsetPts=0
+MinTradeGapSec=330
+UseAISignals=false
+BT_EnableAIReplay=false
+UseFibonacciFilter=false
+UseRegimeDetector=false
+UseRiskGovernor=false
+UseMicrostructureFilters=false
+UseShadowSL=false
+UseLadderTP=false
+UsePyramiding=false
+Cloud_Enable=false
+
+
+============================================================
+FILE: configs/best_tick_final.set
+============================================================
+EnableLogger=false
+LogDecisionsCSV=logs/decisions.csv
+LogDealsCSV=logs/deals.csv
+LogOpenRows=false
+
+EnableJSONLTrades=false
+JSONL_FilePrefix=trades
+JSONL_SymbolTag=XAUUSDr
+JSONL_MinFieldsMode=0
+
+InpMagic=20260208
+InpSymbol=XAUUSDr
+UseCurrentSymbol=true
+
+TradeMode=2
+HYB_RequireAgreementWhenAI=false
+HYB_TechFallbackWhenNoAI=false
+HYB_TechFallbackWhenAIFiltered=false
+
+UseMA=true
+InpMAfast=29
+InpMAslow=89
+InpMA_Method=1
+InpMA_Price=1
+
+UseRSI=true
+InpRSI_Period=11
+InpRSI_BuyMax=61
+InpRSI_SellMin=54
+
+InpATR_Period=23
+InpATR_SL_Mult=1.6
+InpRR=3.0
+InpMaxSpreadPts=350
+
+AutoConfig=false
+AC_LookbackDays=365
+InpSpreadSLFactor=2.5
+InpCommissionPerLot=7.0
+
+InpRiskPct=0.55
+MaxOpenPerSymbol=1
+MaxTradesPerDay=9
+UseDailyLossStop=true
+DailyLossPct=3.5
+
+UseTrailingStop=true
+TS_StartPts=525
+TS_StepPts=50
+
+UseBreakEven=true
+BE_TriggerPts=170
+BE_OffsetPts=0
+
+UsePartialClose=false
+
+TS_Buffer_ATR=0.6
+MinSL_Gap_ATR=0.7
+MinSL_Gap_SprdMul=3.0
+TS_CooldownBars=4
+
+BE_MinR=0.3
+BE_MinGainPtsExtra=10
+BE_ArmedAfterBars=2
+BE_SpreadMul=1.5
+TS_MinDeltaModifyPts=25
+
+UseSessionFilter=false
+TradeOnClosedBar=true
+MinTradeGapSec=330
+DirInput=0
+
+UseCalendarNews=false
+UseEmergencyExit=false
+
+UseAISignals=false
+BT_EnableAIReplay=false
+
+UseFibonacciFilter=false
+UseRegimeDetector=false
+UseRiskGovernor=false
+UseMicrostructureFilters=false
+
+UseShadowSL=false
+UseTimeStop=false
+UseMFE_MAE_Trailing=false
+UseLadderTP=false
+UsePyramiding=false
+
+Cloud_Enable=false
+
+BT_DisableCalendar=false
+BT_DisableCloud=false
+BT_AllowLocalAIFile=false
+BT_ForceTechIfNoAI=false
+
+EnableCloseJournaling=true
+CloseScanLookbackMin=240
+CloseScanEverySec=5
+
+ShowDebugPanel=true
+
+============================================================
+FILE: configs/phaseA_search.yaml
+============================================================
+# configs/phaseA_search.yaml
+run:
+  symbol: "XAUUSDr"
+  timeframe: "H1"
+  utc: true
+  start: "2021-01-01"
+  end: "2025-12-31"
+
+costs:
+  spread_points_model: "fixed"     # fixed | from_data (لاحقًا)
+  fixed_spread_points: 220         # اجعلها قريبة من متوسط Exness Raw Spread على الذهب
+  slippage_points: 25              # تقدير محافظ
+  commission_per_lot: 7.0
+
+execution:
+  trade_on_closed_bar: true
+  min_trade_gap_sec: 60            # baseline (لكننا نبحث MinTradeGapSec أيضًا)
+
+risk:
+  initial_balance: 10000
+
+constraints:
+  max_dd_pct: 12.0
+  min_trades: 200
+  min_pf: 1.20
+  worst_month_pct: -8.0
+
+search_space:
+  # ===== Signals =====
+  InpMAfast:
+    type: "int"
+    low: 8
+    high: 55
+
+  InpMAslow:
+    type: "int"
+    low: 20
+    high: 200
+
+  InpRSI_Period:
+    type: "int"
+    low: 7
+    high: 28
+
+  InpRSI_BuyMax:
+    type: "int"
+    low: 45
+    high: 65
+
+  InpRSI_SellMin:
+    type: "int"
+    low: 35
+    high: 55
+
+  # ===== ATR / SL / TP =====
+  InpATR_Period:
+    type: "int"
+    low: 7
+    high: 28
+
+  InpATR_SL_Mult:
+    type: "float"
+    low: 1.2
+    high: 3.0
+    step: 0.1
+
+  InpRR:
+    type: "float"
+    low: 1.2
+    high: 3.2
+    step: 0.1
+
+  # ===== Spread gate =====
+  InpMaxSpreadPts:
+    type: "int"
+    low: 120
+    high: 350
+    step: 10
+
+  # ===== Risk & Limits =====
+  InpRiskPct:
+    type: "float"
+    low: 0.15
+    high: 1.00
+    step: 0.05
+
+  MaxTradesPerDay:
+    type: "int"
+    low: 2
+    high: 10
+
+  DailyLossPct:
+    type: "float"
+    low: 1.5
+    high: 4.0
+    step: 0.25
+
+  # ===== BE / TS (kept but not emphasized) =====
+  UseTrailingStop:
+    type: "bool"
+
+  TS_StartPts:
+    type: "int"
+    low: 150
+    high: 600
+    step: 25
+
+  TS_StepPts:
+    type: "int"
+    low: 50
+    high: 250
+    step: 10
+
+  UseBreakEven:
+    type: "bool"
+
+  BE_TriggerPts:
+    type: "int"
+    low: 50
+    high: 250
+    step: 10
+
+  BE_OffsetPts:
+    type: "int"
+    low: 0
+    high: 60
+    step: 5
+
+  # ===== Execution =====
+  MinTradeGapSec:
+    type: "int"
+    low: 60
+    high: 900
+    step: 30
+
+rules:
+  - "InpMAslow >= InpMAfast + 10"
+  - "InpRSI_SellMin <= InpRSI_BuyMax - 5"
+  - "TS_StepPts <= TS_StartPts"
+
+============================================================
+FILE: configs/tick_base.ini
+============================================================
+[Tester]
+; IMPORTANT: Expert path must be relative to MQL5\Experts
+Expert=Experts\EA V8.ex5
+
+Symbol=XAUUSDr
+Period=H1
+Optimization=0
+Model=0
+FromDate=2021.01.01
+ToDate=2025.12.31
+ForwardMode=0
+Deposit=10000
+Currency=USD
+Leverage=100
+ExecutionMode=0
+OptimizationCriterion=1
+Visual=0
+
+; Use absolute paths so we know exactly where files are written/read
+ExpertParameters=C:\tradealpha_research\configs\_RUN_CURRENT.set
+Report=C:\tradealpha_research\out_v9_tick\_runs\sanity_tick\report
+ReplaceReport=1
+ShutdownTerminal=1
+
+============================================================
+FILE: out_diag_mt5/mt5_diag_result.json
+============================================================
+{
+  "ini_path": "out_v9_tick\\_runs\\sanity_tick\\run.ini",
+  "mt5_terminal": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+  "run_meta": {
+    "cmd": [
+      "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+      "/config:out_v9_tick\\_runs\\sanity_tick\\run.ini"
+    ],
+    "rc": 0,
+    "elapsed": 0.5327343940734863,
+    "stdout_len": 0,
+    "stderr_len": 0
+  },
+  "report_prefix_from_ini": "C:\\tradealpha_research\\out_v9_tick\\_runs\\sanity_tick\\report",
+  "local_report_candidates": [
+    "C:\\tradealpha_research\\out_v9_tick\\_runs\\sanity_tick\\report.html",
+    "C:\\tradealpha_research\\out_v9_tick\\_runs\\sanity_tick\\report.htm",
+    "C:\\tradealpha_research\\out_v9_tick\\_runs\\sanity_tick\\report.xml"
+  ],
+  "found_report": null,
+  "found_recent_logs": [],
+  "hint": "If found_report is None AND rc is 0 with very small elapsed, MT5 likely exited before starting tester. Check MT5 Strategy Tester -> Journal. Also verify Expert name matches EXACTLY and EA exists in MQL5\\Experts."
+}
+
+============================================================
+FILE: out_v9_tick/_runs/sanity_tick/run.ini
+============================================================
+[Tester]
+Expert=EA V8.ex5
+Symbol=XAUUSDr
+Period=H1
+Optimization=0
+Model=0
+FromDate=2021.01.01
+ToDate=2025.12.31
+ForwardMode=0
+Deposit=10000
+Currency=USD
+ProfitInPips=0
+Leverage=100
+ExecutionMode=0
+OptimizationCriterion=1
+Visual=0
+Report=C:\tradealpha_research\out_v9_tick\_runs\sanity_tick\report
+ReplaceReport=1
+ShutdownTerminal=1
+
+
+============================================================
+FILE: out_wfo/stage_1_explore/effective_config.yaml
+============================================================
+run:
+  symbol: XAUUSDr
+  timeframe: H1
+  utc: true
+  start: '2021-01-01'
+  end: '2025-12-31'
+costs:
+  spread_points_model: fixed
+  fixed_spread_points: 220
+  slippage_points: 25
+  commission_per_lot: 7.0
+execution:
+  trade_on_closed_bar: true
+  min_trade_gap_sec: 60
+risk:
+  initial_balance: 10000
+constraints:
+  max_dd_pct: 21.0
+  min_trades: 80
+  min_pf: 1.05
+  worst_month_pct: -14.0
+search_space:
+  InpMAfast:
+    type: int
+    low: 8
+    high: 55
+  InpMAslow:
+    type: int
+    low: 20
+    high: 200
+  InpRSI_Period:
+    type: int
+    low: 7
+    high: 28
+  InpRSI_BuyMax:
+    type: int
+    low: 45
+    high: 65
+  InpRSI_SellMin:
+    type: int
+    low: 35
+    high: 55
+  InpATR_Period:
+    type: int
+    low: 7
+    high: 28
+  InpATR_SL_Mult:
+    type: float
+    low: 1.2
+    high: 3.0
+    step: 0.1
+  InpRR:
+    type: float
+    low: 1.2
+    high: 3.2
+    step: 0.1
+  InpMaxSpreadPts:
+    type: int
+    low: 120
+    high: 350
+    step: 10
+  InpRiskPct:
+    type: float
+    low: 0.15
+    high: 1.0
+    step: 0.05
+  MaxTradesPerDay:
+    type: int
+    low: 2
+    high: 10
+  DailyLossPct:
+    type: float
+    low: 1.5
+    high: 4.0
+    step: 0.25
+  UseTrailingStop:
+    type: bool
+  TS_StartPts:
+    type: int
+    low: 150
+    high: 600
+    step: 25
+  TS_StepPts:
+    type: int
+    low: 50
+    high: 250
+    step: 10
+  UseBreakEven:
+    type: bool
+  BE_TriggerPts:
+    type: int
+    low: 50
+    high: 250
+    step: 10
+  BE_OffsetPts:
+    type: int
+    low: 0
+    high: 60
+    step: 5
+  MinTradeGapSec:
+    type: int
+    low: 60
+    high: 900
+    step: 30
+rules:
+- InpMAslow >= InpMAfast + 10
+- InpRSI_SellMin <= InpRSI_BuyMax - 5
+- TS_StepPts <= TS_StartPts
+
+
+============================================================
+FILE: out_wfo/stage_1_explore/stage_meta.yaml
+============================================================
+stage: &id001
+  name: explore
+  dd: 18.0
+  pf: 1.1
+  wm: -12.0
+  tr: 120
+attempts:
+- stage_cfg: *id001
+  valid_trials: 0
+- stage_cfg:
+    name: explore_relax1
+    dd: 19.5
+    pf: 1.07
+    wm: -13.0
+    tr: 100
+  valid_trials: 0
+- stage_cfg:
+    name: explore_relax2
+    dd: 21.0
+    pf: 1.05
+    wm: -14.0
+    tr: 80
+  valid_trials: 103
+
+
+============================================================
+FILE: out_wfo/stage_2_tighten/effective_config.yaml
+============================================================
+run:
+  symbol: XAUUSDr
+  timeframe: H1
+  utc: true
+  start: '2021-01-01'
+  end: '2025-12-31'
+costs:
+  spread_points_model: fixed
+  fixed_spread_points: 220
+  slippage_points: 25
+  commission_per_lot: 7.0
+execution:
+  trade_on_closed_bar: true
+  min_trade_gap_sec: 60
+risk:
+  initial_balance: 10000
+constraints:
+  max_dd_pct: 15.0
+  min_trades: 160
+  min_pf: 1.15
+  worst_month_pct: -10.0
+search_space:
+  InpMAfast:
+    type: int
+    low: 20
+    high: 31
+  InpMAslow:
+    type: int
+    low: 80
+    high: 109
+  InpRSI_Period:
+    type: int
+    low: 8
+    high: 12
+  InpRSI_BuyMax:
+    type: int
+    low: 58
+    high: 65
+  InpRSI_SellMin:
+    type: int
+    low: 44
+    high: 55
+  InpATR_Period:
+    type: int
+    low: 18
+    high: 28
+  InpATR_SL_Mult:
+    type: float
+    low: 1.5
+    high: 1.6
+    step: 0.1
+  InpRR:
+    type: float
+    low: 3.0
+    high: 3.2
+    step: 0.1
+  InpMaxSpreadPts:
+    type: int
+    low: 300
+    high: 350
+    step: 10
+  InpRiskPct:
+    type: float
+    low: 0.35000000000000003
+    high: 0.6000000000000001
+    step: 0.05
+  MaxTradesPerDay:
+    type: int
+    low: 8
+    high: 10
+  DailyLossPct:
+    type: float
+    low: 2.75
+    high: 3.5
+    step: 0.25
+  UseTrailingStop:
+    type: bool
+  TS_StartPts:
+    type: int
+    low: 525
+    high: 600
+    step: 25
+  TS_StepPts:
+    type: int
+    low: 50
+    high: 70
+    step: 10
+  UseBreakEven:
+    type: bool
+  BE_TriggerPts:
+    type: int
+    low: 150
+    high: 230
+    step: 10
+  BE_OffsetPts:
+    type: int
+    low: 0
+    high: 5
+    step: 5
+  MinTradeGapSec:
+    type: int
+    low: 180
+    high: 360
+    step: 30
+rules:
+- InpMAslow >= InpMAfast + 10
+- InpRSI_SellMin <= InpRSI_BuyMax - 5
+- TS_StepPts <= TS_StartPts
+
+
+============================================================
+FILE: out_wfo/stage_2_tighten/stage_meta.yaml
+============================================================
+stage: &id001
+  name: tighten
+  dd: 15.0
+  pf: 1.15
+  wm: -10.0
+  tr: 160
+attempts:
+- stage_cfg: *id001
+  valid_trials: 25
+
+
+============================================================
+FILE: out_wfo/stage_3_company/effective_config.yaml
+============================================================
+run:
+  symbol: XAUUSDr
+  timeframe: H1
+  utc: true
+  start: '2021-01-01'
+  end: '2025-12-31'
+costs:
+  spread_points_model: fixed
+  fixed_spread_points: 220
+  slippage_points: 25
+  commission_per_lot: 7.0
+execution:
+  trade_on_closed_bar: true
+  min_trade_gap_sec: 60
+risk:
+  initial_balance: 10000
+constraints:
+  max_dd_pct: 13.5
+  min_trades: 180
+  min_pf: 1.17
+  worst_month_pct: -9.0
+search_space:
+  InpMAfast:
+    type: int
+    low: 29
+    high: 29
+  InpMAslow:
+    type: int
+    low: 89
+    high: 89
+  InpRSI_Period:
+    type: int
+    low: 11
+    high: 11
+  InpRSI_BuyMax:
+    type: int
+    low: 61
+    high: 61
+  InpRSI_SellMin:
+    type: int
+    low: 54
+    high: 54
+  InpATR_Period:
+    type: int
+    low: 23
+    high: 23
+  InpATR_SL_Mult:
+    type: float
+    low: 1.6
+    high: 1.6
+    step: 0.1
+  InpRR:
+    type: float
+    low: 3.0
+    high: 3.0
+    step: 0.1
+  InpMaxSpreadPts:
+    type: int
+    low: 350
+    high: 350
+    step: 10
+  InpRiskPct:
+    type: float
+    low: 0.55
+    high: 0.55
+    step: 0.05
+  MaxTradesPerDay:
+    type: int
+    low: 9
+    high: 9
+  DailyLossPct:
+    type: float
+    low: 3.5
+    high: 3.5
+    step: 0.25
+  UseTrailingStop:
+    type: bool
+  TS_StartPts:
+    type: int
+    low: 525
+    high: 525
+    step: 25
+  TS_StepPts:
+    type: int
+    low: 50
+    high: 50
+    step: 10
+  UseBreakEven:
+    type: bool
+  BE_TriggerPts:
+    type: int
+    low: 170
+    high: 170
+    step: 10
+  BE_OffsetPts:
+    type: int
+    low: 0
+    high: 0
+    step: 5
+  MinTradeGapSec:
+    type: int
+    low: 330
+    high: 330
+    step: 30
+rules:
+- InpMAslow >= InpMAfast + 10
+- InpRSI_SellMin <= InpRSI_BuyMax - 5
+- TS_StepPts <= TS_StartPts
+
+
+============================================================
+FILE: out_wfo/stage_3_company/stage_meta.yaml
+============================================================
+stage: &id001
+  name: company
+  dd: 12.0
+  pf: 1.2
+  wm: -8.0
+  tr: 200
+attempts:
+- stage_cfg: *id001
+  valid_trials: 0
+- stage_cfg:
+    name: company_relax1
+    dd: 13.5
+    pf: 1.17
+    wm: -9.0
+    tr: 180
+  valid_trials: 250
+
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_01_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": false,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": true,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_02_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": true,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": false,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_03_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": false,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": false,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_04_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": true,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": true,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_05_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": false,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": true,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_06_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": true,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": false,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_07_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": false,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": false,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_08_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": true,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": true,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_09_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": false,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": true,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/cfg_10_params.json
+============================================================
+{
+  "InpMAfast": 29,
+  "InpMAslow": 89,
+  "InpRSI_Period": 11,
+  "InpRSI_BuyMax": 61,
+  "InpRSI_SellMin": 54,
+  "InpATR_Period": 23,
+  "InpATR_SL_Mult": 1.6,
+  "InpRR": 3.0,
+  "InpMaxSpreadPts": 350,
+  "InpRiskPct": 0.55,
+  "MaxTradesPerDay": 9,
+  "DailyLossPct": 3.5,
+  "UseTrailingStop": true,
+  "TS_StartPts": 525,
+  "TS_StepPts": 50,
+  "UseBreakEven": true,
+  "BE_TriggerPts": 170,
+  "BE_OffsetPts": 0,
+  "MinTradeGapSec": 330
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/final_config.json
+============================================================
+{
+  "selected_by": "no_config_passed_gate(mc_dd_p95<= 12.0); picked min(mc_dd_p95) then max(mc_net_p05)",
+  "constraints_used": {
+    "dd_limit": 12.0,
+    "pf_limit": 1.2
+  },
+  "best_row": {
+    "rank": 4.0,
+    "base_net_profit": 7498.581574105388,
+    "base_pf": 1.253225127027418,
+    "base_max_dd_pct": -7.6862119285304065,
+    "base_worst_month_pct": -5.321474483425503,
+    "base_trades": 703.0,
+    "mc_iters": 300.0,
+    "mc_net_p05": 5943.7632563705965,
+    "mc_net_med": 7159.509736444012,
+    "mc_dd_p95": 13.950098152045623,
+    "mc_pf_p05": 1.2091296850566635,
+    "mc_pass_rate": 0.8233333333333334
+  },
+  "params": {
+    "InpMAfast": 29,
+    "InpMAslow": 89,
+    "InpRSI_Period": 11,
+    "InpRSI_BuyMax": 61,
+    "InpRSI_SellMin": 54,
+    "InpATR_Period": 23,
+    "InpATR_SL_Mult": 1.6,
+    "InpRR": 3.0,
+    "InpMaxSpreadPts": 350,
+    "InpRiskPct": 0.55,
+    "MaxTradesPerDay": 9,
+    "DailyLossPct": 3.5,
+    "UseTrailingStop": true,
+    "TS_StartPts": 525,
+    "TS_StepPts": 50,
+    "UseBreakEven": true,
+    "BE_TriggerPts": 170,
+    "BE_OffsetPts": 0,
+    "MinTradeGapSec": 330
+  },
+  "symbol": "XAUUSDr",
+  "timeframe": "H1"
+}
+
+============================================================
+FILE: out_wfo/stage_4_montecarlo/final_config.set
+============================================================
+InpMAfast=29
+InpMAslow=89
+InpRSI_Period=11
+InpRSI_BuyMax=61
+InpRSI_SellMin=54
+InpATR_Period=23
+InpATR_SL_Mult=1.6
+InpRR=3.0
+InpMaxSpreadPts=350
+InpRiskPct=0.55
+MaxTradesPerDay=9
+DailyLossPct=3.5
+UseTrailingStop=true
+TS_StartPts=525
+TS_StepPts=50
+UseBreakEven=true
+BE_TriggerPts=170
+BE_OffsetPts=0
+MinTradeGapSec=330
+
+
+============================================================
+FILE: src/core/base_config.py
+============================================================
+# src/core/base_config.py
+
+BASE_CONFIG = {
+
+    # --- Core ---
+    "TradeMode": 2,
+    "UseMA": True,
+    "UseRSI": True,
+    "UseAISignals": False,
+
+    # --- IMPORTANT: force no-AI noise in tester ---
+    "UseLiveConfig": False,     # يمنع LiveConfig من التدخل أثناء الباكتيست
+    "BT_AISignalsCSV": "",      # يمنع محاولة فتح ملف إشارات AI الافتراضي
+
+    # --- RSI ---
+    "InpRSI_Period": 11,
+    "InpRSI_BuyMax": 61,
+    "InpRSI_SellMin": 54,
+
+    # --- ATR ---
+    "InpATR_Period": 23,
+    "InpMaxSpreadPts": 350,
+
+    # --- Risk ---
+    "InpRiskPct": 0.55,
+    "MaxTradesPerDay": 9,
+    "UseDailyLossStop": True,
+    "DailyLossPct": 3.5,
+
+    # --- BE & TS ---
+    "UseTrailingStop": True,
+    "TS_StartPts": 525,
+    "TS_StepPts": 50,
+
+    "UseBreakEven": True,
+    "BE_TriggerPts": 170,
+    "BE_OffsetPts": 0,
+
+    "MinTradeGapSec": 330,
+
+    # --- Disabled modules ---
+    "UseFibonacciFilter": False,
+    "UseRegimeDetector": False,
+    "UseRiskGovernor": False,
+    "UseMicrostructureFilters": False,
+    "UseShadowSL": False,
+    "UseLadderTP": False,
+    "UsePyramiding": False,
+    "Cloud_Enable": False,
+}
+
+============================================================
+FILE: src/core/fold_generator.py
+============================================================
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from dataclasses import dataclass
+from typing import List
+
+
+@dataclass
+class Fold:
+    fold_id: int
+    train_from: datetime
+    train_to: datetime
+    test_from: datetime
+    test_to: datetime
+
+
+class ExpandingWFOGenerator:
+    """
+    Expanding Window Walk Forward Generator
+    Train: grows from initial start
+    Test: fixed length
+    Step: equal to test window
+    """
+
+    def __init__(
+        self,
+        start_date: str,
+        end_date: str,
+        initial_train_months: int = 24,
+        test_months: int = 6,
+        step_months: int = 6,
+    ):
+        self.start_date = datetime.strptime(start_date, "%Y.%m.%d")
+        self.end_date = datetime.strptime(end_date, "%Y.%m.%d")
+        self.initial_train_months = initial_train_months
+        self.test_months = test_months
+        self.step_months = step_months
+
+    def generate(self) -> List[Fold]:
+        folds = []
+
+        train_start = self.start_date
+        train_end = train_start + relativedelta(months=self.initial_train_months)
+
+        fold_id = 1
+
+        while True:
+            test_start = train_end
+            test_end = test_start + relativedelta(months=self.test_months)
+
+            if test_end > self.end_date:
+                break
+
+            fold = Fold(
+                fold_id=fold_id,
+                train_from=train_start,
+                train_to=train_end,
+                test_from=test_start,
+                test_to=test_end,
+            )
+
+            folds.append(fold)
+
+            # Expanding: train always starts from initial start
+            train_end = train_end + relativedelta(months=self.step_months)
+
+            fold_id += 1
+
+        return folds
+
+
+def format_mt5_date(dt: datetime) -> str:
+    return dt.strftime("%Y.%m.%d")
+
+
+if __name__ == "__main__":
+    generator = ExpandingWFOGenerator(
+        start_date="2021.01.01",
+        end_date="2025.12.31",
+        initial_train_months=24,
+        test_months=6,
+        step_months=6,
+    )
+
+    folds = generator.generate()
+
+    print("\nGenerated WFO Folds:\n")
+    for f in folds:
+        print(
+            f"Fold {f.fold_id}: "
+            f"Train [{format_mt5_date(f.train_from)} → {format_mt5_date(f.train_to)}] | "
+            f"Test [{format_mt5_date(f.test_from)} → {format_mt5_date(f.test_to)}]"
+        )
+
+============================================================
+FILE: src/core/ini_builder.py
+============================================================
+# src/core/ini_builder.py
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Optional
+
+
+class INIBuilder:
+    """
+    Builds MT5 Strategy Tester INI config.
+
+    Key changes:
+    - Converts set_path/report_prefix/ini_path to absolute paths so MT5 can always find them.
+    - Keeps compatibility with the .ini format you're already using.
+    """
+
+    def __init__(self, expert: str):
+        self.expert = expert
+
+    def build(
+        self,
+        symbol: str,
+        period: str,
+        from_date: str,
+        to_date: str,
+        deposit: int,
+        set_path: str,
+        report_prefix: str,
+        ini_path: str,
+        optimization: int = 0,
+        model: int = 0,
+        leverage: int = 100,
+        currency: str = "USD",
+        shutdown_terminal: int = 1,
+        replace_report: int = 1,
+    ) -> str:
+        set_abs = str(Path(set_path).resolve())
+        report_abs = str(Path(report_prefix).resolve())
+        ini_abs = Path(ini_path).resolve()
+        ini_abs.parent.mkdir(parents=True, exist_ok=True)
+
+        lines = [
+            "[Tester]",
+            f"Expert={self.expert}",
+            f"Symbol={symbol}",
+            f"Period={period}",
+            f"Optimization={optimization}",
+            f"Model={model}",
+            f"FromDate={from_date}",
+            f"ToDate={to_date}",
+            f"Deposit={deposit}",
+            f"Currency={currency}",
+            f"Leverage={leverage}",
+            f"Report={report_abs}",
+            f"ReplaceReport={replace_report}",
+            f"ShutdownTerminal={shutdown_terminal}",
+            f"ExpertParameters={set_abs}",
+        ]
+
+        ini_abs.write_text("\n".join(lines), encoding="utf-8")
+        return str(ini_abs)
+
+============================================================
+FILE: src/core/mt5_executor.py
+============================================================
+# src/core/mt5_executor.py
+from __future__ import annotations
+
+import glob
+import os
+import subprocess
+import time
+from pathlib import Path
+from typing import Optional
+
+
+class MT5Executor:
+    """
+    Runs MT5 terminal in headless tester mode via /config:<ini>.
+    Waits for a report file with prefix report_prefix.
+    """
+
+    def __init__(self, terminal_path: str):
+        self.terminal_path = terminal_path
+
+    def run(self, ini_path: str) -> int:
+        ini_abs = str(Path(ini_path).resolve())
+        cwd = str(Path(ini_abs).parent)
+
+        # Most reliable: /config:<path>
+        cmd = [self.terminal_path, f"/config:{ini_abs}"]
+
+        # Note: We WAIT here; MT5 will exit if ShutdownTerminal=1 in ini.
+        p = subprocess.Popen(cmd, cwd=cwd)
+        return p.wait()
+
+    def wait_for_report(self, report_prefix: str, timeout_sec: int = 300) -> Optional[str]:
+        """
+        Waits for MT5 report output (html/htm/xml) based on Report=<prefix>
+        In MT5, report filename is usually <prefix>.<ext> or <prefix>_*.*
+        """
+        prefix_abs = str(Path(report_prefix).resolve())
+
+        patterns = [
+            prefix_abs + "*.htm",
+            prefix_abs + "*.html",
+            prefix_abs + "*.xml",
+            prefix_abs + "_*.htm",
+            prefix_abs + "_*.html",
+            prefix_abs + "_*.xml",
+        ]
+
+        deadline = time.time() + timeout_sec
+        while time.time() < deadline:
+            hits: list[str] = []
+            for pat in patterns:
+                hits.extend(glob.glob(pat))
+
+            if hits:
+                hits.sort(key=lambda x: os.path.getmtime(x), reverse=True)
+                return hits[0]
+
+            time.sleep(1)
+
+        return None
+
+============================================================
+FILE: src/core/parameter_grid.py
+============================================================
+from dataclasses import dataclass
+from itertools import product
+from typing import List
+import json
+
+
+@dataclass
+class ParameterSet:
+    ma_fast: int
+    ma_slow: int
+    atr_sl_mult: float
+    rr: float
+
+
+class GridGenerator:
+
+    def __init__(self):
+        self.ma_fast_values = [20, 29, 40, 50, 60]
+        self.ma_slow_values = [80, 100, 120, 150, 200]
+        self.atr_sl_values = [1.4, 1.6, 1.8, 2.0, 2.2]
+        self.rr_values = [2.0, 2.4, 2.8, 3.0]
+
+    def generate(self) -> List[ParameterSet]:
+
+        combinations = product(
+            self.ma_fast_values,
+            self.ma_slow_values,
+            self.atr_sl_values,
+            self.rr_values,
+        )
+
+        params = []
+
+        for ma_fast, ma_slow, atr_sl, rr in combinations:
+
+            # شرط منطقي مهم:
+            # MA slow يجب أن يكون أكبر من MA fast
+            if ma_slow <= ma_fast:
+                continue
+
+            params.append(
+                ParameterSet(
+                    ma_fast=ma_fast,
+                    ma_slow=ma_slow,
+                    atr_sl_mult=atr_sl,
+                    rr=rr,
+                )
+            )
+
+        return params
+
+
+def save_grid_to_json(params: List[ParameterSet], path: str):
+
+    data = [
+        {
+            "ma_fast": p.ma_fast,
+            "ma_slow": p.ma_slow,
+            "atr_sl_mult": p.atr_sl_mult,
+            "rr": p.rr,
+        }
+        for p in params
+    ]
+
+    with open(path, "w") as f:
+        json.dump(data, f, indent=4)
+
+
+if __name__ == "__main__":
+
+    generator = GridGenerator()
+    params = generator.generate()
+
+    print(f"\nGenerated parameter sets: {len(params)}\n")
+
+    save_grid_to_json(params, "parameter_grid.json")
+
+    print("Saved to parameter_grid.json")
+
+============================================================
+FILE: src/core/set_builder.py
+============================================================
+# src/core/set_builder.py
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Dict
+
+
+def _format_set_value(v: Any) -> str:
+    """
+    MT5 .set formatting:
+      - bool: true/false (lowercase)
+      - int/float: plain
+      - str: plain (no quotes)
+    """
+    if isinstance(v, bool):
+        return "true" if v else "false"
+    if v is None:
+        # safest: empty
+        return ""
+    return str(v)
+
+
+@dataclass
+class SetFileBuilder:
+    base_config: Dict[str, Any]
+
+    def build_params(self, overrides: Dict[str, Any] | None = None) -> Dict[str, Any]:
+        params = dict(self.base_config or {})
+        if overrides:
+            for k, v in overrides.items():
+                params[k] = v
+        return params
+
+    def save(self, overrides: Dict[str, Any], out_path: str) -> str:
+        """
+        Writes a complete .set file including base defaults + overrides.
+        """
+        out = Path(out_path)
+        out.parent.mkdir(parents=True, exist_ok=True)
+
+        params = self.build_params(overrides)
+
+        # Write in stable order for reproducibility
+        keys = sorted(params.keys(), key=lambda x: x.lower())
+        lines = []
+        for k in keys:
+            lines.append(f"{k}={_format_set_value(params[k])}")
+
+        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        return str(out)
+
+============================================================
+FILE: src/core/single_run_test.py
+============================================================
+# src/core/single_run_test.py
+from src.core.parameter_grid import GridGenerator
+from src.core.set_builder import SetFileBuilder
+from src.core.base_config import BASE_CONFIG
+from src.core.ini_builder import INIBuilder
+from src.core.mt5_executor import MT5Executor
+
+MT5_PATH = r"C:\Program Files\MetaTrader 5\terminal64.exe"
+
+SYMBOL = "XAUUSDr"
+PERIOD = "H1"
+DEPOSIT = 10000
+
+generator = GridGenerator()
+params = generator.generate()
+first = params[0]
+
+# Strategy parameters from grid
+grid_overrides = {
+    "InpMAfast": first.ma_fast,
+    "InpMAslow": first.ma_slow,
+    "InpATR_SL_Mult": first.atr_sl_mult,
+    "InpRR": first.rr,
+}
+
+# HARD overrides to guarantee TECH-ONLY + deterministic tester
+hard_overrides = {
+    "TradeMode": 2,            # TM_TECH_ONLY
+    "UseLiveConfig": False,    # no live_config.json in tester
+    "BT_AISignalsCSV": "",     # do not try to open AI csv
+}
+
+dynamic = {}
+dynamic.update(grid_overrides)
+dynamic.update(hard_overrides)
+
+set_path = "temp/test.set"
+report_prefix = "temp/report"
+ini_path = "temp/run.ini"
+
+builder = SetFileBuilder(BASE_CONFIG)
+builder.save(dynamic, set_path)
+
+ini = INIBuilder("EA V8.ex5")
+ini.build(
+    SYMBOL,
+    PERIOD,
+    "2021.01.01",
+    "2023.01.01",
+    DEPOSIT,
+    set_path,
+    report_prefix,
+    ini_path,
+)
+
+executor = MT5Executor(MT5_PATH)
+
+print("Running MT5...")
+rc = executor.run(ini_path)
+
+report = executor.wait_for_report(report_prefix)
+
+print("Return code:", rc)
+print("Report:", report)
+
+============================================================
+FILE: src/core/test_set_builder.py
+============================================================
+from src.core.parameter_grid import GridGenerator
+from src.core.set_builder import SetFileBuilder
+from src.core.base_config import BASE_CONFIG
+
+generator = GridGenerator()
+params = generator.generate()
+
+builder = SetFileBuilder(BASE_CONFIG)
+
+# خذ أول تركيبة فقط للاختبار
+first = params[0]
+
+dynamic = {
+    "InpMAfast": first.ma_fast,
+    "InpMAslow": first.ma_slow,
+    "InpATR_SL_Mult": first.atr_sl_mult,
+    "InpRR": first.rr,
+}
+
+builder.save(dynamic, "test_output.set")
+
+print("SET file generated: test_output.set")
+
+============================================================
+FILE: src/backtest_tech.py
+============================================================
+# src/backtest_tech.py
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Dict, Any, List, Optional
+import numpy as np
+import pandas as pd
+
+from .indicators import ema, rsi, atr
+from .mt5_symbol_info import SymbolSpec
+
+
+@dataclass
+class Trade:
+    entry_time: pd.Timestamp
+    exit_time: pd.Timestamp
+    dir: int
+    entry: float
+    exit: float
+    sl: float
+    tp: float
+    lots: float
+    pnl: float
+    reason: str
+
+
+@dataclass
+class BacktestResult:
+    trades: List[Trade]
+    equity: pd.Series
+    stats: Dict[str, float]
+    monthly: pd.Series
+
+
+def backtest_tech(
+    df: pd.DataFrame,
+    p: Dict[str, Any],
+    costs: Dict[str, Any],
+    run: Dict[str, Any],
+    spec: SymbolSpec
+) -> BacktestResult:
+
+    # ----- SYMBOL SPEC -----
+    point = spec.point if spec.point > 0 else 0.01
+    tick_size = spec.tick_size if spec.tick_size > 0 else point
+    tick_value = spec.tick_value if spec.tick_value > 0 else 1.0
+    vol_min = spec.vol_min
+    vol_step = spec.vol_step
+    vol_max = spec.vol_max
+
+    value_per_price_unit = tick_value / tick_size
+
+    # ----- DATA -----
+    t = df["time"].values
+    o = df["open"].values
+    h = df["high"].values
+    l = df["low"].values
+    c = df["close"].values
+    spread_pts = df["spread"].values
+
+    # ----- INDICATORS -----
+    ma_fast = ema(c, int(p["InpMAfast"]))
+    ma_slow = ema(c, int(p["InpMAslow"]))
+    rsi_v = rsi(c, int(p["InpRSI_Period"]))
+    atr_v = atr(h, l, c, int(p["InpATR_Period"]))
+
+    # ----- COSTS -----
+    fixed_spread = float(costs.get("fixed_spread_points", 0))
+    slippage_pts = float(costs.get("slippage_points", 0))
+    commission_per_lot = float(costs.get("commission_per_lot", 0.0))
+
+    # ----- ACCOUNT -----
+    balance = float(run.get("initial_balance", 10000))
+    equity = balance
+    eq_curve = []
+    eq_time = []
+
+    risk_pct = float(p["InpRiskPct"])
+    max_trades_day = int(p["MaxTradesPerDay"])
+    daily_loss_pct = float(p["DailyLossPct"])
+
+    use_be = bool(p["UseBreakEven"])
+    use_ts = bool(p["UseTrailingStop"])
+
+    open_trade: Optional[Trade] = None
+    trades: List[Trade] = []
+
+    current_day = None
+    day_trades = 0
+    day_start_equity = equity
+
+    def round_volume(v: float) -> float:
+        if vol_step <= 0:
+            return max(vol_min, min(v, vol_max))
+        steps = round((v - vol_min) / vol_step)
+        out = vol_min + steps * vol_step
+        return max(vol_min, min(out, vol_max))
+
+    def calc_lots(sl_dist: float) -> float:
+        risk_money = equity * (risk_pct / 100.0)
+        risk_per_lot = sl_dist * value_per_price_unit
+        if risk_per_lot <= 0:
+            return 0.0
+        lots = risk_money / risk_per_lot
+        return round_volume(lots)
+
+    for i in range(len(df)):
+        ts = df["time"].iloc[i]
+        day = ts.date()
+
+        if current_day != day:
+            current_day = day
+            day_trades = 0
+            day_start_equity = equity
+
+        eq_curve.append(equity)
+        eq_time.append(ts)
+
+        if open_trade is not None:
+            hit = False
+            exit_price = None
+            reason = None
+
+            if open_trade.dir == 1:
+                if l[i] <= open_trade.sl:
+                    hit = True
+                    exit_price = open_trade.sl
+                    reason = "SL"
+                elif h[i] >= open_trade.tp:
+                    hit = True
+                    exit_price = open_trade.tp
+                    reason = "TP"
+            else:
+                if h[i] >= open_trade.sl:
+                    hit = True
+                    exit_price = open_trade.sl
+                    reason = "SL"
+                elif l[i] <= open_trade.tp:
+                    hit = True
+                    exit_price = open_trade.tp
+                    reason = "TP"
+
+            if hit:
+                pnl = (exit_price - open_trade.entry) * open_trade.dir
+                pnl *= open_trade.lots * value_per_price_unit
+                pnl -= commission_per_lot * open_trade.lots
+
+                equity += pnl
+
+                trades.append(
+                    Trade(
+                        open_trade.entry_time,
+                        ts,
+                        open_trade.dir,
+                        open_trade.entry,
+                        exit_price,
+                        open_trade.sl,
+                        open_trade.tp,
+                        open_trade.lots,
+                        pnl,
+                        reason,
+                    )
+                )
+                open_trade = None
+
+        if open_trade is None:
+            if day_trades >= max_trades_day:
+                continue
+
+            if np.isnan(ma_fast[i]) or np.isnan(ma_slow[i]) or np.isnan(rsi_v[i]) or np.isnan(atr_v[i]):
+                continue
+
+            trend_up = ma_fast[i] > ma_slow[i]
+            trend_dn = ma_fast[i] < ma_slow[i]
+
+            buy = trend_up and rsi_v[i] <= float(p["InpRSI_BuyMax"])
+            sell = trend_dn and rsi_v[i] >= float(p["InpRSI_SellMin"])
+
+            if not buy and not sell:
+                continue
+
+            direction = 1 if buy else -1
+            entry = c[i]
+
+            sl_dist = float(p["InpATR_SL_Mult"]) * atr_v[i]
+            tp_dist = sl_dist * float(p["InpRR"])
+
+            if direction == 1:
+                sl = entry - sl_dist
+                tp = entry + tp_dist
+            else:
+                sl = entry + sl_dist
+                tp = entry - tp_dist
+
+            lots = calc_lots(abs(entry - sl))
+            if lots <= 0:
+                continue
+
+            open_trade = Trade(ts, ts, direction, entry, entry, sl, tp, lots, 0.0, "OPEN")
+            day_trades += 1
+
+    eq_series = pd.Series(eq_curve, index=pd.to_datetime(eq_time, utc=True))
+    monthly = eq_series.resample("ME").last().pct_change().fillna(0) * 100.0
+
+    return BacktestResult(trades=trades, equity=eq_series, stats={}, monthly=monthly)
+
+============================================================
+FILE: src/data_mt5.py
+============================================================
+from __future__ import annotations
+from typing import Optional, List
+import pandas as pd
+from datetime import datetime, timezone
+
+def _tf_to_mt5(tf: str):
+    import MetaTrader5 as mt5
+    tf = tf.upper().strip()
+    m = {
+        "M1": mt5.TIMEFRAME_M1,
+        "M5": mt5.TIMEFRAME_M5,
+        "M15": mt5.TIMEFRAME_M15,
+        "M30": mt5.TIMEFRAME_M30,
+        "H1": mt5.TIMEFRAME_H1,
+        "H4": mt5.TIMEFRAME_H4,
+        "D1": mt5.TIMEFRAME_D1,
+    }
+    if tf not in m:
+        raise ValueError(f"Unsupported timeframe: {tf}")
+    return m[tf]
+
+def _ensure_symbol(symbol: str) -> str:
+    """
+    يحاول إيجاد الرمز الصحيح حتى لو كان عند الوسيط لاحقة مثل XAUUSDr / XAUUSDm / XAUUSD.i
+    """
+    import MetaTrader5 as mt5
+
+    # 1) exact
+    info = mt5.symbol_info(symbol)
+    if info is not None:
+        if not info.visible:
+            mt5.symbol_select(symbol, True)
+        return symbol
+
+    # 2) search contains
+    all_syms = mt5.symbols_get()
+    if not all_syms:
+        return symbol
+
+    key = symbol.upper()
+    cands = [s.name for s in all_syms if key in s.name.upper()]
+
+    # إذا لم يجد، جرّب على XAU (مفيد للذهب)
+    if not cands and "XAU" in key:
+        cands = [s.name for s in all_syms if "XAU" in s.name.upper()]
+
+    # اختر الأقرب: يبدأ بنفس الكلمة ثم الأقصر
+    if cands:
+        cands.sort(key=lambda n: (0 if n.upper().startswith(key) else 1, len(n)))
+        best = cands[0]
+        inf = mt5.symbol_info(best)
+        if inf is not None and not inf.visible:
+            mt5.symbol_select(best, True)
+        return best
+
+    return symbol
+
+def fetch_rates_mt5(symbol: str, timeframe: str, start: str, end: str, utc: bool = True) -> pd.DataFrame:
+    import MetaTrader5 as mt5
+
+    if not mt5.initialize():
+        raise RuntimeError(f"MT5 initialize() failed. last_error={mt5.last_error()}")
+
+    symbol_real = _ensure_symbol(symbol)
+
+    tf = _tf_to_mt5(timeframe)
+
+    dt_start = datetime.fromisoformat(start)
+    dt_end   = datetime.fromisoformat(end)
+
+    if utc:
+        dt_start = dt_start.replace(tzinfo=timezone.utc)
+        dt_end   = dt_end.replace(tzinfo=timezone.utc)
+
+    rates = mt5.copy_rates_range(symbol_real, tf, dt_start, dt_end)
+
+    if rates is None or len(rates) == 0:
+        # اطبع تشخيص واضح قبل الإنهاء
+        last = mt5.last_error()
+        mt5.shutdown()
+        raise RuntimeError(
+            f"No rates returned for symbol='{symbol_real}' (requested '{symbol}'), tf={timeframe}, "
+            f"start={start}, end={end}. MT5 last_error={last}. "
+            f"Check: symbol name, data availability, and that terminal is connected."
+        )
+
+    df = pd.DataFrame(rates)
+    df["time"] = pd.to_datetime(df["time"], unit="s", utc=True)
+    df = df.rename(columns={"tick_volume": "tickvol"})
+    # spread قد لا يكون موجود لبعض السيرفرات، تأكد
+    if "spread" not in df.columns:
+        df["spread"] = 0
+    if "real_volume" not in df.columns:
+        df["real_volume"] = 0
+
+    df = df[["time","open","high","low","close","spread","real_volume","tickvol"]].copy()
+    df = df.sort_values("time").reset_index(drop=True)
+
+    mt5.shutdown()
+    return df
+
+def save_parquet(df: pd.DataFrame, path: str) -> None:
+    df.to_parquet(path, index=False)
+
+def load_parquet(path: str) -> pd.DataFrame:
+    return pd.read_parquet(path)
+
+============================================================
+FILE: src/diagnose_and_run_mt5.py
+============================================================
+# src/diagnose_and_run_mt5.py
+from __future__ import annotations
+
+import os
+import time
+import json
+import shutil
+import subprocess
+from pathlib import Path
+from typing import Optional, List, Tuple
+
+from .report_parser import parse_mt5_report
+
+# -------------------- USER SETTINGS --------------------
+MT5_TERMINAL = r"C:\Program Files\MetaTrader 5\terminal64.exe"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]  # ...\tradealpha_research
+OUT_ROOT = PROJECT_ROOT / "out_v9_tick" / "_runs" / "sanity_tick"
+
+EXPERT_FILE_NAME = "EA V8.ex5"  # اسم ملف الإكسبرت كما عندك
+SYMBOL = "XAUUSDr"
+TIMEFRAME = "H1"
+FROM_DATE = "2021.01.01"
+TO_DATE = "2025.12.31"
+DEPOSIT = "10000"
+
+# report prefix (MT5 will append .htm/.html)
+REPORT_PREFIX = str((OUT_ROOT / "report").resolve())
+
+# how long to wait for report creation
+WAIT_SEC = 90
+POLL_EVERY = 1.0
+# ------------------------------------------------------
+
+
+def now_ts() -> float:
+    return time.time()
+
+
+def kill_mt5() -> dict:
+    """
+    Kill ALL running terminal64.exe processes.
+    Returns dict with info.
+    """
+    # taskkill returns 0 even if nothing was killed sometimes; we capture output
+    cmd = ["taskkill", "/F", "/IM", "terminal64.exe", "/T"]
+    p = subprocess.run(cmd, capture_output=True, text=True, shell=False)
+    return {
+        "cmd": " ".join(cmd),
+        "rc": p.returncode,
+        "stdout": p.stdout.strip(),
+        "stderr": p.stderr.strip(),
+    }
+
+
+def mt5_running() -> bool:
+    p = subprocess.run(["tasklist", "/FI", "IMAGENAME eq terminal64.exe"], capture_output=True, text=True)
+    out = (p.stdout or "").lower()
+    return "terminal64.exe" in out
+
+
+def list_terminal_hash_dirs() -> List[Path]:
+    base = Path(os.environ.get("APPDATA", "")) / "MetaQuotes" / "Terminal"
+    if not base.exists():
+        return []
+    return [p for p in base.iterdir() if p.is_dir()]
+
+
+def find_expert_in_terminal_data(expert_file: str) -> List[Tuple[Path, Path]]:
+    """
+    Search for expert_file under:
+      %APPDATA%\MetaQuotes\Terminal\<HASH>\MQL5\Experts\**
+    Returns list of (hash_dir, full_path_to_ex5)
+    """
+    found = []
+    for hdir in list_terminal_hash_dirs():
+        experts_root = hdir / "MQL5" / "Experts"
+        if not experts_root.exists():
+            continue
+        hits = list(experts_root.rglob(expert_file))
+        for hp in hits:
+            if hp.is_file():
+                found.append((hdir, hp))
+    return found
+
+
+def choose_best_terminal(found: List[Tuple[Path, Path]]) -> Optional[Tuple[Path, Path]]:
+    """
+    Choose best match:
+    - Most recently modified ex5 wins
+    """
+    if not found:
+        return None
+    found.sort(key=lambda x: x[1].stat().st_mtime, reverse=True)
+    return found[0]
+
+
+def relative_expert_path(experts_root: Path, expert_full: Path) -> str:
+    rel = expert_full.relative_to(experts_root)
+    # MT5 expects backslashes
+    return str(rel).replace("/", "\\")
+
+
+def write_ini(ini_path: Path, expert_rel: str) -> None:
+    """
+    Create run.ini for Strategy Tester.
+    IMPORTANT: Expert is relative to MQL5\\Experts
+    """
+    ini_text = f"""[Tester]
+Expert={expert_rel}
+Symbol={SYMBOL}
+Period={TIMEFRAME}
+Optimization=0
+Model=0
+FromDate={FROM_DATE}
+ToDate={TO_DATE}
+ForwardMode=0
+Deposit={DEPOSIT}
+Currency=USD
+ProfitInPips=0
+Leverage=100
+ExecutionMode=0
+OptimizationCriterion=1
+Visual=0
+Report={REPORT_PREFIX}
+ReplaceReport=1
+ShutdownTerminal=1
+"""
+    ini_path.parent.mkdir(parents=True, exist_ok=True)
+    ini_path.write_text(ini_text, encoding="utf-8")
+
+
+def run_mt5_config(mt5_terminal: str, ini_path: Path, log_path: Path, timeout_sec: int = 60 * 10) -> dict:
+    cmd = [mt5_terminal, f"/config:{str(ini_path.resolve())}"]
+    t0 = now_ts()
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    timeout = False
+    try:
+        out, err = p.communicate(timeout=timeout_sec)
+    except subprocess.TimeoutExpired:
+        timeout = True
+        p.kill()
+        out, err = p.communicate()
+
+    meta = {
+        "cmd": cmd,
+        "rc": p.returncode,
+        "timeout": timeout,
+        "elapsed": now_ts() - t0,
+        "stdout_len": len(out or ""),
+        "stderr_len": len(err or ""),
+    }
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    log_path.write_text(
+        "CMD:\n" + " ".join(cmd) + "\n\nSTDOUT:\n" + (out or "") + "\n\nSTDERR:\n" + (err or "") + "\n",
+        encoding="utf-8",
+    )
+    return meta
+
+
+def find_report_local(run_dir: Path) -> Optional[Path]:
+    c1 = run_dir / "report.html"
+    c2 = run_dir / "report.htm"
+    c3 = run_dir / "report.xml"
+    for c in (c1, c2, c3):
+        if c.exists() and c.stat().st_size > 100:
+            return c
+    return None
+
+
+def find_newest_report_in_terminal(hash_dir: Path, after_ts: float) -> Optional[Path]:
+    """
+    Look for:
+      %APPDATA%\\MetaQuotes\\Terminal\\<HASH>\\Tester\\*.htm*
+    Also check common subfolders.
+    """
+    tester = hash_dir / "Tester"
+    if not tester.exists():
+        return None
+
+    patterns = ["*.htm", "*.html", "*.xml"]
+    candidates: List[Path] = []
+    for pat in patterns:
+        candidates += list(tester.rglob(pat))
+
+    # filter by timestamp and size
+    candidates = [p for p in candidates if p.is_file() and p.stat().st_mtime >= after_ts and p.stat().st_size > 500]
+    if not candidates:
+        return None
+
+    candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+    return candidates[0]
+
+
+def wait_for_report(run_dir: Path, hash_dir: Path, after_ts: float) -> Tuple[Optional[Path], dict]:
+    t0 = now_ts()
+    while now_ts() - t0 < WAIT_SEC:
+        loc = find_report_local(run_dir)
+        if loc:
+            return loc, {"where": "run_dir", "path": str(loc)}
+        ter = find_newest_report_in_terminal(hash_dir, after_ts)
+        if ter:
+            return ter, {"where": "terminal_tester", "path": str(ter)}
+        time.sleep(POLL_EVERY)
+    return None, {"where": None, "path": None}
+
+
+def main():
+    OUT_ROOT.mkdir(parents=True, exist_ok=True)
+    ini_path = OUT_ROOT / "run.ini"
+    log_path = OUT_ROOT / "mt5_run.log"
+
+    # 1) locate expert
+    found = find_expert_in_terminal_data(EXPERT_FILE_NAME)
+    chosen = choose_best_terminal(found)
+
+    if not chosen:
+        out = {
+            "error": "EXPERT_NOT_FOUND",
+            "expert_file": EXPERT_FILE_NAME,
+            "hint": (
+                "لم أجد الإكسبرت داخل أي مجلد MT5 Data. افتح MT5 -> File -> Open Data Folder "
+                "ثم تأكد أن الملف موجود داخل MQL5\\Experts (واعمل Compile)."
+            ),
+            "searched_base": str((Path(os.environ.get("APPDATA", "")) / "MetaQuotes" / "Terminal").resolve()),
+        }
+        print(json.dumps(out, indent=2, ensure_ascii=False))
+        raise SystemExit(2)
+
+    hash_dir, expert_full = chosen
+    experts_root = hash_dir / "MQL5" / "Experts"
+    expert_rel = relative_expert_path(experts_root, expert_full)
+
+    # 2) write ini with correct expert rel path
+    write_ini(ini_path, expert_rel)
+
+    # 3) kill MT5 if running (THIS IS THE KEY FIX)
+    before = mt5_running()
+    kill_info = None
+    if before:
+        kill_info = kill_mt5()
+        time.sleep(1.0)
+
+    # 4) run MT5 config
+    start_ts = now_ts()
+    run_meta = run_mt5_config(MT5_TERMINAL, ini_path, log_path, timeout_sec=60 * 10)
+
+    # 5) wait for report either in run_dir or terminal tester folders
+    report_path, report_found_meta = wait_for_report(OUT_ROOT, hash_dir, after_ts=start_ts)
+
+    final = {
+        "python": os.sys.version,
+        "mt5_terminal": MT5_TERMINAL,
+        "hash_dir": str(hash_dir),
+        "experts_root": str(experts_root),
+        "expert_full": str(expert_full),
+        "expert_rel_used_in_ini": expert_rel,
+        "ini_path": str(ini_path),
+        "report_prefix": REPORT_PREFIX,
+        "mt5_was_running_before": before,
+        "kill_info": kill_info,
+        "run_meta": run_meta,
+        "report_found": report_found_meta,
+    }
+
+    if not report_path:
+        final["error"] = "REPORT_NOT_FOUND"
+        final["hint"] = (
+            "إذا ما زال لا يوجد report بعد قتل MT5، فغالبًا هناك خطأ داخل Strategy Tester (Journal) "
+            "مثل: EA غير مسموح / لم يتم تحميله / symbol غير موجود / لا توجد بيانات / login. "
+            "افتح MT5 -> Strategy Tester -> Journal وانسخ آخر 50 سطر هنا."
+        )
+        print(json.dumps(final, indent=2, ensure_ascii=False))
+        raise SystemExit(3)
+
+    # 6) if report found in terminal folders, copy it to run dir as report.html/htm
+    rp = Path(report_path)
+    if rp.parent != OUT_ROOT:
+        # normalize name to report.html
+        dst = OUT_ROOT / ("report.html" if rp.suffix.lower() == ".html" else "report.htm")
+        shutil.copy2(str(rp), str(dst))
+        rp = dst
+        final["report_copied_to"] = str(rp)
+
+    # 7) parse report
+    metrics = parse_mt5_report(str(rp))
+    out_json = OUT_ROOT / "sanity_result.json"
+    payload = {"meta": final, "metrics": metrics}
+    out_json.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+    print("\nSaved:", out_json)
+
+
+if __name__ == "__main__":
+    main()
+
+============================================================
+FILE: src/export_final_set.py
+============================================================
+from __future__ import annotations
+import json
+import os
+
+FINAL_JSON = "out_wfo/stage_4_montecarlo/final_config.json"
+OUT_SET = "out_wfo/stage_4_montecarlo/final_config.set"
+
+# Map Python param names to MT5 input names (same here)
+# Keep only params that exist in your optimization space.
+KEEP_KEYS = [
+    "InpMAfast","InpMAslow","InpRSI_Period","InpRSI_BuyMax","InpRSI_SellMin",
+    "InpATR_Period","InpATR_SL_Mult","InpRR","InpMaxSpreadPts",
+    "InpRiskPct","MaxTradesPerDay","DailyLossPct",
+    "UseTrailingStop","TS_StartPts","TS_StepPts",
+    "UseBreakEven","BE_TriggerPts","BE_OffsetPts","MinTradeGapSec"
+]
+
+def mt5_bool(v: bool) -> str:
+    return "true" if bool(v) else "false"
+
+def main():
+    with open(FINAL_JSON, "r", encoding="utf-8") as f:
+        j = json.load(f)
+
+    params = j.get("params", {})
+    lines = []
+
+    for k in KEEP_KEYS:
+        if k not in params:
+            continue
+        v = params[k]
+        if isinstance(v, bool):
+            vv = mt5_bool(v)
+        else:
+            vv = str(v)
+        # MT5 .set format: Key=Value
+        lines.append(f"{k}={vv}")
+
+    os.makedirs(os.path.dirname(OUT_SET), exist_ok=True)
+    with open(OUT_SET, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+    print("Saved:", OUT_SET)
+
+if __name__ == "__main__":
+    main()
+
+============================================================
+FILE: src/indicators.py
+============================================================
+from __future__ import annotations
+import numpy as np
+import pandas as pd
+
+def ema(x: np.ndarray, period: int) -> np.ndarray:
+    x = np.asarray(x, dtype=float)
+    alpha = 2.0 / (period + 1.0)
+    out = np.empty_like(x)
+    out[:] = np.nan
+    if len(x) == 0:
+        return out
+    out[0] = x[0]
+    for i in range(1, len(x)):
+        out[i] = alpha * x[i] + (1 - alpha) * out[i-1]
+    return out
+
+def rsi(close: np.ndarray, period: int) -> np.ndarray:
+    c = np.asarray(close, dtype=float)
+    out = np.empty_like(c)
+    out[:] = np.nan
+    if len(c) < period + 1:
+        return out
+    diff = np.diff(c)
+    gain = np.where(diff > 0, diff, 0.0)
+    loss = np.where(diff < 0, -diff, 0.0)
+
+    avg_gain = np.empty(len(c))
+    avg_loss = np.empty(len(c))
+    avg_gain[:] = np.nan
+    avg_loss[:] = np.nan
+
+    avg_gain[period] = gain[:period].mean()
+    avg_loss[period] = loss[:period].mean()
+
+    for i in range(period + 1, len(c)):
+        avg_gain[i] = (avg_gain[i-1]*(period-1) + gain[i-1]) / period
+        avg_loss[i] = (avg_loss[i-1]*(period-1) + loss[i-1]) / period
+
+    rs = avg_gain / (avg_loss + 1e-12)
+    out = 100.0 - (100.0 / (1.0 + rs))
+    out[:period] = np.nan
+    return out
+
+def atr(high: np.ndarray, low: np.ndarray, close: np.ndarray, period: int) -> np.ndarray:
+    h = np.asarray(high, dtype=float)
+    l = np.asarray(low, dtype=float)
+    c = np.asarray(close, dtype=float)
+
+    tr = np.empty_like(c)
+    tr[:] = np.nan
+    tr[0] = h[0] - l[0]
+    for i in range(1, len(c)):
+        tr[i] = max(h[i]-l[i], abs(h[i]-c[i-1]), abs(l[i]-c[i-1]))
+
+    # Wilder smoothing
+    out = np.empty_like(c)
+    out[:] = np.nan
+    if len(c) < period + 1:
+        return out
+    out[period] = np.nanmean(tr[1:period+1])
+    for i in range(period + 1, len(c)):
+        out[i] = (out[i-1]*(period-1) + tr[i]) / period
+    return out
+
+============================================================
+FILE: src/metrics.py
+============================================================
+from __future__ import annotations
+from typing import Dict, Any
+import numpy as np
+import pandas as pd
+from .backtest_tech import BacktestResult
+
+def max_drawdown_pct(equity: pd.Series) -> float:
+    peak = equity.cummax()
+    dd = (equity - peak) / peak * 100.0
+    return float(dd.min())
+
+def profit_factor(trades_pnl: np.ndarray) -> float:
+    gains = trades_pnl[trades_pnl > 0].sum()
+    losses = -trades_pnl[trades_pnl < 0].sum()
+    if losses <= 1e-12:
+        return float("inf") if gains > 0 else 0.0
+    return float(gains / losses)
+
+def worst_month_pct(monthly_returns: pd.Series) -> float:
+    return float(monthly_returns.min()) if len(monthly_returns) else 0.0
+
+def summarize(res: BacktestResult) -> Dict[str, float]:
+    pnls = np.array([t.pnl for t in res.trades], dtype=float)
+    pf = profit_factor(pnls) if len(pnls) else 0.0
+    mdd = max_drawdown_pct(res.equity) if len(res.equity) else 0.0
+    wm = worst_month_pct(res.monthly)
+    net = float(pnls.sum()) if len(pnls) else 0.0
+    ntr = float(len(pnls))
+    return {
+        "net_profit": net,
+        "profit_factor": pf,
+        "max_dd_pct": mdd,
+        "worst_month_pct": wm,
+        "trades": ntr,
+    }
+
+def passes_constraints(stats: Dict[str, float], c: Dict[str, Any]) -> bool:
+    if stats["max_dd_pct"] < -float(c["max_dd_pct"]):
+        return False
+    if stats["trades"] < float(c["min_trades"]):
+        return False
+    if stats["profit_factor"] < float(c["min_pf"]):
+        return False
+    if stats["worst_month_pct"] < float(c["worst_month_pct"]):
+        return False
+    return True
+
+============================================================
+FILE: src/monte_carlo.py
+============================================================
+# src/monte_carlo.py  (UPDATED FULL — Block Bootstrap + stronger selection fields)
+from __future__ import annotations
+
+import os
+import math
+import json
+import random
+from typing import Dict, Any
+
+import numpy as np
+import pandas as pd
+
+from .objective_wfo import load_yaml
+from .wfo import build_wfo_windows, slice_window
+from .backtest_tech import backtest_tech
+from .mt5_symbol_info import get_symbol_spec
+
+
+def equity_stats_from_trades(trades: list, initial_balance: float) -> Dict[str, float]:
+    if not trades:
+        return {
+            "net_profit": 0.0,
+            "profit_factor": 0.0,
+            "max_dd_pct": 0.0,
+            "worst_month_pct": 0.0,
+            "trades": 0.0,
+        }
+
+    trades = sorted(trades, key=lambda x: x.exit_time)
+
+    eq = initial_balance
+    eq_series = []
+    ts_series = []
+
+    gross_profit = 0.0
+    gross_loss = 0.0
+
+    for tr in trades:
+        pnl = float(tr.pnl)
+        eq += pnl
+        eq_series.append(eq)
+
+        ts = pd.Timestamp(tr.exit_time)
+        if ts.tzinfo is None:
+            ts = ts.tz_localize("UTC")
+        else:
+            ts = ts.tz_convert("UTC")
+        ts_series.append(ts)
+
+        if pnl >= 0:
+            gross_profit += pnl
+        else:
+            gross_loss += abs(pnl)
+
+    eq_s = pd.Series(eq_series, index=pd.to_datetime(ts_series, utc=True)).sort_index()
+
+    peak = eq_s.cummax()
+    dd = (eq_s / peak) - 1.0
+    max_dd_pct = float(dd.min() * 100.0)
+
+    monthly = eq_s.resample("ME").last().pct_change().fillna(0.0) * 100.0
+    worst_month_pct = float(monthly.min()) if len(monthly) else 0.0
+
+    pf = float(gross_profit / gross_loss) if gross_loss > 0 else float("inf")
+    net_profit = float(eq_s.iloc[-1] - initial_balance)
+
+    return {
+        "net_profit": net_profit,
+        "profit_factor": pf if math.isfinite(pf) else 999.0,
+        "max_dd_pct": max_dd_pct,
+        "worst_month_pct": worst_month_pct,
+        "trades": float(len(trades)),
+    }
+
+
+def monte_carlo_on_trades(
+    trades: list,
+    initial_balance: float,
+    n_iter: int = 300,
+    delete_frac: float = 0.05,
+    pnl_noise_sigma: float = 0.06,
+    seed: int = 42,
+    method: str = "block",      # "block" (recommended) | "shuffle"
+    block_size: int = 20,       # used for block
+) -> pd.DataFrame:
+    """
+    Monte Carlo on trade PnLs:
+      - method="block": block bootstrap (preserves clustering, more realistic than full shuffle)
+      - delete_frac: randomly delete trades (execution misses)
+      - pnl_noise_sigma: multiplicative noise on PnL (spread/slippage uncertainty)
+    """
+    rng = random.Random(seed)
+    pnls = np.array([float(t.pnl) for t in trades], dtype=float)
+
+    if len(pnls) < 30:
+        return pd.DataFrame()
+
+    n = len(pnls)
+    del_n = int(round(n * delete_frac))
+    np_rng = np.random.default_rng(seed + 1337)
+
+    rows = []
+
+    if method == "block":
+        b = max(5, int(block_size))
+        blocks = [pnls[i:i + b] for i in range(0, n, b)]
+        if len(blocks) < 2:
+            method = "shuffle"
+
+    for k in range(n_iter):
+        # sample order
+        if method == "shuffle":
+            idx = list(range(n))
+            rng.shuffle(idx)
+            pn = pnls[idx].copy()
+        else:
+            idxb = list(range(len(blocks)))
+            rng.shuffle(idxb)
+            pn = np.concatenate([blocks[j] for j in idxb]).astype(float)
+            pn = pn[:n]
+
+        # delete random subset
+        if del_n > 0 and len(pn) > 1:
+            drop_idx = set(rng.sample(range(len(pn)), k=min(del_n, len(pn) - 1)))
+            pn = np.array([pn[i] for i in range(len(pn)) if i not in drop_idx], dtype=float)
+
+        # pnl noise
+        noise = np_rng.normal(loc=0.0, scale=pnl_noise_sigma, size=len(pn))
+        pn = pn * (1.0 + noise)
+
+        # equity path
+        eq = initial_balance
+        peak = initial_balance
+        max_dd = 0.0
+        gp = 0.0
+        gl = 0.0
+
+        for x in pn:
+            x = float(x)
+            eq += x
+            if x >= 0:
+                gp += x
+            else:
+                gl += abs(x)
+            if eq > peak:
+                peak = eq
+            dd = (eq / peak) - 1.0
+            if dd < max_dd:
+                max_dd = dd
+
+        net = eq - initial_balance
+        pf = (gp / gl) if gl > 0 else 999.0
+
+        rows.append(
+            {
+                "iter": k,
+                "net_profit": float(net),
+                "profit_factor": float(pf),
+                "max_dd_pct": float(max_dd * 100.0),
+            }
+        )
+
+    return pd.DataFrame(rows)
+
+
+def load_top_configs(stage3_csv: str, top_n: int = 10) -> pd.DataFrame:
+    df = pd.read_csv(stage3_csv).sort_values("score", ascending=False)
+
+    # Keep only unique parameter sets
+    param_cols = [c for c in df.columns if c.startswith("Inp")] + [
+        "MaxTradesPerDay",
+        "DailyLossPct",
+        "UseTrailingStop",
+        "TS_StartPts",
+        "TS_StepPts",
+        "UseBreakEven",
+        "BE_TriggerPts",
+        "BE_OffsetPts",
+        "MinTradeGapSec",
+    ]
+    param_cols = [c for c in param_cols if c in df.columns]
+    if param_cols:
+        df = df.drop_duplicates(subset=param_cols, keep="first")
+
+    return df.head(top_n).reset_index(drop=True)
+
+
+def row_to_params(row: pd.Series, search_space: Dict[str, Any]) -> Dict[str, Any]:
+    params: Dict[str, Any] = {}
+    for k in search_space.keys():
+        if k in row:
+            v = row[k]
+            if isinstance(v, str) and v in ("True", "False"):
+                v = (v == "True")
+            params[k] = v
+    return params
+
+
+def main():
+    cfg = load_yaml("configs/phaseA_search.yaml")
+
+    symbol = cfg["run"]["symbol"]
+    tf = cfg["run"]["timeframe"]
+    start = cfg["run"]["start"]
+    end = cfg["run"]["end"]
+
+    from .data_mt5 import fetch_rates_mt5
+    df = fetch_rates_mt5(symbol, tf, start, end, utc=True)
+
+    wfo_cfg = cfg.get("wfo", {})
+    train_months = int(wfo_cfg.get("train_months", 18))
+    test_months = int(wfo_cfg.get("test_months", 6))
+    step_months = int(wfo_cfg.get("step_months", 6))
+    min_test_bars = int(wfo_cfg.get("min_test_bars", 200))
+
+    windows = build_wfo_windows(
+        df,
+        train_months=train_months,
+        test_months=test_months,
+        step_months=step_months,
+        min_test_bars=min_test_bars,
+        time_col="time",
+    )
+
+    spec = get_symbol_spec(symbol)
+    costs = cfg["costs"]
+    initial_balance = float(cfg["risk"]["initial_balance"])
+    trade_on_closed = bool(cfg["execution"]["trade_on_closed_bar"])
+
+    stage3_csv = "out_wfo/stage_3_company/results.csv"
+    top_cfgs = load_top_configs(stage3_csv, top_n=10)
+
+    out_dir = "out_wfo/stage_4_montecarlo"
+    os.makedirs(out_dir, exist_ok=True)
+
+    summary_rows = []
+
+    for i, row in top_cfgs.iterrows():
+        params = row_to_params(row, cfg["search_space"])
+        cfg_tag = f"cfg_{i+1:02d}"
+
+        all_trades = []
+        for w in windows:
+            _, test_df = slice_window(df, w, time_col="time")
+            if len(test_df) < min_test_bars:
+                continue
+            res = backtest_tech(
+                test_df,
+                params,
+                costs=costs,
+                run={"initial_balance": initial_balance, "trade_on_closed_bar": trade_on_closed},
+                spec=spec,
+            )
+            all_trades.extend(res.trades)
+
+        base_stats = equity_stats_from_trades(all_trades, initial_balance)
+
+        mc = monte_carlo_on_trades(
+            all_trades,
+            initial_balance=initial_balance,
+            n_iter=300,
+            delete_frac=0.05,
+            pnl_noise_sigma=0.06,
+            seed=42 + i,
+            method="block",
+            block_size=20,
+        )
+
+        with open(os.path.join(out_dir, f"{cfg_tag}_params.json"), "w", encoding="utf-8") as f:
+            json.dump(params, f, indent=2, ensure_ascii=False)
+
+        if mc is None or mc.empty:
+            summary_rows.append(
+                {
+                    "rank": i + 1,
+                    "base_net_profit": base_stats["net_profit"],
+                    "base_pf": base_stats["profit_factor"],
+                    "base_max_dd_pct": base_stats["max_dd_pct"],
+                    "base_worst_month_pct": base_stats["worst_month_pct"],
+                    "base_trades": base_stats["trades"],
+                    "mc_iters": 0,
+                    "mc_net_p05": np.nan,
+                    "mc_net_med": np.nan,
+                    "mc_dd_p95": np.nan,
+                    "mc_pf_p05": np.nan,
+                    "mc_pass_rate": np.nan,
+                }
+            )
+            continue
+
+        mc.to_csv(os.path.join(out_dir, f"{cfg_tag}_mc.csv"), index=False)
+
+        net_p05 = float(mc["net_profit"].quantile(0.05))
+        net_med = float(mc["net_profit"].quantile(0.50))
+        dd_p95 = float(mc["max_dd_pct"].abs().quantile(0.95))
+        pf_p05 = float(mc["profit_factor"].quantile(0.05))
+
+        dd_limit = float(cfg["constraints"]["max_dd_pct"])
+        pf_limit = float(cfg["constraints"]["min_pf"])
+        pass_rate = float(((mc["max_dd_pct"].abs() <= dd_limit) & (mc["profit_factor"] >= pf_limit) & (mc["net_profit"] > 0)).mean())
+
+        summary_rows.append(
+            {
+                "rank": i + 1,
+                "base_net_profit": base_stats["net_profit"],
+                "base_pf": base_stats["profit_factor"],
+                "base_max_dd_pct": base_stats["max_dd_pct"],
+                "base_worst_month_pct": base_stats["worst_month_pct"],
+                "base_trades": base_stats["trades"],
+                "mc_iters": int(len(mc)),
+                "mc_net_p05": net_p05,
+                "mc_net_med": net_med,
+                "mc_dd_p95": dd_p95,
+                "mc_pf_p05": pf_p05,
+                "mc_pass_rate": pass_rate,
+            }
+        )
+
+    summary = pd.DataFrame(summary_rows).sort_values(["mc_pass_rate", "mc_net_med"], ascending=[False, False])
+    summary.to_csv(os.path.join(out_dir, "mc_summary.csv"), index=False)
+    print("Saved:", os.path.join(out_dir, "mc_summary.csv"))
+    print(summary.head(10).to_string(index=False))
+
+
+if __name__ == "__main__":
+    main()
+
+============================================================
+FILE: src/mt5_probe.py
+============================================================
+from __future__ import annotations
+import MetaTrader5 as mt5
+from datetime import datetime, timedelta, timezone
+
+def main():
+    if not mt5.initialize():
+        print("MT5 initialize() FAILED:", mt5.last_error())
+        return
+
+    term = mt5.terminal_info()
+    acc  = mt5.account_info()
+    print("Terminal:", term)
+    print("Account :", acc)
+
+    # ابحث عن رموز الذهب الشائعة
+    all_syms = mt5.symbols_get()
+    names = [s.name for s in all_syms] if all_syms else []
+    cand = [n for n in names if "XAU" in n.upper()]
+    print("\nXAU candidates (first 50):")
+    for n in cand[:50]:
+        print(" ", n)
+
+    # جرّب تلقائيًا أول 5 مرشحين على H1 (آخر 30 يوم)
+    tf = mt5.TIMEFRAME_H1
+    dt_end = datetime.now(timezone.utc)
+    dt_start = dt_end - timedelta(days=30)
+
+    print("\nTesting rates for candidates:")
+    for n in cand[:10]:
+        r = mt5.copy_rates_range(n, tf, dt_start, dt_end)
+        cnt = 0 if r is None else len(r)
+        print(f"  {n:15s} -> bars: {cnt}")
+
+    mt5.shutdown()
+
+if __name__ == "__main__":
+    main()
+
+============================================================
+FILE: src/mt5_runner.py
+============================================================
+# src/mt5_runner.py
+from __future__ import annotations
+
+import time
+import subprocess
+from pathlib import Path
+from typing import Optional, Tuple
+
+def run_mt5_terminal(
+    mt5_terminal: str,
+    ini_path: str,
+    log_path: Optional[str] = None,
+    timeout_sec: int = 60 * 60 * 6
+) -> Tuple[int, float]:
+    """
+    Runs MT5 Strategy Tester in headless mode:
+      terminal64.exe /config:<ini>
+    Writes stdout/stderr into log_path (if provided).
+    Returns (return_code, elapsed_seconds).
+    """
+    terminal = Path(mt5_terminal)
+    ini = Path(ini_path)
+
+    if not terminal.exists():
+        raise FileNotFoundError(f"MT5 terminal not found: {terminal}")
+    if not ini.exists():
+        raise FileNotFoundError(f"INI not found: {ini}")
+
+    cmd = [str(terminal), f"/config:{str(ini)}"]
+
+    t0 = time.time()
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+    try:
+        out, err = p.communicate(timeout=timeout_sec)
+    except subprocess.TimeoutExpired:
+        p.kill()
+        raise RuntimeError(f"MT5 test timeout after {timeout_sec} sec. ini={ini}")
+
+    elapsed = time.time() - t0
+
+    if log_path:
+        lp = Path(log_path)
+        lp.parent.mkdir(parents=True, exist_ok=True)
+        lp.write_text(
+            "CMD:\n" + " ".join(cmd) + "\n\nSTDOUT:\n" + (out or "") + "\n\nSTDERR:\n" + (err or ""),
+            encoding="utf-8",
+            errors="ignore",
+        )
+
+    return p.returncode, elapsed
+
+============================================================
+FILE: src/mt5_symbol_info.py
+============================================================
+# src/mt5_symbol_info.py
+from __future__ import annotations
+from dataclasses import dataclass
+import MetaTrader5 as mt5
+
+
+@dataclass
+class SymbolSpec:
+    name: str
+    point: float
+    digits: int
+    tick_size: float
+    tick_value: float
+    vol_min: float
+    vol_step: float
+    vol_max: float
+    contract_size: float
+
+
+def get_symbol_spec(symbol: str) -> SymbolSpec:
+    if not mt5.initialize():
+        raise RuntimeError(f"MT5 init failed: {mt5.last_error()}")
+
+    info = mt5.symbol_info(symbol)
+    if info is None:
+        mt5.shutdown()
+        raise RuntimeError(f"symbol_info() is None for {symbol}")
+
+    if not info.visible:
+        mt5.symbol_select(symbol, True)
+
+    spec = SymbolSpec(
+        name=symbol,
+        point=float(info.point),
+        digits=int(info.digits),
+        tick_size=float(info.trade_tick_size),
+        tick_value=float(info.trade_tick_value),
+        vol_min=float(info.volume_min),
+        vol_step=float(info.volume_step),
+        vol_max=float(info.volume_max),
+        contract_size=float(info.trade_contract_size),
+    )
+
+    mt5.shutdown()
+    return spec
+
+============================================================
+FILE: src/objective_wfo.py
+============================================================
+# src/objective_wfo.py
+from __future__ import annotations
+
+from typing import Dict, Any, List
+import yaml
+import numpy as np
+import optuna
+import pandas as pd
+
+from .metrics import summarize
+from .backtest_tech import backtest_tech
+from .mt5_symbol_info import get_symbol_spec
+from .wfo import build_wfo_windows, slice_window
+
+
+def load_yaml(path: str) -> Dict[str, Any]:
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f.read())
+
+
+def suggest_params(trial: optuna.Trial, space: Dict[str, Any]) -> Dict[str, Any]:
+    p: Dict[str, Any] = {}
+    for k, spec in space.items():
+        t = spec["type"]
+        if t == "int":
+            step = spec.get("step", 1)
+            p[k] = trial.suggest_int(k, int(spec["low"]), int(spec["high"]), step=int(step))
+        elif t == "float":
+            step = spec.get("step", None)
+            if step is None:
+                p[k] = trial.suggest_float(k, float(spec["low"]), float(spec["high"]))
+            else:
+                p[k] = trial.suggest_float(k, float(spec["low"]), float(spec["high"]), step=float(step))
+        elif t == "bool":
+            p[k] = trial.suggest_categorical(k, [True, False])
+        else:
+            raise ValueError(f"Unknown type: {t} for {k}")
+    return p
+
+
+def apply_rules(p: Dict[str, Any]) -> bool:
+    if not (p["InpMAslow"] >= p["InpMAfast"] + 10):
+        return False
+    if not (p["InpRSI_SellMin"] <= p["InpRSI_BuyMax"] - 5):
+        return False
+    if not (p["TS_StepPts"] <= p["TS_StartPts"]):
+        return False
+    return True
+
+
+def make_objective_wfo(df: pd.DataFrame, cfg: Dict[str, Any]):
+    """
+    WFO-CV objective:
+    - Evaluate SAME params across rolling test windows.
+    - Hard gate per test window (DD/PF/WorstMonth/Trades).
+    - Rank by robust aggregate (median test profit) minus stability penalties.
+    """
+    space = cfg["search_space"]
+    constraints = cfg["constraints"]
+    run = cfg["run"]
+    costs = cfg["costs"]
+
+    # WFO settings (optional in YAML). Defaults are suitable for ~5y H1.
+    wfo_cfg = cfg.get("wfo", {})
+    train_months = int(wfo_cfg.get("train_months", 18))
+    test_months = int(wfo_cfg.get("test_months", 6))
+    step_months = int(wfo_cfg.get("step_months", 6))
+    min_test_bars = int(wfo_cfg.get("min_test_bars", 200))
+    min_windows = int(wfo_cfg.get("min_windows", 4))
+
+    windows = build_wfo_windows(
+        df,
+        train_months=train_months,
+        test_months=test_months,
+        step_months=step_months,
+        min_test_bars=min_test_bars,
+        time_col="time",
+    )
+    if len(windows) < min_windows:
+        raise RuntimeError(
+            f"Not enough WFO windows ({len(windows)}) for settings "
+            f"train={train_months}m test={test_months}m step={step_months}m. "
+            f"Expand date range or relax WFO settings."
+        )
+
+    symbol = run["symbol"]
+    sym_spec = get_symbol_spec(symbol)
+
+    max_dd_limit = float(constraints["max_dd_pct"])
+    min_pf = float(constraints["min_pf"])
+    min_trades_total = float(constraints["min_trades"])
+    worst_month_limit = float(constraints["worst_month_pct"])
+
+    # per-window minimum trades (avoid "passes by luck" on tiny trade counts)
+    min_trades_per_window = int(wfo_cfg.get("min_trades_per_window", max(30, int(min_trades_total / len(windows) * 0.6))))
+
+    def objective(trial: optuna.Trial) -> float:
+        p = suggest_params(trial, space)
+        if not apply_rules(p):
+            raise optuna.TrialPruned()
+
+        test_net: List[float] = []
+        test_dd: List[float] = []
+        test_pf: List[float] = []
+        test_wm: List[float] = []
+        test_tr: List[float] = []
+
+        # Evaluate across windows
+        for w in windows:
+            train_df, test_df = slice_window(df, w, time_col="time")
+
+            # Optional: ensure enough data in test
+            if len(test_df) < min_test_bars:
+                continue
+
+            # Run test backtest (we focus on out-of-sample)
+            res_test = backtest_tech(
+                test_df,
+                p,
+                costs=costs,
+                run={
+                    "initial_balance": cfg["risk"]["initial_balance"],
+                    "trade_on_closed_bar": cfg["execution"]["trade_on_closed_bar"],
+                },
+                spec=sym_spec,
+            )
+            st = summarize(res_test)
+
+            tr = float(st["trades"])
+            dd_abs = abs(float(st["max_dd_pct"]))
+            pf = float(st["profit_factor"])
+            wm = float(st["worst_month_pct"])
+            net = float(st["net_profit"])
+
+            # Hard gates PER TEST WINDOW
+            if tr < min_trades_per_window:
+                raise optuna.TrialPruned()
+            if dd_abs > max_dd_limit + 0.01:
+                raise optuna.TrialPruned()
+            if pf < min_pf:
+                raise optuna.TrialPruned()
+            if wm < worst_month_limit:
+                raise optuna.TrialPruned()
+
+            test_net.append(net)
+            test_dd.append(dd_abs)
+            test_pf.append(pf)
+            test_wm.append(wm)
+            test_tr.append(tr)
+
+        if len(test_net) < min_windows:
+            raise optuna.TrialPruned()
+
+        # Robust aggregate score
+        net_med = float(np.median(test_net))
+        net_mean = float(np.mean(test_net))
+        net_std = float(np.std(test_net, ddof=0))
+
+        dd_mean = float(np.mean(test_dd))
+        pf_mean = float(np.mean(test_pf))
+        wm_mean = float(np.mean(test_wm))
+        tr_mean = float(np.mean(test_tr))
+
+        # Stability penalties (prefer consistent forward performance)
+        penalty = 0.0
+        penalty += 0.20 * net_std                      # penalize unstable profits
+        penalty += 50.0 * max(0.0, dd_mean - max_dd_limit * 0.90)  # prefer margin under DD
+        penalty += 200.0 * max(0.0, (min_pf + 0.05) - pf_mean)      # prefer PF above minimum
+        penalty += 30.0 * max(0.0, (worst_month_limit + 1.0) - wm_mean)  # prefer better worst month
+
+        score = net_med - penalty
+
+        # Attach diagnostics
+        trial.set_user_attr("wfo_windows", float(len(test_net)))
+        trial.set_user_attr("wfo_net_med", net_med)
+        trial.set_user_attr("wfo_net_mean", net_mean)
+        trial.set_user_attr("wfo_net_std", net_std)
+        trial.set_user_attr("wfo_dd_mean", dd_mean)
+        trial.set_user_attr("wfo_pf_mean", pf_mean)
+        trial.set_user_attr("wfo_wm_mean", wm_mean)
+        trial.set_user_attr("wfo_tr_mean", tr_mean)
+        trial.set_user_attr("penalty", float(penalty))
+
+        return float(score)
+
+    return objective
+
+============================================================
+FILE: src/objective.py
+============================================================
+# src/objective.py
+from __future__ import annotations
+
+from typing import Dict, Any
+import yaml
+import optuna
+
+from .metrics import summarize
+from .backtest_tech import backtest_tech
+from .mt5_symbol_info import get_symbol_spec
+
+
+def load_yaml(path: str) -> Dict[str, Any]:
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f.read())
+
+
+def suggest_params(trial: optuna.Trial, space: Dict[str, Any]) -> Dict[str, Any]:
+    p: Dict[str, Any] = {}
+    for k, spec in space.items():
+        t = spec["type"]
+        if t == "int":
+            step = spec.get("step", 1)
+            p[k] = trial.suggest_int(k, int(spec["low"]), int(spec["high"]), step=int(step))
+        elif t == "float":
+            step = spec.get("step", None)
+            if step is None:
+                p[k] = trial.suggest_float(k, float(spec["low"]), float(spec["high"]))
+            else:
+                p[k] = trial.suggest_float(k, float(spec["low"]), float(spec["high"]), step=float(step))
+        elif t == "bool":
+            p[k] = trial.suggest_categorical(k, [True, False])
+        else:
+            raise ValueError(f"Unknown type: {t} for {k}")
+    return p
+
+
+def apply_rules(p: Dict[str, Any]) -> bool:
+    if not (p["InpMAslow"] >= p["InpMAfast"] + 10):
+        return False
+    if not (p["InpRSI_SellMin"] <= p["InpRSI_BuyMax"] - 5):
+        return False
+    if not (p["TS_StepPts"] <= p["TS_StartPts"]):
+        return False
+    return True
+
+
+def make_objective(df, cfg: Dict[str, Any]):
+    space = cfg["search_space"]
+    constraints = cfg["constraints"]
+    run = cfg["run"]
+    costs = cfg["costs"]
+
+    symbol = run["symbol"]
+    sym_spec = get_symbol_spec(symbol)
+
+    max_dd_limit = float(constraints["max_dd_pct"])
+    min_pf = float(constraints["min_pf"])
+    min_trades = float(constraints["min_trades"])
+    worst_month_limit = float(constraints["worst_month_pct"])
+
+    def objective(trial: optuna.Trial) -> float:
+        p = suggest_params(trial, space)
+        if not apply_rules(p):
+            raise optuna.TrialPruned()
+
+        res = backtest_tech(
+            df,
+            p,
+            costs=costs,
+            run={
+                "initial_balance": cfg["risk"]["initial_balance"],
+                "trade_on_closed_bar": cfg["execution"]["trade_on_closed_bar"],
+            },
+            spec=sym_spec,
+        )
+
+        st = summarize(res)
+
+        # Prune only useless trials early
+        if st["trades"] < 20:
+            raise optuna.TrialPruned()
+
+        # -------------------------
+        # HARD GATES (Company-like)
+        # -------------------------
+        dd_abs = abs(float(st["max_dd_pct"]))
+        if dd_abs > max_dd_limit + 0.01:
+            raise optuna.TrialPruned()
+
+        if float(st["profit_factor"]) < min_pf:
+            raise optuna.TrialPruned()
+
+        if float(st["trades"]) < min_trades:
+            raise optuna.TrialPruned()
+
+        if float(st["worst_month_pct"]) < worst_month_limit:
+            raise optuna.TrialPruned()
+
+        # -------------------------
+        # Soft ranking inside gates
+        # -------------------------
+        wm = float(st["worst_month_pct"])     # higher (less negative) is better
+        pf = float(st["profit_factor"])
+        tr = float(st["trades"])
+
+        penalty = 0.0
+
+        # keep tiny penalties to prefer stronger stability even within gates
+        # (optional): if DD close to limit, penalize slightly
+        if dd_abs > max_dd_limit * 0.95:
+            penalty += 200.0 * (dd_abs - max_dd_limit * 0.95)
+
+        # prefer PF above minimum
+        if pf < (min_pf + 0.10):
+            penalty += 300.0 * ((min_pf + 0.10) - pf)
+
+        # prefer worst-month well above limit
+        if wm < (worst_month_limit + 2.0):
+            penalty += 150.0 * ((worst_month_limit + 2.0) - wm)
+
+        # prefer more trades (stability) but mild
+        if tr < (min_trades + 100):
+            penalty += 0.5 * ((min_trades + 100) - tr)
+
+        score = float(st["net_profit"]) - penalty
+
+        for k, v in st.items():
+            trial.set_user_attr(k, float(v))
+        trial.set_user_attr("dd_abs", dd_abs)
+        trial.set_user_attr("penalty", penalty)
+
+        return float(score)
+
+    return objective
+
+============================================================
+FILE: src/optimize_phaseA.py
+============================================================
+# src/optimize_phaseA.py
+from __future__ import annotations
+import os
+import pandas as pd
+import optuna
+
+from .objective import load_yaml, make_objective
+from .data_mt5 import fetch_rates_mt5, save_parquet, load_parquet
+
+
+def main():
+    cfg = load_yaml("configs/phaseA_search.yaml")
+    symbol = cfg["run"]["symbol"]
+    tf = cfg["run"]["timeframe"]
+    start = cfg["run"]["start"]
+    end = cfg["run"]["end"]
+
+    os.makedirs("data", exist_ok=True)
+    data_path = f"data/{symbol}_{tf}_{start}_{end}.parquet".replace(":", "-")
+
+    if os.path.exists(data_path):
+        df = load_parquet(data_path)
+    else:
+        df = fetch_rates_mt5(symbol, tf, start, end, utc=cfg["run"].get("utc", True))
+        save_parquet(df, data_path)
+
+    objective_fn = make_objective(df, cfg)
+    assert callable(objective_fn), f"make_objective() returned non-callable: {type(objective_fn)}"
+
+    study = optuna.create_study(direction="maximize", sampler=optuna.samplers.TPESampler(seed=42))
+
+    n_trials = 400
+    study.optimize(objective_fn, n_trials=n_trials, show_progress_bar=True)
+
+    best = sorted([t for t in study.trials if t.value is not None], key=lambda x: x.value, reverse=True)[:10]
+    os.makedirs("out", exist_ok=True)
+
+    rows = []
+    for t in best:
+        row = {"score": t.value, **t.params, **t.user_attrs}
+        rows.append(row)
+
+    out_df = pd.DataFrame(rows)
+    out_df.to_csv("out/top10_phaseA.csv", index=False)
+    print("Saved: out/top10_phaseA.csv")
+    print(out_df.head(10).to_string(index=False))
+
+
+if __name__ == "__main__":
+    main()
+
+============================================================
+FILE: src/pipeline_auto_wfo_mc.py
+============================================================
+# src/pipeline_auto_wfo_mc.py  (FULL FIXED — added numpy import + robust best_row casting)
+from __future__ import annotations
+
+import os
+import copy
+import math
+import json
+
+import numpy as np
+import pandas as pd
+import yaml
+import optuna
+
+from .objective_wfo import make_objective_wfo, load_yaml
+from .data_mt5 import fetch_rates_mt5
+from .monte_carlo import (
+    load_top_configs,
+    row_to_params,
+    equity_stats_from_trades,
+    monte_carlo_on_trades,
+)
+from .wfo import build_wfo_windows, slice_window
+from .backtest_tech import backtest_tech
+from .mt5_symbol_info import get_symbol_spec
+
+
+BASE_STAGES = [
+    {"name": "explore", "dd": 18.0, "pf": 1.10, "wm": -12.0, "tr": 120},
+    {"name": "tighten", "dd": 15.0, "pf": 1.15, "wm": -10.0, "tr": 160},
+    {"name": "company", "dd": 12.0, "pf": 1.20, "wm": -8.0,  "tr": 200},
+]
+
+
+def _snap_float(x: float, step: float, mode: str) -> float:
+    if step <= 0:
+        return float(x)
+    q = x / step
+    if mode == "floor":
+        return float(math.floor(q) * step)
+    if mode == "ceil":
+        return float(math.ceil(q) * step)
+    return float(round(q) * step)
+
+
+def _snap_int(x: float, step: int, mode: str) -> int:
+    step = int(step) if step else 1
+    if step <= 1:
+        return int(round(x))
+    q = x / step
+    if mode == "floor":
+        return int(math.floor(q) * step)
+    if mode == "ceil":
+        return int(math.ceil(q) * step)
+    return int(round(q) * step)
+
+
+def _align_bounds_to_step(spec: dict, lo: float, hi: float) -> tuple[float, float]:
+    t = spec["type"]
+    step = spec.get("step", None)
+
+    if t == "int":
+        st = int(step) if step is not None else 1
+        lo2 = _snap_int(lo, st, "ceil")
+        hi2 = _snap_int(hi, st, "floor")
+        if hi2 < lo2:
+            mid = _snap_int((lo + hi) / 2.0, st, "round")
+            lo2 = mid
+            hi2 = mid
+        return float(lo2), float(hi2)
+
+    if t == "float":
+        if step is None:
+            return float(lo), float(hi)
+        st = float(step)
+        lo2 = _snap_float(lo, st, "ceil")
+        hi2 = _snap_float(hi, st, "floor")
+        if hi2 < lo2:
+            mid = _snap_float((lo + hi) / 2.0, st, "round")
+            lo2 = mid
+            hi2 = mid
+        return float(lo2), float(hi2)
+
+    return float(lo), float(hi)
+
+
+def narrow_search_space(df_results: pd.DataFrame, space: dict, keep_ratio: float = 0.25) -> dict:
+    new_space = copy.deepcopy(space)
+
+    df_results = df_results.dropna(subset=["score"])
+    if len(df_results) < 10:
+        return new_space
+
+    top_n = max(5, int(len(df_results) * keep_ratio))
+    top = df_results.sort_values("score", ascending=False).head(top_n)
+
+    for name, spec in space.items():
+        if name not in top.columns:
+            continue
+        t = spec["type"]
+        if t not in ("int", "float"):
+            continue
+
+        base_lo = float(spec["low"])
+        base_hi = float(spec["high"])
+
+        lo = float(top[name].min())
+        hi = float(top[name].max())
+        margin = (hi - lo) * 0.25
+
+        lo = max(base_lo, lo - margin)
+        hi = min(base_hi, hi + margin)
+
+        lo, hi = _align_bounds_to_step(spec, lo, hi)
+
+        new_space[name]["low"] = lo if t == "float" else int(lo)
+        new_space[name]["high"] = hi if t == "float" else int(hi)
+
+    return new_space
+
+
+def auto_relax(stage: dict, attempt: int) -> dict:
+    s = dict(stage)
+    s["dd"] = float(s["dd"]) + 1.5 * (attempt + 1)
+    s["pf"] = max(1.05, float(s["pf"]) - 0.03 * (attempt + 1))
+    s["wm"] = float(s["wm"]) - 1.0 * (attempt + 1)
+    s["tr"] = max(60, int(s.get("tr", 200)) - 20 * (attempt + 1))
+    s["name"] = f"{s['name']}_relax{attempt+1}"
+    return s
+
+
+def _write_stage(stage_dir: str, cfg: dict, df_out: pd.DataFrame | None, meta: dict):
+    os.makedirs(stage_dir, exist_ok=True)
+    with open(os.path.join(stage_dir, "stage_meta.yaml"), "w", encoding="utf-8") as f:
+        yaml.safe_dump(meta, f, sort_keys=False, allow_unicode=True)
+    with open(os.path.join(stage_dir, "effective_config.yaml"), "w", encoding="utf-8") as f:
+        yaml.safe_dump(cfg, f, sort_keys=False, allow_unicode=True)
+    if df_out is not None and len(df_out) > 0:
+        df_out.to_csv(os.path.join(stage_dir, "results.csv"), index=False)
+
+
+def run_stage(df: pd.DataFrame, base_cfg: dict, stage_cfg: dict, n_trials: int = 250):
+    cfg = copy.deepcopy(base_cfg)
+    cfg["constraints"]["max_dd_pct"] = float(stage_cfg["dd"])
+    cfg["constraints"]["min_pf"] = float(stage_cfg["pf"])
+    cfg["constraints"]["worst_month_pct"] = float(stage_cfg["wm"])
+    cfg["constraints"]["min_trades"] = int(stage_cfg.get("tr", cfg["constraints"].get("min_trades", 200)))
+
+    objective = make_objective_wfo(df, cfg)
+
+    study = optuna.create_study(direction="maximize", sampler=optuna.samplers.TPESampler(seed=42))
+    study.optimize(objective, n_trials=int(n_trials), show_progress_bar=True)
+
+    trials = [t for t in study.trials if t.value is not None]
+    if not trials:
+        return None, None, cfg
+
+    rows = [{"score": t.value, **t.params, **t.user_attrs} for t in trials]
+    df_out = pd.DataFrame(rows).sort_values("score", ascending=False).reset_index(drop=True)
+
+    new_space = narrow_search_space(df_out, cfg["search_space"], keep_ratio=0.25)
+    return df_out, new_space, cfg
+
+
+def _to_jsonable(x):
+    # robust conversion for numpy scalars / pandas scalars
+    if isinstance(x, (np.integer,)):
+        return int(x)
+    if isinstance(x, (np.floating,)):
+        return float(x)
+    if isinstance(x, (pd.Timestamp,)):
+        return x.isoformat()
+    return x
+
+
+def run_stage4_montecarlo(cfg: dict, df: pd.DataFrame, out_root: str, stage3_dir: str):
+    stage3_csv = os.path.join(stage3_dir, "results.csv")
+    top_cfgs = load_top_configs(stage3_csv, top_n=10)
+
+    out_dir = os.path.join(out_root, "stage_4_montecarlo")
+    os.makedirs(out_dir, exist_ok=True)
+
+    symbol = cfg["run"]["symbol"]
+    spec = get_symbol_spec(symbol)
+    costs = cfg["costs"]
+    initial_balance = float(cfg["risk"]["initial_balance"])
+    trade_on_closed = bool(cfg["execution"]["trade_on_closed_bar"])
+
+    wfo_cfg = cfg.get("wfo", {})
+    train_months = int(wfo_cfg.get("train_months", 18))
+    test_months = int(wfo_cfg.get("test_months", 6))
+    step_months = int(wfo_cfg.get("step_months", 6))
+    min_test_bars = int(wfo_cfg.get("min_test_bars", 200))
+
+    windows = build_wfo_windows(
+        df,
+        train_months=train_months,
+        test_months=test_months,
+        step_months=step_months,
+        min_test_bars=min_test_bars,
+        time_col="time",
+    )
+
+    dd_limit = float(cfg["constraints"]["max_dd_pct"])
+    pf_limit = float(cfg["constraints"]["min_pf"])
+
+    summary_rows = []
+    params_by_rank = {}
+
+    for i, row in top_cfgs.iterrows():
+        params = row_to_params(row, cfg["search_space"])
+        cfg_tag = f"cfg_{i+1:02d}"
+        params_by_rank[i + 1] = params
+
+        all_trades = []
+        for w in windows:
+            _, test_df = slice_window(df, w, time_col="time")
+            if len(test_df) < min_test_bars:
+                continue
+            res = backtest_tech(
+                test_df,
+                params,
+                costs=costs,
+                run={"initial_balance": initial_balance, "trade_on_closed_bar": trade_on_closed},
+                spec=spec,
+            )
+            all_trades.extend(res.trades)
+
+        base_stats = equity_stats_from_trades(all_trades, initial_balance)
+
+        mc = monte_carlo_on_trades(
+            all_trades,
+            initial_balance=initial_balance,
+            n_iter=300,
+            delete_frac=0.05,
+            pnl_noise_sigma=0.06,
+            seed=42 + i,
+            method="block",
+            block_size=20,
+        )
+
+        with open(os.path.join(out_dir, f"{cfg_tag}_params.json"), "w", encoding="utf-8") as f:
+            json.dump(params, f, indent=2, ensure_ascii=False)
+
+        if mc is None or mc.empty:
+            summary_rows.append(
+                {
+                    "rank": i + 1,
+                    "base_net_profit": base_stats["net_profit"],
+                    "base_pf": base_stats["profit_factor"],
+                    "base_max_dd_pct": base_stats["max_dd_pct"],
+                    "base_worst_month_pct": base_stats["worst_month_pct"],
+                    "base_trades": base_stats["trades"],
+                    "mc_iters": 0,
+                    "mc_net_p05": float("nan"),
+                    "mc_net_med": float("nan"),
+                    "mc_dd_p95": float("nan"),
+                    "mc_pf_p05": float("nan"),
+                    "mc_pass_rate": float("nan"),
+                }
+            )
+            continue
+
+        mc.to_csv(os.path.join(out_dir, f"{cfg_tag}_mc.csv"), index=False)
+
+        net_p05 = float(mc["net_profit"].quantile(0.05))
+        net_med = float(mc["net_profit"].quantile(0.50))
+        dd_p95 = float(mc["max_dd_pct"].abs().quantile(0.95))
+        pf_p05 = float(mc["profit_factor"].quantile(0.05))
+
+        pass_rate = float(((mc["max_dd_pct"].abs() <= dd_limit) & (mc["profit_factor"] >= pf_limit) & (mc["net_profit"] > 0)).mean())
+
+        summary_rows.append(
+            {
+                "rank": i + 1,
+                "base_net_profit": base_stats["net_profit"],
+                "base_pf": base_stats["profit_factor"],
+                "base_max_dd_pct": base_stats["max_dd_pct"],
+                "base_worst_month_pct": base_stats["worst_month_pct"],
+                "base_trades": base_stats["trades"],
+                "mc_iters": int(len(mc)),
+                "mc_net_p05": net_p05,
+                "mc_net_med": net_med,
+                "mc_dd_p95": dd_p95,
+                "mc_pf_p05": pf_p05,
+                "mc_pass_rate": pass_rate,
+            }
+        )
+
+    summary = pd.DataFrame(summary_rows)
+    summary_path = os.path.join(out_dir, "mc_summary.csv")
+    summary.to_csv(summary_path, index=False)
+
+    passed = summary.dropna(subset=["mc_dd_p95", "mc_net_p05", "mc_net_med"])
+    passed_gate = passed[passed["mc_dd_p95"] <= dd_limit].copy()
+
+    if len(passed_gate) > 0:
+        selected = passed_gate.sort_values(
+            ["mc_net_p05", "mc_net_med", "mc_pf_p05", "mc_pass_rate"],
+            ascending=[False, False, False, False],
+        ).iloc[0]
+        reason = f"passed_gate(mc_dd_p95<= {dd_limit}) then max(mc_net_p05, mc_net_med)"
+    else:
+        selected = passed.sort_values(
+            ["mc_dd_p95", "mc_net_p05", "mc_net_med"],
+            ascending=[True, False, False],
+        ).iloc[0]
+        reason = f"no_config_passed_gate(mc_dd_p95<= {dd_limit}); picked min(mc_dd_p95) then max(mc_net_p05)"
+
+    sel_rank = int(selected["rank"])
+    final_params = params_by_rank.get(sel_rank, {})
+
+    best_row = {k: _to_jsonable(selected[k]) for k in selected.index}
+
+    final = {
+        "selected_by": reason,
+        "constraints_used": {"dd_limit": dd_limit, "pf_limit": pf_limit},
+        "best_row": best_row,
+        "params": final_params,
+        "symbol": cfg["run"]["symbol"],
+        "timeframe": cfg["run"]["timeframe"],
+    }
+
+    with open(os.path.join(out_dir, "final_config.json"), "w", encoding="utf-8") as f:
+        json.dump(final, f, indent=2, ensure_ascii=False)
+
+    print("Saved:", summary_path)
+    print(summary.sort_values(["mc_net_p05", "mc_net_med"], ascending=[False, False]).head(10).to_string(index=False))
+    print("Saved:", os.path.join(out_dir, "final_config.json"))
+
+
+if __name__ == "__main__":
+    # Note: main() is defined in the earlier versions of this file.
+    # This module is meant to be executed as: python -m src.pipeline_auto_wfo_mc
+    # The main() function is below.
+    def main():
+        cfg = load_yaml("configs/phaseA_search.yaml")
+
+        symbol = cfg["run"]["symbol"]
+        tf = cfg["run"]["timeframe"]
+        start = cfg["run"]["start"]
+        end = cfg["run"]["end"]
+
+        df = fetch_rates_mt5(symbol, tf, start, end, utc=True)
+
+        current_space = copy.deepcopy(cfg["search_space"])
+        out_root = "out_wfo"
+        os.makedirs(out_root, exist_ok=True)
+
+        stage3_dir = None
+
+        for i, base_stage in enumerate(BASE_STAGES):
+            cfg["search_space"] = current_space
+            stage_dir_base = os.path.join(out_root, f"stage_{i+1}_{base_stage['name']}")
+            meta = {"stage": base_stage, "attempts": []}
+
+            df_out = None
+            new_space = None
+            effective_cfg = None
+
+            for attempt in range(4):
+                stage_cfg = base_stage if attempt == 0 else auto_relax(base_stage, attempt - 1)
+                print(
+                    f"\n=== WFO Stage {i+1} | {stage_cfg['name']} | "
+                    f"dd≤{stage_cfg['dd']} pf≥{stage_cfg['pf']} wm≥{stage_cfg['wm']} tr≥{stage_cfg['tr']} ==="
+                )
+
+                df_out, new_space, effective_cfg = run_stage(df, cfg, stage_cfg, n_trials=250)
+                meta["attempts"].append({"stage_cfg": stage_cfg, "valid_trials": 0 if df_out is None else int(len(df_out))})
+
+                if df_out is not None and len(df_out) > 0:
+                    print(df_out.head(3).to_string(index=False))
+                    break
+
+            _write_stage(stage_dir_base, effective_cfg if effective_cfg else cfg, df_out, meta)
+
+            if df_out is None or new_space is None:
+                print("WFO pipeline stopped: no valid trials even after relax attempts.")
+                return
+
+            current_space = new_space
+
+            if i == 2:
+                stage3_dir = stage_dir_base
+
+        print("\n=== WFO PIPELINE COMPLETE (Stages 1–3) ===")
+
+        if stage3_dir is None:
+            print("Stage 3 directory not found. Cannot run Stage 4.")
+            return
+
+        print("\n=== Stage 4: Monte Carlo Robustness (block bootstrap) ===")
+        run_stage4_montecarlo(cfg, df, out_root=out_root, stage3_dir=stage3_dir)
+
+        print("\n=== ALL DONE (WFO + MC) ===")
+        print("Check out_wfo/stage_4_montecarlo/ for mc_summary.csv and final_config.json")
+
+    main()
+
+============================================================
+FILE: src/pipeline_auto_wfo.py
+============================================================
+# src/pipeline_auto_wfo.py
+from __future__ import annotations
+
+import os
+import copy
+import math
+import pandas as pd
+import yaml
+import optuna
+
+from .objective_wfo import make_objective_wfo, load_yaml
+from .data_mt5 import fetch_rates_mt5
+
+
+BASE_STAGES = [
+    {"name": "explore", "dd": 18.0, "pf": 1.10, "wm": -12.0, "tr": 120},
+    {"name": "tighten", "dd": 15.0, "pf": 1.15, "wm": -10.0, "tr": 160},
+    {"name": "company", "dd": 12.0, "pf": 1.20, "wm": -8.0,  "tr": 200},
+]
+
+
+def _snap_float(x: float, step: float, mode: str) -> float:
+    if step <= 0:
+        return float(x)
+    q = x / step
+    if mode == "floor":
+        return float(math.floor(q) * step)
+    if mode == "ceil":
+        return float(math.ceil(q) * step)
+    return float(round(q) * step)
+
+
+def _snap_int(x: float, step: int, mode: str) -> int:
+    step = int(step) if step else 1
+    if step <= 1:
+        return int(round(x))
+    q = x / step
+    if mode == "floor":
+        return int(math.floor(q) * step)
+    if mode == "ceil":
+        return int(math.ceil(q) * step)
+    return int(round(q) * step)
+
+
+def _align_bounds_to_step(spec: dict, lo: float, hi: float) -> tuple[float, float]:
+    t = spec["type"]
+    step = spec.get("step", None)
+
+    if t == "int":
+        st = int(step) if step is not None else 1
+        lo2 = _snap_int(lo, st, "ceil")
+        hi2 = _snap_int(hi, st, "floor")
+        if hi2 < lo2:
+            mid = _snap_int((lo + hi) / 2.0, st, "round")
+            lo2 = mid
+            hi2 = mid
+        return float(lo2), float(hi2)
+
+    if t == "float":
+        if step is None:
+            return float(lo), float(hi)
+        st = float(step)
+        lo2 = _snap_float(lo, st, "ceil")
+        hi2 = _snap_float(hi, st, "floor")
+        if hi2 < lo2:
+            mid = _snap_float((lo + hi) / 2.0, st, "round")
+            lo2 = mid
+            hi2 = mid
+        return float(lo2), float(hi2)
+
+    return float(lo), float(hi)
+
+
+def narrow_search_space(df_results: pd.DataFrame, space: dict, keep_ratio: float = 0.2) -> dict:
+    new_space = copy.deepcopy(space)
+
+    df_results = df_results.dropna(subset=["score"])
+    if len(df_results) < 10:
+        return new_space
+
+    top_n = max(5, int(len(df_results) * keep_ratio))
+    top = df_results.sort_values("score", ascending=False).head(top_n)
+
+    for name, spec in space.items():
+        if name not in top.columns:
+            continue
+        t = spec["type"]
+        if t not in ("int", "float"):
+            continue
+
+        base_lo = float(spec["low"])
+        base_hi = float(spec["high"])
+
+        lo = float(top[name].min())
+        hi = float(top[name].max())
+        margin = (hi - lo) * 0.25
+
+        lo = max(base_lo, lo - margin)
+        hi = min(base_hi, hi + margin)
+
+        lo, hi = _align_bounds_to_step(spec, lo, hi)
+
+        new_space[name]["low"] = lo if t == "float" else int(lo)
+        new_space[name]["high"] = hi if t == "float" else int(hi)
+
+    return new_space
+
+
+def auto_relax(stage: dict, attempt: int) -> dict:
+    s = dict(stage)
+    s["dd"] = float(s["dd"]) + 1.5 * (attempt + 1)
+    s["pf"] = max(1.05, float(s["pf"]) - 0.03 * (attempt + 1))
+    s["wm"] = float(s["wm"]) - 1.0 * (attempt + 1)
+    s["tr"] = max(60, int(s.get("tr", 200)) - 20 * (attempt + 1))
+    s["name"] = f"{s['name']}_relax{attempt+1}"
+    return s
+
+
+def _write_stage(stage_dir: str, cfg: dict, df_out: pd.DataFrame | None, meta: dict):
+    os.makedirs(stage_dir, exist_ok=True)
+    with open(os.path.join(stage_dir, "stage_meta.yaml"), "w", encoding="utf-8") as f:
+        yaml.safe_dump(meta, f, sort_keys=False, allow_unicode=True)
+    with open(os.path.join(stage_dir, "effective_config.yaml"), "w", encoding="utf-8") as f:
+        yaml.safe_dump(cfg, f, sort_keys=False, allow_unicode=True)
+    if df_out is not None and len(df_out) > 0:
+        df_out.to_csv(os.path.join(stage_dir, "results.csv"), index=False)
+
+
+def run_stage(df: pd.DataFrame, base_cfg: dict, stage_cfg: dict, n_trials: int = 250):
+    cfg = copy.deepcopy(base_cfg)
+    cfg["constraints"]["max_dd_pct"] = float(stage_cfg["dd"])
+    cfg["constraints"]["min_pf"] = float(stage_cfg["pf"])
+    cfg["constraints"]["worst_month_pct"] = float(stage_cfg["wm"])
+    cfg["constraints"]["min_trades"] = int(stage_cfg.get("tr", cfg["constraints"].get("min_trades", 200)))
+
+    objective = make_objective_wfo(df, cfg)
+
+    study = optuna.create_study(direction="maximize", sampler=optuna.samplers.TPESampler(seed=42))
+    study.optimize(objective, n_trials=int(n_trials), show_progress_bar=True)
+
+    trials = [t for t in study.trials if t.value is not None]
+    if not trials:
+        return None, None, cfg
+
+    rows = [{"score": t.value, **t.params, **t.user_attrs} for t in trials]
+    df_out = pd.DataFrame(rows).sort_values("score", ascending=False).reset_index(drop=True)
+
+    new_space = narrow_search_space(df_out, cfg["search_space"], keep_ratio=0.25)
+    return df_out, new_space, cfg
+
+
+def main():
+    cfg = load_yaml("configs/phaseA_search.yaml")
+
+    symbol = cfg["run"]["symbol"]
+    tf = cfg["run"]["timeframe"]
+    start = cfg["run"]["start"]
+    end = cfg["run"]["end"]
+
+    df = fetch_rates_mt5(symbol, tf, start, end, utc=True)
+
+    current_space = copy.deepcopy(cfg["search_space"])
+
+    os.makedirs("out_wfo", exist_ok=True)
+
+    for i, base_stage in enumerate(BASE_STAGES):
+        cfg["search_space"] = current_space
+        stage_dir_base = f"out_wfo/stage_{i+1}_{base_stage['name']}"
+        meta = {"stage": base_stage, "attempts": []}
+
+        df_out = None
+        new_space = None
+        effective_cfg = None
+
+        for attempt in range(4):  # 0..3
+            stage_cfg = base_stage if attempt == 0 else auto_relax(base_stage, attempt - 1)
+            print(
+                f"\n=== WFO Stage {i+1} | {stage_cfg['name']} | "
+                f"dd≤{stage_cfg['dd']} pf≥{stage_cfg['pf']} wm≥{stage_cfg['wm']} tr≥{stage_cfg['tr']} ==="
+            )
+
+            df_out, new_space, effective_cfg = run_stage(df, cfg, stage_cfg, n_trials=250)
+            meta["attempts"].append({"stage_cfg": stage_cfg, "valid_trials": 0 if df_out is None else int(len(df_out))})
+
+            if df_out is not None and len(df_out) > 0:
+                print(df_out.head(3).to_string(index=False))
+                break
+
+        _write_stage(stage_dir_base, effective_cfg if effective_cfg else cfg, df_out, meta)
+
+        if df_out is None or new_space is None:
+            print("WFO pipeline stopped: no valid trials even after relax attempts.")
+            return
+
+        current_space = new_space
+
+    print("\n=== WFO PIPELINE COMPLETE ===")
+    print("Check out_wfo/ for staged WFO results and configs.")
+
+
+if __name__ == "__main__":
+    main()
+
+============================================================
+FILE: src/pipeline_auto.py
+============================================================
+# src/pipeline_auto.py
+from __future__ import annotations
+
+import os
+import copy
+import math
+import yaml
+import pandas as pd
+import numpy as np
+import optuna
+
+from .objective import make_objective, load_yaml
+from .data_mt5 import fetch_rates_mt5
+
+
+# مراحل أساسية (يمكن تعديلها لاحقًا)
+BASE_STAGES = [
+    {"name": "explore", "dd": 18.0, "pf": 1.10, "wm": -12.0, "tr": 120},
+    {"name": "tighten", "dd": 15.0, "pf": 1.15, "wm": -10.0, "tr": 160},
+    {"name": "company", "dd": 12.0, "pf": 1.20, "wm": -8.0,  "tr": 200},
+]
+
+
+def _snap_float(x: float, step: float, mode: str) -> float:
+    if step <= 0:
+        return float(x)
+    q = x / step
+    if mode == "floor":
+        return float(math.floor(q) * step)
+    if mode == "ceil":
+        return float(math.ceil(q) * step)
+    return float(round(q) * step)
+
+
+def _snap_int(x: float, step: int, mode: str) -> int:
+    step = int(step) if step else 1
+    if step <= 1:
+        return int(round(x))
+    q = x / step
+    if mode == "floor":
+        return int(math.floor(q) * step)
+    if mode == "ceil":
+        return int(math.ceil(q) * step)
+    return int(round(q) * step)
+
+
+def _align_bounds_to_step(spec: dict, lo: float, hi: float) -> tuple[float, float]:
+    t = spec["type"]
+    step = spec.get("step", None)
+
+    if t == "int":
+        st = int(step) if step is not None else 1
+        lo2 = _snap_int(lo, st, "ceil")
+        hi2 = _snap_int(hi, st, "floor")
+        if hi2 < lo2:
+            # fallback: widen one step around center
+            mid = _snap_int((lo + hi) / 2.0, st, "round")
+            lo2 = mid
+            hi2 = mid
+        return float(lo2), float(hi2)
+
+    if t == "float":
+        if step is None:
+            return float(lo), float(hi)
+        st = float(step)
+        lo2 = _snap_float(lo, st, "ceil")
+        hi2 = _snap_float(hi, st, "floor")
+        if hi2 < lo2:
+            mid = _snap_float((lo + hi) / 2.0, st, "round")
+            lo2 = mid
+            hi2 = mid
+        return float(lo2), float(hi2)
+
+    # bool
+    return float(lo), float(hi)
+
+
+def narrow_search_space(df_results: pd.DataFrame, space: dict, keep_ratio: float = 0.2) -> dict:
+    """
+    يضيق النطاقات حول أفضل keep_ratio من النتائج،
+    مع محاذاة الحدود على step لتجنب تحذيرات Optuna.
+    """
+    new_space = copy.deepcopy(space)
+
+    df_results = df_results.dropna(subset=["score"])
+    if len(df_results) < 10:
+        return new_space
+
+    top_n = max(5, int(len(df_results) * keep_ratio))
+    top = df_results.sort_values("score", ascending=False).head(top_n)
+
+    for name, spec in space.items():
+        if name not in top.columns:
+            continue
+
+        t = spec["type"]
+        if t not in ("int", "float"):
+            continue
+
+        base_lo = float(spec["low"])
+        base_hi = float(spec["high"])
+
+        lo = float(top[name].min())
+        hi = float(top[name].max())
+
+        # widen a bit around observed best region
+        margin = (hi - lo) * 0.25
+        lo = max(base_lo, lo - margin)
+        hi = min(base_hi, hi + margin)
+
+        lo, hi = _align_bounds_to_step(spec, lo, hi)
+
+        new_space[name]["low"] = lo if t == "float" else int(lo)
+        new_space[name]["high"] = hi if t == "float" else int(hi)
+
+    return new_space
+
+
+def _write_stage(cfg: dict, stage_dir: str, df_out: pd.DataFrame | None, meta: dict):
+    os.makedirs(stage_dir, exist_ok=True)
+    with open(os.path.join(stage_dir, "stage_meta.yaml"), "w", encoding="utf-8") as f:
+        yaml.safe_dump(meta, f, sort_keys=False, allow_unicode=True)
+
+    with open(os.path.join(stage_dir, "effective_config.yaml"), "w", encoding="utf-8") as f:
+        yaml.safe_dump(cfg, f, sort_keys=False, allow_unicode=True)
+
+    if df_out is not None and len(df_out) > 0:
+        df_out.to_csv(os.path.join(stage_dir, "results.csv"), index=False)
+
+
+def run_stage(df: pd.DataFrame, cfg: dict, stage_cfg: dict, stage_index: int, n_trials: int = 300):
+    """
+    يرجع (df_out, new_space). إذا لا يوجد valid trials يرجع (None, None)
+    """
+    cfg = copy.deepcopy(cfg)
+    cfg["constraints"]["max_dd_pct"] = float(stage_cfg["dd"])
+    cfg["constraints"]["min_pf"] = float(stage_cfg["pf"])
+    cfg["constraints"]["worst_month_pct"] = float(stage_cfg["wm"])
+    cfg["constraints"]["min_trades"] = int(stage_cfg.get("tr", cfg["constraints"].get("min_trades", 200)))
+
+    objective = make_objective(df, cfg)
+
+    study = optuna.create_study(direction="maximize", sampler=optuna.samplers.TPESampler(seed=42))
+    study.optimize(objective, n_trials=int(n_trials), show_progress_bar=True)
+
+    trials = [t for t in study.trials if t.value is not None]
+    if not trials:
+        return None, None, cfg
+
+    rows = []
+    for t in trials:
+        rows.append({"score": t.value, **t.params, **t.user_attrs})
+
+    df_out = pd.DataFrame(rows).sort_values("score", ascending=False).reset_index(drop=True)
+    new_space = narrow_search_space(df_out, cfg["search_space"], keep_ratio=0.2)
+    return df_out, new_space, cfg
+
+
+def auto_relax(stage: dict, attempt: int) -> dict:
+    """
+    إذا Stage فشل (0 valid) نخفف القيود تدريجيًا.
+    attempt=0 أول تخفيف، ثم أقوى…
+    """
+    s = dict(stage)
+    # Relax schedule
+    # dd: +1.5 كل محاولة، pf: -0.03، worst month: -1.0 (أقل صرامة)، trades: -20
+    s["dd"] = float(s["dd"]) + 1.5 * (attempt + 1)
+    s["pf"] = max(1.05, float(s["pf"]) - 0.03 * (attempt + 1))
+    s["wm"] = float(s["wm"]) - 1.0 * (attempt + 1)
+    s["tr"] = max(60, int(s.get("tr", 200)) - 20 * (attempt + 1))
+    s["name"] = f"{s['name']}_relax{attempt+1}"
+    return s
+
+
+def main():
+    cfg = load_yaml("configs/phaseA_search.yaml")
+
+    symbol = cfg["run"]["symbol"]
+    tf = cfg["run"]["timeframe"]
+    start = cfg["run"]["start"]
+    end = cfg["run"]["end"]
+
+    df = fetch_rates_mt5(symbol, tf, start, end, utc=True)
+
+    current_space = copy.deepcopy(cfg["search_space"])
+    stages = copy.deepcopy(BASE_STAGES)
+
+    os.makedirs("out", exist_ok=True)
+
+    for i, base_stage in enumerate(stages):
+        cfg["search_space"] = current_space
+
+        stage_dir = f"out/stage_{i+1}_{base_stage['name']}"
+        meta = {"stage": base_stage, "attempts": []}
+
+        # نحاول stage حتى 3 مرات مع relax تلقائي إذا فشل
+        df_out = None
+        new_space = None
+        effective_cfg = None
+
+        for attempt in range(4):  # 0..3
+            stage_cfg = base_stage if attempt == 0 else auto_relax(base_stage, attempt - 1)
+            print(f"\n=== Stage {i+1} | {stage_cfg['name']} | dd≤{stage_cfg['dd']} pf≥{stage_cfg['pf']} wm≥{stage_cfg['wm']} tr≥{stage_cfg['tr']} ===")
+
+            df_out, new_space, effective_cfg = run_stage(df, cfg, stage_cfg, i, n_trials=300)
+
+            meta["attempts"].append({"stage_cfg": stage_cfg, "valid_trials": 0 if df_out is None else int(len(df_out))})
+
+            if df_out is not None and len(df_out) > 0:
+                print(df_out.head(3).to_string(index=False))
+                break
+
+        _write_stage(effective_cfg if effective_cfg else cfg, stage_dir, df_out, meta)
+
+        if df_out is None or new_space is None:
+            print("Pipeline stopped: no valid trials even after relax attempts.")
+            return
+
+        current_space = new_space
+
+    print("\n=== PIPELINE COMPLETE ===")
+    print("Check out/ for staged results and configs.")
+
+
+if __name__ == "__main__":
+    main()
+
+============================================================
+FILE: src/pipeline_v9_tick_wfo_mc.py
+============================================================
+# src/pipeline_v9_tick_wfo_mc.py
+from __future__ import annotations
+
+import os
+import re
+import json
+import time
+import glob
+import subprocess
+from pathlib import Path
+from datetime import datetime
+
+
+# =========================
+# USER CONFIG (EDIT IF NEEDED)
+# =========================
+MT5_TERMINAL = r"C:\Program Files\MetaTrader 5\terminal64.exe"
+BASE_INI     = r"configs\tick_base.ini"
+
+# اسم الاكسبرت كما في Strategy Tester (لازم يكون موجود في MT5 Data Folder ضمن MQL5\Experts)
+EXPERT_NAME  = r"EA V8.ex5"
+
+# الرمز/الفريم
+SYMBOL       = "XAUUSDr"
+PERIOD       = "H1"
+FROM_DATE    = "2021.01.01"
+TO_DATE      = "2025.12.31"
+
+# ملفات التشغيل
+RUN_SET_REL  = r"configs\_RUN_CURRENT.set"
+OUT_ROOT     = Path("out_v9_tick")
+
+
+# =========================
+# HELPERS
+# =========================
+def _now_ts() -> float:
+    return time.time()
+
+
+def _ensure_dir(p: Path) -> None:
+    p.mkdir(parents=True, exist_ok=True)
+
+
+def write_set_utf16le(params: dict, set_path: str) -> None:
+    """
+    Writes MT5 .set file in UTF-16LE with BOM.
+    Format: Key=Value per line.
+    """
+    lines = []
+    for k, v in params.items():
+        if isinstance(v, bool):
+            vv = "true" if v else "false"
+        else:
+            vv = str(v)
+        lines.append(f"{k}={vv}")
+
+    txt = "\n".join(lines) + "\n"
+    p = Path(set_path)
+    _ensure_dir(p.parent)
+
+    # UTF-16LE with BOM
+    p.write_bytes(b"\xff\xfe" + txt.encode("utf-16le"))
+
+
+def patch_ini(
+    base_ini: str,
+    out_ini: str,
+    *,
+    expert_name: str,
+    symbol: str,
+    period: str,
+    from_date: str,
+    to_date: str,
+    report_prefix_abs: str,
+    expert_params_abs: str,
+) -> None:
+    """
+    Patch a base MT5 tester ini to a runnable ini:
+      - Expert, Symbol, Period, FromDate, ToDate, Report, ExpertParameters
+      - ReplaceReport=1, ShutdownTerminal=1
+    """
+    src = Path(base_ini)
+    if not src.exists():
+        raise FileNotFoundError(f"Base INI not found: {src.resolve()}")
+
+    lines = src.read_text(encoding="utf-8", errors="ignore").splitlines()
+
+    def set_kv(line: str, key: str, val: str) -> str:
+        if line.strip().lower().startswith(key.lower() + "="):
+            return f"{key}={val}"
+        return line
+
+    out_lines = []
+    in_tester = False
+    for line in lines:
+        s = line.strip()
+        if s.startswith("[") and s.endswith("]"):
+            in_tester = (s.lower() == "[tester]")
+            out_lines.append(line)
+            continue
+
+        if in_tester:
+            line = set_kv(line, "Expert", expert_name)
+            line = set_kv(line, "Symbol", symbol)
+            line = set_kv(line, "Period", period)
+            line = set_kv(line, "FromDate", from_date)
+            line = set_kv(line, "ToDate", to_date)
+
+            # report prefix: MT5 will create report.htm / report.html (and sometimes report.xml)
+            line = set_kv(line, "Report", report_prefix_abs)
+            line = set_kv(line, "ReplaceReport", "1")
+            line = set_kv(line, "ShutdownTerminal", "1")
+
+            # IMPORTANT: absolute path to .set
+            line = set_kv(line, "ExpertParameters", expert_params_abs)
+
+        out_lines.append(line)
+
+    outp = Path(out_ini)
+    _ensure_dir(outp.parent)
+    outp.write_text("\n".join(out_lines) + "\n", encoding="utf-8")
+
+
+def run_mt5_terminal(mt5_terminal: str, ini_path: str, log_path: str, timeout_sec: int = 6 * 60 * 60) -> tuple[int, float]:
+    terminal = Path(mt5_terminal)
+    ini = Path(ini_path)
+    if not terminal.exists():
+        raise FileNotFoundError(f"MT5 terminal not found: {terminal}")
+    if not ini.exists():
+        raise FileNotFoundError(f"INI not found: {ini}")
+
+    cmd = [str(terminal), f"/config:{str(ini)}"]
+    t0 = _now_ts()
+
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    try:
+        out, err = p.communicate(timeout=timeout_sec)
+    except subprocess.TimeoutExpired:
+        p.kill()
+        out, err = p.communicate()
+        raise RuntimeError(f"MT5 timeout after {timeout_sec} sec. ini={ini}")
+
+    elapsed = _now_ts() - t0
+
+    lp = Path(log_path)
+    _ensure_dir(lp.parent)
+    lp.write_text(
+        "CMD:\n" + " ".join(cmd) + "\n\nSTDOUT:\n" + (out or "") + "\n\nSTDERR:\n" + (err or "") + "\n",
+        encoding="utf-8",
+        errors="ignore",
+    )
+
+    return p.returncode, elapsed
+
+
+def parse_mt5_report(html_path: str) -> dict:
+    """
+    Parses a MT5 HTML report for basic metrics.
+    """
+    p = Path(html_path)
+    if not p.exists():
+        raise FileNotFoundError(f"Report not found: {p}")
+
+    txt = p.read_text(encoding="utf-8", errors="ignore")
+
+    def find_float(pattern: str):
+        m = re.search(pattern, txt, re.IGNORECASE)
+        if not m:
+            return None
+        val = m.group(1).replace("\xa0", "").replace(" ", "").replace(",", "")
+        try:
+            return float(val)
+        except:
+            return None
+
+    net_profit = find_float(r"Total Net Profit<\/td>\s*<td[^>]*>\s*([-\d\.,]+)")
+    pf        = find_float(r"Profit Factor<\/td>\s*<td[^>]*>\s*([-\d\.,]+)")
+    dd        = find_float(r"Drawdown Relative<\/td>\s*<td[^>]*>\s*([-\d\.,]+)")
+    trades    = find_float(r"Total Trades<\/td>\s*<td[^>]*>\s*([-\d\.,]+)")
+
+    return {
+        "net_profit": net_profit,
+        "profit_factor": pf,
+        "max_dd_pct": dd,
+        "trades": trades,
+        "report": str(p.resolve()),
+    }
+
+
+def _candidate_terminal_roots() -> list[Path]:
+    """
+    Typical MT5 terminal data roots.
+    We scan both Roaming and Local AppData.
+    """
+    roots = []
+    appdata = os.environ.get("APPDATA", "")
+    localapp = os.environ.get("LOCALAPPDATA", "")
+
+    if appdata:
+        roots.append(Path(appdata) / "MetaQuotes" / "Terminal")
+    if localapp:
+        roots.append(Path(localapp) / "MetaQuotes" / "Terminal")
+
+    # Keep only existing
+    out = []
+    for r in roots:
+        if r.exists():
+            out.append(r)
+    return out
+
+
+def _find_reports_under_terminal(after_ts: float) -> list[Path]:
+    """
+    Find report*.htm/html under MT5 terminal folders modified after after_ts.
+    """
+    found: list[Path] = []
+    for root in _candidate_terminal_roots():
+        # Common locations:
+        # 1) ...\Terminal\<HASH>\TesterReports\report*.htm*
+        # 2) ...\Terminal\<HASH>\Tester\*\report*.htm*
+        # 3) ...\Terminal\<HASH>\Tester\reports\report*.htm*
+        patterns = [
+            str(root / "*" / "TesterReports" / "report*.htm*"),
+            str(root / "*" / "Tester" / "*" / "report*.htm*"),
+            str(root / "*" / "Tester" / "reports" / "report*.htm*"),
+            str(root / "*" / "Tester" / "report*.htm*"),
+        ]
+        for pat in patterns:
+            for f in glob.glob(pat):
+                p = Path(f)
+                try:
+                    if p.is_file() and p.stat().st_mtime >= after_ts:
+                        found.append(p)
+                except:
+                    pass
+
+    # newest first
+    found.sort(key=lambda x: x.stat().st_mtime if x.exists() else 0, reverse=True)
+    return found
+
+
+def _find_report_in_run_dir(run_dir: Path) -> Path | None:
+    """
+    Look for report.htm/html in run_dir.
+    """
+    for name in ("report.html", "report.htm", "report.htm.html", "report"):
+        p = run_dir / name
+        if p.exists() and p.is_file():
+            return p
+
+    # Also accept report*.htm*
+    cands = list(run_dir.glob("report*.htm*"))
+    if cands:
+        cands.sort(key=lambda x: x.stat().st_mtime, reverse=True)
+        return cands[0]
+
+    return None
+
+
+def wait_for_report(run_dir: Path, after_ts: float, max_wait_sec: int = 60) -> Path | None:
+    """
+    Wait for report to appear. First run_dir, then terminal folders.
+    """
+    end = _now_ts() + max_wait_sec
+    last_terminal_candidates: list[Path] = []
+
+    while _now_ts() <= end:
+        p = _find_report_in_run_dir(run_dir)
+        if p:
+            return p
+
+        last_terminal_candidates = _find_reports_under_terminal(after_ts)
+        if last_terminal_candidates:
+            return last_terminal_candidates[0]
+
+        time.sleep(1)
+
+    return None
+
+
+def sanity_params_from_final() -> dict:
+    """
+    نفس params التي خرجت من final_config.json عندك.
+    """
+    return {
+        "TradeMode": 2,
+
+        "UseMA": True,
+        "InpMAfast": 29,
+        "InpMAslow": 89,
+        "InpMA_Method": 1,
+        "InpMA_Price": 1,
+
+        "UseRSI": True,
+        "InpRSI_Period": 11,
+        "InpRSI_BuyMax": 61,
+        "InpRSI_SellMin": 54,
+
+        "InpATR_Period": 23,
+        "InpATR_SL_Mult": 1.6,
+        "InpRR": 3.0,
+        "InpMaxSpreadPts": 350,
+
+        "InpRiskPct": 0.55,
+        "MaxTradesPerDay": 9,
+        "UseDailyLossStop": True,
+        "DailyLossPct": 3.5,
+
+        "UseTrailingStop": True,
+        "TS_StartPts": 525,
+        "TS_StepPts": 50,
+
+        "UseBreakEven": True,
+        "BE_TriggerPts": 170,
+        "BE_OffsetPts": 0,
+
+        "MinTradeGapSec": 330,
+
+        # Tech only now
+        "UseAISignals": False,
+        "BT_EnableAIReplay": False,
+
+        # Disable extras for sanity run
+        "UseFibonacciFilter": False,
+        "UseRegimeDetector": False,
+        "UseRiskGovernor": False,
+        "UseMicrostructureFilters": False,
+        "UseShadowSL": False,
+        "UseLadderTP": False,
+        "UsePyramiding": False,
+        "Cloud_Enable": False,
+    }
+
+
+def main() -> None:
+    OUT_ROOT.mkdir(parents=True, exist_ok=True)
+    run_dir = OUT_ROOT / "_runs" / "sanity_tick"
+    _ensure_dir(run_dir)
+
+    # absolute paths
+    run_set_abs = str((Path.cwd() / RUN_SET_REL).resolve())
+    base_ini_abs = str((Path.cwd() / BASE_INI).resolve())
+
+    params = sanity_params_from_final()
+    write_set_utf16le(params, run_set_abs)
+
+    ini_path = run_dir / "run.ini"
+    report_prefix = str((run_dir / "report").resolve())  # MT5 will append .htm/.html
+
+    patch_ini(
+        base_ini_abs,
+        str(ini_path.resolve()),
+        expert_name=EXPERT_NAME,
+        symbol=SYMBOL,
+        period=PERIOD,
+        from_date=FROM_DATE,
+        to_date=TO_DATE,
+        report_prefix_abs=report_prefix,
+        expert_params_abs=run_set_abs,
+    )
+
+    log_path = run_dir / "mt5_run.log"
+    after_ts = _now_ts()
+
+    rc, elapsed = run_mt5_terminal(MT5_TERMINAL, str(ini_path.resolve()), str(log_path.resolve()))
+    # Even if rc=0, MT5 may have failed to run tester. We must locate report.
+
+    rep = wait_for_report(run_dir, after_ts=after_ts, max_wait_sec=60)
+    if not rep:
+        raise FileNotFoundError(
+            "Report not found.\n"
+            f"- run_dir: {run_dir}\n"
+            f"- Check log: {log_path}\n"
+            "Tip: افتح MT5 يدويًا ثم Strategy Tester > Journal وشاهد الخطأ الحقيقي "
+            "(EA not found / no ticks / login / symbol mismatch).\n"
+            f"(rc={rc}, elapsed={elapsed:.1f}s)"
+        )
+
+    metrics = parse_mt5_report(str(rep))
+
+    out = {
+        "params": params,
+        "metrics": metrics,
+        "run_dir": str(run_dir.resolve()),
+        "rc": rc,
+        "elapsed_sec": elapsed,
+        "report_found": str(rep.resolve()),
+        "mt5_terminal": MT5_TERMINAL,
+        "ini": str(ini_path.resolve()),
+        "set": run_set_abs,
+    }
+
+    (OUT_ROOT / "sanity_result.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
+    print("Saved:", (OUT_ROOT / "sanity_result.json").resolve())
+    print(json.dumps(out, indent=2))
+
+
+if __name__ == "__main__":
+    main()
+
+============================================================
+FILE: src/report_parser.py
+============================================================
+import re
+from pathlib import Path
+
+def _find_float(pattern: str, text: str):
+    m = re.search(pattern, text, re.IGNORECASE)
+    if not m:
+        return None
+    val = m.group(1).replace("\xa0", "").replace(" ", "").replace(",", "")
+    try:
+        return float(val)
+    except:
+        return None
+
+def parse_mt5_report(html_path: str) -> dict:
+    p = Path(html_path)
+    if not p.exists():
+        raise FileNotFoundError(f"Report not found: {p}")
+
+    txt = p.read_text(errors="ignore")
+
+    net_profit = _find_float(r"Total Net Profit<\/td>\s*<td[^>]*>\s*([-\d\.,]+)", txt)
+    pf = _find_float(r"Profit Factor<\/td>\s*<td[^>]*>\s*([-\d\.,]+)", txt)
+
+    # Drawdown relative often appears as percentage already
+    dd = _find_float(r"Drawdown Relative<\/td>\s*<td[^>]*>\s*([-\d\.,]+)", txt)
+    trades = _find_float(r"Total Trades<\/td>\s*<td[^>]*>\s*([-\d\.,]+)", txt)
+
+    return {
+        "net_profit": net_profit,
+        "profit_factor": pf,
+        "max_dd_pct": dd,
+        "trades": trades,
+        "report": str(p),
+    }
+
+============================================================
+FILE: src/set_writer.py
+============================================================
+# src/set_writer.py
+from __future__ import annotations
+from pathlib import Path
+from typing import Dict, Any
+
+def _mt5_value(v: Any) -> str:
+    if isinstance(v, bool):
+        return "true" if v else "false"
+    # MT5 يقبل الأرقام كنص
+    return str(v)
+
+def write_set(params: Dict[str, Any], set_path: str) -> None:
+    """
+    Writes a simple MT5 .set style file:
+      Key=Value
+    (هذا النوع مناسب لاستخدامه عبر ExpertParameters=... في ini)
+    """
+    p = Path(set_path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+
+    lines = []
+    for k, v in params.items():
+        if v is None:
+            continue
+        lines.append(f"{k}={_mt5_value(v)}")
+
+    p.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+============================================================
+FILE: src/setfile.py
+============================================================
+# src/setfile.py
+from __future__ import annotations
+
+from typing import Dict, Any
+import codecs
+
+
+def _parse_value(v: str) -> Any:
+    s = v.strip()
+    if s.lower() in ("true", "false"):
+        return s.lower() == "true"
+
+    # int?
+    try:
+        if s.isdigit() or (s.startswith("-") and s[1:].isdigit()):
+            return int(s)
+    except Exception:
+        pass
+
+    # float?
+    try:
+        return float(s)
+    except Exception:
+        return s
+
+
+def read_set_file(path: str) -> Dict[str, Any]:
+    """
+    Reads MT5 .set (often UTF-16LE with BOM) and returns dict of CURRENT values.
+    Example line:
+      InpMAfast=12||20||2||200||N
+    First value before '||' is the current value.
+    """
+    with codecs.open(path, "r", encoding="utf-16") as f:
+        lines = f.read().splitlines()
+
+    out: Dict[str, Any] = {}
+    for ln in lines:
+        ln = ln.strip()
+        if not ln or ln.startswith(";"):
+            continue
+        if "=" not in ln:
+            continue
+
+        k, rest = ln.split("=", 1)
+        k = k.strip()
+        val = rest.split("||", 1)[0]
+        out[k] = _parse_value(val)
+
+    return out
+
+============================================================
+FILE: src/wfo.py
+============================================================
+# src/wfo.py
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import List, Tuple, Optional
+import pandas as pd
+
+
+@dataclass(frozen=True)
+class WFOWindow:
+    train_start: pd.Timestamp
+    train_end: pd.Timestamp
+    test_start: pd.Timestamp
+    test_end: pd.Timestamp
+
+    def __repr__(self) -> str:
+        return (
+            f"WFOWindow(train={self.train_start.date()}→{self.train_end.date()}, "
+            f"test={self.test_start.date()}→{self.test_end.date()})"
+        )
+
+
+def _to_utc_ts(x) -> pd.Timestamp:
+    ts = pd.Timestamp(x)
+    if ts.tzinfo is None:
+        ts = ts.tz_localize("UTC")
+    else:
+        ts = ts.tz_convert("UTC")
+    return ts
+
+
+def build_wfo_windows(
+    df: pd.DataFrame,
+    train_months: int = 18,
+    test_months: int = 6,
+    step_months: int = 6,
+    min_test_bars: int = 200,
+    time_col: str = "time",
+) -> List[WFOWindow]:
+    """
+    Rolling time windows:
+      Train: [t, t+train_months)
+      Test : [t+train_months, t+train_months+test_months)
+      Step : shift t by step_months
+    """
+    if time_col not in df.columns:
+        raise ValueError(f"df missing '{time_col}' column")
+
+    t0 = _to_utc_ts(df[time_col].min())
+    t1 = _to_utc_ts(df[time_col].max())
+
+    windows: List[WFOWindow] = []
+    cur = t0
+
+    # Ensure we start from the first bar time (floor to day)
+    cur = cur.floor("D")
+
+    while True:
+        train_start = cur
+        train_end = train_start + pd.DateOffset(months=train_months)
+        test_start = train_end
+        test_end = test_start + pd.DateOffset(months=test_months)
+
+        if test_end > t1:
+            break
+
+        # Check enough bars in test segment
+        mask_test = (df[time_col] >= test_start) & (df[time_col] < test_end)
+        if int(mask_test.sum()) >= int(min_test_bars):
+            windows.append(
+                WFOWindow(
+                    train_start=train_start,
+                    train_end=train_end,
+                    test_start=test_start,
+                    test_end=test_end,
+                )
+            )
+
+        cur = cur + pd.DateOffset(months=step_months)
+
+    return windows
+
+
+def slice_window(
+    df: pd.DataFrame, w: WFOWindow, time_col: str = "time"
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    train = df[(df[time_col] >= w.train_start) & (df[time_col] < w.train_end)].copy()
+    test = df[(df[time_col] >= w.test_start) & (df[time_col] < w.test_end)].copy()
+    return train, test
+
+============================================================
+FILE: parameter_grid.json
+============================================================
+[
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 20,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 29,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 40,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 50,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 80,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 100,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 120,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 150,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.4,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.6,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 1.8,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.0,
+        "rr": 3.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.0
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.4
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 2.8
+    },
+    {
+        "ma_fast": 60,
+        "ma_slow": 200,
+        "atr_sl_mult": 2.2,
+        "rr": 3.0
+    }
+]

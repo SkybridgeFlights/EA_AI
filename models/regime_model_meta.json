@@ -1,0 +1,55 @@
+{
+  "trained_at_utc": "2026-03-31T21:49:12+00:00Z",
+  "symbol": "XAUUSD",
+  "tf": "H1",
+  "train_period": "2021-01-01 to 2023-12-31",
+  "test_period": "2024-01-01 to 2026-12-31",
+  "classes": [
+    "HIGH_VOL",
+    "RANGE",
+    "STRONG_TREND",
+    "WEAK_TREND"
+  ],
+  "feature_cols": [
+    "atr_norm",
+    "vol_ratio",
+    "hl_ratio",
+    "bb_width",
+    "adx_14",
+    "di_diff",
+    "di_sum",
+    "ema_ratio_s",
+    "ema_ratio_l",
+    "roc_10",
+    "roc_24",
+    "bb_pct_b",
+    "body_ratio",
+    "upper_wick",
+    "lower_wick"
+  ],
+  "thresholds": {
+    "vol_ratio_hv": 1.08,
+    "adx_strong": 35.0,
+    "di_diff_strong": 15.0,
+    "adx_weak": 26.5
+  },
+  "metrics": {
+    "train_acc": 0.9999,
+    "train_rows": 17708,
+    "test_acc": 0.9977,
+    "test_rows": 13219,
+    "dist_true": {
+      "WEAK_TREND": 3715,
+      "RANGE": 3605,
+      "HIGH_VOL": 3326,
+      "STRONG_TREND": 2573
+    },
+    "dist_pred": {
+      "WEAK_TREND": 3707,
+      "RANGE": 3609,
+      "HIGH_VOL": 3327,
+      "STRONG_TREND": 2576
+    }
+  },
+  "model_bin": "C:\\EA_AI\\models\\regime_model.bin"
+}

@@ -1,0 +1,9 @@
+stage: &id001
+  name: explore
+  dd: 18.0
+  pf: 1.1
+  wm: -12.0
+  tr: 120
+attempts:
+- stage_cfg: *id001
+  valid_trials: 148

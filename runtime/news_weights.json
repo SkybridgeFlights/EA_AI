@@ -1,0 +1,21 @@
+{
+  "updated_at": "2025-11-30T10:20:41Z",
+  "lookback_days": 60,
+  "min_trades_per_bucket": 20,
+  "buckets": {
+    "none": {
+      "bucket": "none",
+      "trades": 1334,
+      "wins": 0,
+      "losses": 0,
+      "pf": 0.0,
+      "wr": 0.0,
+      "mean_R": 0.0,
+      "pnl": 0.0,
+      "max_dd_pct": 0.0
+    }
+  },
+  "weights": {
+    "none": 0.92
+  }
+}

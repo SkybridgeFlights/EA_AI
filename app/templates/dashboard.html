@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>EA Live Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+  <style>
+    html,body { height: 100%; }
+    body { background:#0a0a0a; color:#e5e5e5; }
+    .card { background:#111318; border:1px solid #1f2430; border-radius:16px; }
+    .stat { font-size:2rem; font-weight:700; }
+    .btn { background:#1e293b; padding:6px 10px; border-radius:8px; }
+    .btn:hover { filter:brightness(1.15); }
+    .input { background:#0d1117; border:1px solid #2a3140; border-radius:8px; padding:6px 8px; }
+    .switch { appearance:none; width:42px; height:24px; border-radius:9999px; background:#374151; position:relative; cursor:pointer; }
+    .switch:checked { background:#10b981; }
+    .switch:before { content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff; transition:transform .2s; }
+    .switch:checked:before { transform: translateX(18px); }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .chip{ background:#0d1117; border:1px solid #2a3140; padding:4px 8px; border-radius:999px; }
+  </style>
+</head>
+<body class="min-h-full">
+  <div class="max-w-7xl mx-auto p-4 md:p-6 space-y-4 md:space-y-6">
+    <!-- Header / Controls -->
+    <header class="flex flex-wrap items-center gap-2 md:gap-3 justify-between">
+      <h1 class="text-xl md:text-2xl font-semibold">EA Dashboard</h1>
+      <div class="flex flex-wrap items-center gap-2 md:gap-3">
+        <label class="text-sm text-zinc-400">Symbols</label>
+        <select id="symSel" class="input">
+          <option value="">All</option>
+        </select>
+
+        <label class="text-sm text-zinc-400">Last N</label>
+        <input id="lastN" type="number" class="input w-24" value="200" min="1" max="100000"/>
+
+        <label class="text-sm text-zinc-400">Page size</label>
+        <input id="pageSize" type="number" class="input w-20" value="50" min="1" max="1000"/>
+
+        <label class="text-sm text-zinc-400">Search</label>
+        <input id="searchBox" type="text" class="input w-48" placeholder="symbol/type/reason or decisions text"/>
+
+        <button id="refreshBtn" class="btn">Refresh</button>
+
+        <div class="flex items-center gap-1">
+          <span class="text-sm text-zinc-400">Auto:</span>
+          <input id="autoToggle" type="checkbox" class="switch" checked/>
+        </div>
+      </div>
+    </header>
+
+    <!-- Live chips -->
+    <div class="flex flex-wrap gap-2">
+      <div class="chip text-xs">Updated: <span id="m_upd" class="mono ml-1">—</span></div>
+      <div class="chip text-xs">Shadow: <span id="chip_shadow" class="mono ml-1">—</span></div>
+      <div class="chip text-xs">FreezeUntil: <span id="chip_freeze" class="mono ml-1">—</span></div>
+      <div class="chip text-xs">Mode: <span id="m_mode" class="mono ml-1">—</span></div>
+    </div>
+
+    <!-- Stats -->
+    <section class="grid grid-cols-2 md:grid-cols-7 gap-3">
+      <div class="card p-4">
+        <div class="text-xs text-zinc-400">Trades (window)</div>
+        <div id="m_trades" class="stat">0</div>
+      </div>
+      <div class="card p-4">
+        <div class="text-xs text-zinc-400">Win rate %</div>
+        <div id="m_winrate" class="stat">0</div>
+      </div>
+      <div class="card p-4">
+        <div class="text-xs text-zinc-400">Profit factor</div>
+        <div id="m_pf" class="stat">0</div>
+      </div>
+      <div class="card p-4">
+        <div class="text-xs text-zinc-400">Max drawdown</div>
+        <div id="m_maxdd" class="stat">0</div>
+      </div>
+      <div class="card p-4">
+        <div class="text-xs text-zinc-400">PnL today</div>
+        <div id="m_pnl" class="stat">0</div>
+      </div>
+      <div class="card p-4">
+        <div class="text-xs text-zinc-400">Symbols</div>
+        <div id="m_syms" class="text-lg font-semibold">—</div>
+      </div>
+      <!-- AI model stats -->
+      <div class="card p-4">
+        <div class="text-xs text-zinc-400">AI model</div>
+        <div class="text-base md:text-lg font-semibold leading-tight">
+          AUC: <span id="m_ai_auc">—</span><br/>
+          ACC: <span id="m_ai_acc">—</span>
+        </div>
+        <div class="text-[10px] text-zinc-500 mt-1">
+          rows: <span id="m_ai_rows">—</span>, feats: <span id="m_ai_feats">—</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts + Selfcal/Config -->
+    <section class="grid lg:grid-cols-3 gap-4">
+      <div class="card p-4 lg:col-span-2 h-[360px] md:h-[420px]">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="font-semibold">Equity Curve</h2>
+          <span class="text-xs text-zinc-500">time scale</span>
+        </div>
+        <canvas id="eqChart" class="w-full h-full"></canvas>
+      </div>
+
+      <div class="card p-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="font-semibold">Selfcal / Live</h2>
+          <button id="refreshHealth" class="btn">Refresh status</button>
+        </div>
+        <div class="text-sm space-y-1">
+          <div>Last run: <span id="sc_last">—</span></div>
+          <div>Next in: <span id="sc_next">—</span></div>
+          <div>Shadow mode: <span id="sc_shadow">—</span></div>
+          <div>Last result: <span id="sc_ok">—</span></div>
+          <div class="text-rose-400">Error: <span id="sc_err">—</span></div>
+        </div>
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-sm text-zinc-400">Shadow</span>
+            <input id="shadowToggle" type="checkbox" class="switch"/>
+          </div>
+          <div class="flex items-center gap-2">
+            <input id="freezeMin" class="input w-20" type="number" min="1" max="1440" value="60"/>
+            <button id="freezeBtn" class="btn">Freeze (min)</button>
+          </div>
+        </div>
+
+        <div class="h-px bg-zinc-800 my-1"></div>
+
+        <h3 class="font-semibold">Live Config</h3>
+        <div class="grid grid-cols-2 gap-2">
+          <label class="text-xs text-zinc-400">AI_MinConfidence</label><input id="p_conf" class="input" type="number" step="0.01" min="0" max="1"/>
+          <label class="text-xs text-zinc-400">InpATR_SL_Mult</label><input id="p_atr" class="input" type="number" step="0.01"/>
+          <label class="text-xs text-zinc-400">InpRR</label><input id="p_rr" class="input" type="number" step="0.01"/>
+          <label class="text-xs text-zinc-400">RiskPct</label><input id="p_risk" class="input" type="number" step="0.01"/>
+          <label class="text-xs text-zinc-400">NewsFilterLevel</label><input id="p_news" class="input" type="number" step="1" min="0"/>
+          <label class="text-xs text-zinc-400">MaxSpreadPts</label><input id="p_maxspr" class="input" type="number" step="1" min="0"/>
+          <div class="col-span-2">
+            <button id="saveCfg" class="btn w-full">Save</button>
+          </div>
+        </div>
+        <div class="text-xs text-zinc-500">Updated at: <span id="cfg_upd">—</span></div>
+      </div>
+    </section>
+
+    <!-- R Histogram -->
+    <section class="card p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="font-semibold">R Histogram (JSONL)</h2>
+        <span class="text-xs text-zinc-500">/api/dashboard/jsonl_summary</span>
+      </div>
+      <div class="h-[260px]">
+        <canvas id="rChart" class="w-full h-full"></canvas>
+      </div>
+    </section>
+
+    <!-- Last trades + Decisions -->
+    <section class="grid lg:grid-cols-2 gap-4">
+      <div class="card p-4">
+        <div class="flex items-center justify-between mb-2 gap-3">
+          <h2 class="font-semibold">Last trades</h2>
+          <div class="text-xs text-zinc-400">sorted by time desc</div>
+        </div>
+        <div class="overflow-auto">
+          <table class="min-w-full text-sm">
+            <thead class="text-zinc-400">
+              <tr class="text-left border-b border-zinc-800">
+                <th class="py-2 pr-4">Time (UTC)</th>
+                <th class="py-2 pr-4">Symbol</th>
+                <th class="py-2 pr-4">Type</th>
+                <th class="py-2 pr-4">Lots</th>
+                <th class="py-2 pr-4">Price</th>
+                <th class="py-2 pr-4">Profit</th>
+                <th class="py-2 pr-4">Reason</th>
+              </tr>
+            </thead>
+            <tbody id="tbl" class="divide-y divide-zinc-800"></tbody>
+          </table>
+        </div>
+        <div class="flex items-center justify-between mt-3">
+          <div class="text-xs text-zinc-400" id="pagingInfo">0–0 of 0</div>
+          <div class="flex items-center gap-2">
+            <button id="prevPage" class="btn">Prev</button>
+            <button id="nextPage" class="btn">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-4">
+        <div class="flex items-center justify-between mb-2 gap-3">
+          <h2 class="font-semibold">Decisions (latest)</h2>
+          <div class="text-xs text-zinc-400">filtered by Symbols/Search</div>
+        </div>
+        <div class="overflow-auto">
+          <table class="min-w-full text-sm">
+            <thead class="text-zinc-400">
+              <tr class="text-left border-b border-zinc-800">
+                <th class="py-2 pr-4">Time (UTC)</th>
+                <th class="py-2 pr-4">Symbol</th>
+                <th class="py-2 pr-4">Stage</th>
+                <th class="py-2 pr-4">Why</th>
+                <th class="py-2 pr-4">AI_dir</th>
+                <th class="py-2 pr-4">AI_conf</th>
+                <th class="py-2 pr-4">News</th>
+                <th class="py-2 pr-4">Shadow</th>
+              </tr>
+            </thead>
+            <tbody id="tblDec" class="divide-y divide-zinc-800"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-xs text-zinc-500">©️ EA Dashboard</footer>
+  </div>
+
+<script>
+let eqChart, rChart;
+let page = 1;
+let healthState = { next_eta: null, last_ts: null, shadow: null };
+
+const $ = (id)=>document.getElementById(id);
+const toLocal = (ts)=>{ try{ return ts? new Date(ts).toLocaleString() : '—'; }catch{ return '—'; } };
+const fmtNum = (v, digits=2)=>{
+  if(v === null || v === undefined) return '—';
+  const n = Number(v);
+  if(Number.isNaN(n)) return '—';
+  return n.toFixed(digits);
+};
+
+async function getJSON(url, params){
+  const q = params? ('?'+new URLSearchParams(params).toString()) : '';
+  const r = await fetch(url+q, {cache:'no-cache'});
+  if(!r.ok) throw new Error(url+' failed');
+  return await r.json();
+}
+async function postJSON(url, body){
+  const r = await fetch(url,{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body||{})});
+  if(!r.ok) throw new Error(url+' failed');
+  return await r.json();
+}
+
+function renderEq(series){
+  const ctx = $('eqChart').getContext('2d');
+  const labels = series.map(p=>new Date(p.t));
+  const values = series.map(p=>p.y);
+  if(eqChart) eqChart.destroy();
+  eqChart = new Chart(ctx,{
+    type:'line',
+    data:{ labels, datasets:[{ label:'Equity', data:values, borderWidth:2, tension:.25, pointRadius:0 }]},
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ x:{ type:'time', time:{ unit:'day'} }, y:{ beginAtZero:false } } }
+  });
+}
+
+function renderR(hist){
+  const labels = hist.map(x=>x.bucket);
+  const counts = hist.map(x=>x.count);
+  const ctx = $('rChart').getContext('2d');
+  if(rChart) rChart.destroy();
+  rChart = new Chart(ctx,{
+    type:'bar',
+    data:{ labels, datasets:[{ label:'Count', data:counts }]},
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ x:{ ticks:{ autoSkip:false } } } }
+  });
+}
+
+function renderDeals(rows, total){
+  const tbody = $('tbl'); tbody.innerHTML='';
+  for(const r of rows){
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="py-2 pr-4 whitespace-nowrap">${r.ts}</td>
+      <td class="py-2 pr-4">${r.symbol??''}</td>
+      <td class="py-2 pr-4">${r.type??''}</td>
+      <td class="py-2 pr-4">${(r.lots??0).toFixed(2)}</td>
+      <td class="py-2 pr-4">${(r.price_open??0).toFixed(2)}</td>
+      <td class="py-2 pr-4 ${(r.profit??0)>0?'text-emerald-400':((r.profit??0)<0?'text-rose-400':'')}">
+        ${(r.profit??0).toFixed(2)}
+      </td>
+      <td class="py-2 pr-4">${r.reason??''}</td>
+    `;
+    tbody.appendChild(tr);
+  }
+  const ps = parseInt($('pageSize').value,10);
+  const start = total===0 ? 0 : (ps*(page-1)+1);
+  const end = Math.min(ps*page, total);
+  $('pagingInfo').textContent = `${start}–${end} of ${total}`;
+}
+
+function renderDecisions(rows){
+  const tbody = $('tblDec'); tbody.innerHTML='';
+  for(const r of rows){
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="py-2 pr-4 whitespace-nowrap">${r.ts||''}</td>
+      <td class="py-2 pr-4">${r.symbol||''}</td>
+      <td class="py-2 pr-4">${r.stage||''}</td>
+      <td class="py-2 pr-4">${r.why||''}</td>
+      <td class="py-2 pr-4">${r.ai_dir||''}</td>
+      <td class="py-2 pr-4">${(r.ai_conf??'')}</td>
+      <td class="py-2 pr-4">${r.news||''}</td>
+      <td class="py-2 pr-4">${r.shadow ? 'ON' : 'OFF'}</td>
+    `;
+    tbody.appendChild(tr);
+  }
+}
+
+async function refreshSummary(){
+  const sym = $('symSel').value || '';
+  const lastN = parseInt($('lastN').value,10);
+  const ps = parseInt($('pageSize').value,10);
+  const search = $('searchBox').value||'';
+
+  const d = await getJSON('/api/dashboard/summary', { symbols:sym, last_n:String(lastN), page:String(page), page_size:String(ps), search });
+
+  $('m_upd').textContent   = toLocal(d.now);
+  $('m_trades').textContent= d.metrics.trades;
+  $('m_winrate').textContent= d.metrics.winrate;
+  $('m_pf').textContent    = d.metrics.pf;
+  $('m_maxdd').textContent = d.metrics.maxdd;
+  $('m_pnl').textContent   = d.metrics.pnl_today;
+  $('m_syms').textContent  = (d.symbols||[]).join(', ') || '—';
+
+  const sel = $('symSel');
+  if(sel.options.length<=1 && d.symbols){
+    for(const s of d.symbols){ const o=document.createElement('option'); o.value=s; o.textContent=s; sel.appendChild(o); }
+  }
+
+  const p = d.params ?? {};
+  $('p_conf').value  = p.AI_MinConfidence ?? '';
+  $('p_atr').value   = p.InpATR_SL_Mult ?? '';
+  $('p_rr').value    = p.InpRR ?? '';
+  $('p_risk').value  = p.RiskPct ?? '';
+  $('p_news').value  = p.NewsFilterLevel ?? '';
+  $('p_maxspr').value= p.MaxSpreadPts ?? '';
+  $('cfg_upd').textContent = d.live_config_updated_at ?? '—';
+
+  $('chip_shadow').textContent = (d.shadow===true?'ON':(d.shadow===false?'OFF':'—'));
+  $('chip_freeze').textContent = (p.FreezeUntil? new Date(p.FreezeUntil*1000).toLocaleString() : '—');
+
+  $('shadowToggle').checked = d.shadow===true;
+
+  renderEq(d.equity||[]);
+  renderDeals(d.last||[], d.total||0);
+}
+
+async function refreshDecisions(){
+  const sym = $('symSel').value || '';
+  const search = $('searchBox').value||'';
+  const js = await getJSON('/api/dashboard/decisions', { symbols:sym, last_n:String(300), search });
+  renderDecisions(js.last||[]);
+}
+
+async function refreshJSONL(){
+  const sym = $('symSel').value || '';
+  const js = await getJSON('/api/dashboard/jsonl_summary', { symbols:sym, last_n:String(5000) });
+  renderR(js.R_hist||[]);
+}
+
+/* NEW: refresh core metrics + AI model */
+async function refreshMetricsCore(){
+  try{
+    const days = parseInt($('lastN').value,10) || 30;
+    const d = await getJSON('/api/metrics/core', { days:String(days) });
+
+    const live  = d.live  || {};
+    const model = d.ai_model || {};
+
+    $('m_mode').textContent   = live.stability_mode || '—';
+    $('m_ai_auc').textContent = fmtNum(model.auc, 3);
+    $('m_ai_acc').textContent = fmtNum(model.acc, 3);
+    $('m_ai_rows').textContent= (model.rows !== null && model.rows !== undefined) ? String(model.rows) : '—';
+    $('m_ai_feats').textContent= (model.feats !== null && model.feats !== undefined) ? String(model.feats) : '—';
+  }catch(e){
+    // نتجاهل الخطأ في واجهة العرض
+  }
+}
+
+async function refreshAll(){
+  await Promise.all([
+    refreshSummary(),
+    refreshDecisions(),
+    refreshJSONL(),
+    refreshMetricsCore(),
+    fetchHealth().then(renderHealth)
+  ]);
+}
+
+async function fetchHealth(){
+  return await getJSON('/api/dashboard/health');
+}
+function renderHealth(h){
+  const sc = h.selfcal || {};
+  healthState.next_eta = (sc.next_run_eta_sec ?? null);
+  healthState.last_ts  = (sc.last_run_ts ?? null);
+  healthState.shadow   = !!sc.shadow;
+
+  $('sc_shadow').textContent = healthState.shadow ? 'ON' : 'OFF';
+  $('sc_err').textContent    = sc.last_err || '—';
+
+  const okEl = $('sc_ok');
+  if(sc.last_ok === true){ okEl.textContent = 'OK'; okEl.className = 'text-emerald-400'; }
+  else if(sc.last_ok === false){ okEl.textContent = 'FAIL'; okEl.className = 'text-rose-400'; }
+  else { okEl.textContent = '—'; okEl.className = ''; }
+
+  $('sc_last').textContent = healthState.last_ts ? new Date(healthState.last_ts*1000).toLocaleString() : '—';
+  $('shadowToggle').checked = !!healthState.shadow;
+}
+
+function tick(){
+  if(healthState.next_eta==null){ $('sc_next').textContent='—'; return; }
+  if(healthState.next_eta>0) healthState.next_eta -= 1;
+  $('sc_next').textContent = healthState.next_eta + 's';
+}
+
+/* Events */
+$('refreshBtn').addEventListener('click', ()=>{ page=1; refreshAll().catch(()=>{}); });
+$('symSel').addEventListener('change', ()=>{ page=1; refreshAll().catch(()=>{}); });
+$('lastN').addEventListener('change', ()=>{ page=1; refreshAll().catch(()=>{}); });
+$('pageSize').addEventListener('change', ()=>{ page=1; refreshAll().catch(()=>{}); });
+$('searchBox').addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ page=1; refreshAll().catch(()=>{}); }});
+$('prevPage').addEventListener('click', ()=>{ if(page>1){ page--; refreshSummary().catch(()=>{});} });
+$('nextPage').addEventListener('click', ()=>{ page++; refreshSummary().catch(()=>{}); });
+
+$('refreshHealth').addEventListener('click', async ()=>{ await fetchHealth().then(renderHealth); });
+
+$('shadowToggle').addEventListener('change', async (e)=>{
+  await postJSON('/api/dashboard/toggle_shadow', {shadow: e.target.checked}).catch(()=>{});
+  await Promise.all([refreshSummary(), refreshMetricsCore(), fetchHealth().then(renderHealth)]);
+});
+
+$('freezeBtn').addEventListener('click', async ()=>{
+  const mins = parseInt($('freezeMin').value,10)||60;
+  await postJSON('/api/dashboard/freeze', {minutes: mins}).catch(()=>{});
+  await refreshSummary();
+});
+
+$('saveCfg').addEventListener('click', async ()=>{
+  const body = {
+    AI_MinConfidence: $('p_conf').value || null,
+    InpATR_SL_Mult:   $('p_atr').value || null,
+    InpRR:            $('p_rr').value || null,
+    RiskPct:          $('p_risk').value || null,
+    NewsFilterLevel:  $('p_news').value || null,
+    MaxSpreadPts:     $('p_maxspr').value || null,
+  };
+  await postJSON('/api/dashboard/live_config', body).catch(()=>{});
+  await Promise.all([refreshSummary(), refreshMetricsCore()]);
+});
+
+/* Auto timers */
+setInterval(async ()=>{
+  try{
+    if($('autoToggle').checked){
+      await Promise.all([
+        refreshSummary(),
+        refreshDecisions(),
+        refreshJSONL(),
+        refreshMetricsCore()
+      ]);
+    }
+    const h = await fetchHealth();
+    renderHealth(h);
+  }catch{}
+}, 3000);
+
+setInterval(tick, 1000);
+
+/* Initial load */
+refreshAll().catch(()=>{});
+</script>
+</body>
+</html>

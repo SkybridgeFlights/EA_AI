@@ -1,0 +1,13 @@
+{
+  "ts": "2025-10-11T11:19:22.370759+00:00",
+  "aggregate": {
+    "pf": 32061.856,
+    "winrate": 76.4,
+    "mdd": 2262894.81,
+    "trades": 89817
+  },
+  "oos_pass": 1,
+  "live_config": "C:\\EA_AI\\runtime\\live_config.json",
+  "shadow": true,
+  "grid_log": "artifacts\\grid_log_20251011_113307.csv"
+}

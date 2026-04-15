@@ -1,0 +1,4260 @@
+{
+  "summary": {
+    "HIGH": 0,
+    "MEDIUM": 2,
+    "LOW": 85,
+    "INFO": 3,
+    "total_files": 244,
+    "python_files": 76,
+    "generated_at": "2026-02-14T17:52:33",
+    "root": "C:\\EA_AI"
+  },
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "category": "XGBOOST",
+      "file": "app\\ml\\registry.py",
+      "line": null,
+      "message": "Potential XGBoost serialization compatibility issue (joblib/pickle load).",
+      "hint": "Prefer saving/loading via Booster.save_model / Booster.load_model (JSON/UBJ) for long-term stability."
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "XGBOOST",
+      "file": "tools\\project_audit.py",
+      "line": null,
+      "message": "Potential XGBoost serialization compatibility issue (joblib/pickle load).",
+      "hint": "Prefer saving/loading via Booster.save_model / Booster.load_model (JSON/UBJ) for long-term stability."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "app\\analytics\\jsonl_loader.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "app\\analytics\\news_performance.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "app\\core\\policy_engine.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "app\\data\\news_store.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "app\\main.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "app\\services\\aggregator.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "app\\services\\writer.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "artifacts\\ingest_report_20251109.txt",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "code.txt",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "logs\\_check_tmp\\dbg.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "logs\\_check_tmp\\root.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "logs\\_check_tmp\\selfcal_once.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "logs\\_check_tmp\\sig_gen.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "logs\\_check_tmp\\summary.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "logs\\_check_tmp\\test_read.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "logs\\server_log.txt",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "models\\active_model.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\.package-lock.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\amdefine\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\amdefine\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\ansi-regex\\readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\ansi-styles\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\ansi-styles\\readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\chalk\\readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\cli-progress\\CHANGES.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\cli-progress\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\cli-progress\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\color-convert\\CHANGELOG.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\color-convert\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\color-name\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\color-name\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\commander\\CHANGELOG.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\commander\\Readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\commander\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\dayjs\\CHANGELOG.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\dayjs\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\dayjs\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\debug\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\debug\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\dukascopy-node\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\dukascopy-node\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\emoji-regex\\LICENSE-MIT.txt",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\emoji-regex\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\emoji-regex\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\fastest-validator\\CHANGELOG.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\fastest-validator\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\fastest-validator\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\fs-extra\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\fs-extra\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\graceful-fs\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\graceful-fs\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\has-flag\\readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\is-fullwidth-code-point\\readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\jsonfile\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\long\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\long\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\lzma-purejs-requirejs\\FORMAT.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\lzma-purejs-requirejs\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\lzma-purejs-requirejs\\node_modules\\commander\\Readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\lzma-purejs-requirejs\\node_modules\\commander\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\lzma-purejs-requirejs\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\ms\\readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\node-fetch\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\node-fetch\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\python-struct\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\python-struct\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\string-width\\readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\strip-ansi\\readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\supports-color\\readme.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\tr46\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\universalify\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\universalify\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\webidl-conversions\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\webidl-conversions\\package.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "node_modules\\whatwg-url\\README.md",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "package-lock.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "runtime\\live_config.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "runtime\\live_config_backup_20251011_220607.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "runtime\\status.json",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "server_log.txt",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "tools\\build_feature_store.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "tools\\project_audit.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "tools\\selfcal_runner.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "tools\\sync_jsonl_from_mt5.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "LOW",
+      "category": "PORTABILITY",
+      "file": "tools\\train_model_xgb.py",
+      "line": null,
+      "message": "Hard-coded absolute path detected.",
+      "hint": "Move paths to config/env (settings) and build them via Path()."
+    },
+    {
+      "severity": "INFO",
+      "category": "PANDAS",
+      "file": "app\\ml\\features.py",
+      "line": null,
+      "message": "Custom _extract_field found; ensure correct handling for duplicate column names and MultiIndex.",
+      "hint": "Add explicit guards for DataFrame-vs-Series and duplicate column names."
+    },
+    {
+      "severity": "INFO",
+      "category": "PANDAS",
+      "file": "tools\\project_audit.py",
+      "line": null,
+      "message": "RecursionError mention in code/comments; investigate recursion guards.",
+      "hint": "Add explicit guards for DataFrame-vs-Series and duplicate column names."
+    },
+    {
+      "severity": "INFO",
+      "category": "PANDAS",
+      "file": "tools\\project_audit.py",
+      "line": null,
+      "message": "Using drop_duplicates(keep=False) can be expensive on huge columns; ensure it's necessary.",
+      "hint": "Add explicit guards for DataFrame-vs-Series and duplicate column names."
+    }
+  ],
+  "files": [
+    {
+      "path": "audit_report.md",
+      "size": 19923,
+      "mtime": 1771087951.356067,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "backtest.py",
+      "size": 2195,
+      "mtime": 1760176636.0,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "numpy",
+        "pandas",
+        "pathlib"
+      ],
+      "functions": [
+        "load_data",
+        "simple_backtest"
+      ],
+      "classes": []
+    },
+    {
+      "path": "code.txt",
+      "size": 850405,
+      "mtime": 1770416016.352811,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "fetch_duka.py",
+      "size": 3285,
+      "mtime": 1758478772.0,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "argparse",
+        "datetime",
+        "os",
+        "pandas",
+        "shutil",
+        "subprocess",
+        "sys"
+      ],
+      "functions": [
+        "fetch",
+        "find_dukascopy_cmd"
+      ],
+      "classes": []
+    },
+    {
+      "path": "mt5_set_builder.py",
+      "size": 9938,
+      "mtime": 1762356299.5852878,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "datetime",
+        "glob",
+        "json",
+        "math",
+        "os",
+        "pathlib",
+        "statistics"
+      ],
+      "functions": [
+        "build_set_lines",
+        "clamp",
+        "env_common_files",
+        "main",
+        "mk_range",
+        "q",
+        "q20_q80_pad",
+        "read_jsonl_values",
+        "round_to"
+      ],
+      "classes": []
+    },
+    {
+      "path": "optimizer_log.txt",
+      "size": 0,
+      "mtime": 1760215038.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "opt_log.txt",
+      "size": 2173,
+      "mtime": 1760472730.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "package-lock.json",
+      "size": 12950,
+      "mtime": 1758478822.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "package.json",
+      "size": 279,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "requirements.txt",
+      "size": 120,
+      "mtime": 1762937846.9004526,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "selfcal_log.txt",
+      "size": 201,
+      "mtime": 1760838026.0246887,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "server_log.txt",
+      "size": 4234,
+      "mtime": 1760838026.0256958,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "signal_log.txt",
+      "size": 0,
+      "mtime": 1760472726.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "sync_signal_log.txt",
+      "size": 105,
+      "mtime": 1760472696.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "test_pipeline.py",
+      "size": 1301,
+      "mtime": 1758995458.0,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "app.services.fetch",
+        "app.services.writer",
+        "argparse",
+        "os"
+      ],
+      "functions": [
+        "main"
+      ],
+      "classes": []
+    },
+    {
+      "path": "test_yf.py",
+      "size": 205,
+      "mtime": 1758995098.0,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "yfinance"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "%APPDATA%\\MetaQuotes\\Terminal\\Common\\Files\\ai_signals\\xauusd_signal_bt.ini",
+      "size": 176,
+      "mtime": 1760257432.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "%USERPROFILE%\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common\\Files\\ai_signals\\xauusd_signal_bt.ini",
+      "size": 176,
+      "mtime": 1760257620.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "app\\config.py",
+      "size": 7960,
+      "mtime": 1764418443.7245042,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "os",
+        "pathlib",
+        "pydantic",
+        "typing"
+      ],
+      "functions": [
+        "_bool",
+        "_load_env_safe"
+      ],
+      "classes": [
+        "Settings"
+      ]
+    },
+    {
+      "path": "app\\dashboard.py",
+      "size": 27817,
+      "mtime": 1765015574.9163713,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "datetime",
+        "dotenv",
+        "fastapi",
+        "fastapi.responses",
+        "functools",
+        "glob",
+        "json",
+        "math",
+        "os",
+        "pandas",
+        "pathlib",
+        "time",
+        "typing"
+      ],
+      "functions": [
+        "_collect_symbols",
+        "_concat_existing",
+        "_dequote",
+        "_expand",
+        "_hit",
+        "_make_equity_curve",
+        "_metrics_from_deals",
+        "_mtime_signature",
+        "_paths_from_env",
+        "_pick",
+        "_read_csv",
+        "_read_deals",
+        "_read_deals_cached",
+        "_read_decisions",
+        "_read_json",
+        "_read_jsonl_trades",
+        "_try_read_variants",
+        "_write_json_atomic",
+        "api_debug",
+        "api_decisions",
+        "api_health",
+        "api_summary",
+        "api_test_read",
+        "dashboard_page",
+        "freeze_minutes",
+        "sanitize_floats",
+        "save_live_config",
+        "selfcal_mark",
+        "toggle_shadow"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\deps.py",
+      "size": 487,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "app.config",
+        "os",
+        "pathlib"
+      ],
+      "functions": [
+        "mt5_ai_signal_path",
+        "mt5_news_csv_path"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\extensions.py",
+      "size": 4169,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "fastapi",
+        "fastapi.openapi.utils",
+        "fastapi.responses",
+        "os",
+        "pathlib",
+        "time",
+        "typing"
+      ],
+      "functions": [
+        "_api_key_guard",
+        "_file_info",
+        "_iso",
+        "apply_extensions",
+        "custom_openapi",
+        "health",
+        "reload_config"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\main.py",
+      "size": 14524,
+      "mtime": 1764431929.350047,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app",
+        "app.analytics.metrics",
+        "app.config",
+        "app.core.policy_engine",
+        "app.dashboard",
+        "app.routes",
+        "app.selfcal.reporting",
+        "fastapi",
+        "fastapi.middleware.cors",
+        "json",
+        "os",
+        "pathlib",
+        "shutil",
+        "threading",
+        "time",
+        "traceback",
+        "typing"
+      ],
+      "functions": [
+        "_selfcal_loop",
+        "api_metrics_core",
+        "api_selfcal_health",
+        "api_selfcal_last_report",
+        "api_selfcal_live_config",
+        "api_selfcal_once",
+        "api_selfcal_rolling",
+        "api_selfcal_whatif",
+        "healthz",
+        "on_shutdown",
+        "on_startup",
+        "root"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\_init_.py",
+      "size": 20,
+      "mtime": 1760176636.0,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\__init__.py",
+      "size": 0,
+      "mtime": 1758995710.0,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\analytics\\jsonl_loader.py",
+      "size": 8183,
+      "mtime": 1763801893.7073166,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "datetime",
+        "dotenv",
+        "glob",
+        "json",
+        "os",
+        "pandas",
+        "typing"
+      ],
+      "functions": [
+        "_iter_jsonl_objects",
+        "_load_env_symbols",
+        "_normalize_symbol",
+        "_parse_time",
+        "load_jsonl_logs"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\analytics\\metrics.py",
+      "size": 6344,
+      "mtime": 1764429789.1612244,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "os",
+        "pandas",
+        "pathlib",
+        "typing"
+      ],
+      "functions": [
+        "_load_deals_csv",
+        "_max_drawdown_pct",
+        "compute_rolling_metrics",
+        "rolling_metrics",
+        "what_if"
+      ],
+      "classes": [
+        "RollingWindowMetrics"
+      ]
+    },
+    {
+      "path": "app\\analytics\\news_performance.py",
+      "size": 11561,
+      "mtime": 1764497997.5259824,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "glob",
+        "json",
+        "os",
+        "pandas",
+        "pathlib",
+        "typing"
+      ],
+      "functions": [
+        "_clamp",
+        "_dequote",
+        "_expand",
+        "_jsonl_paths_from_env",
+        "_max_drawdown_pct",
+        "_now_utc_iso",
+        "_read_jsonl_trades",
+        "compute_news_buckets",
+        "compute_news_weights",
+        "derive_weights_from_buckets",
+        "load_news_weights_file",
+        "write_news_weights"
+      ],
+      "classes": [
+        "NewsBucketMetrics"
+      ]
+    },
+    {
+      "path": "app\\analytics\\__init__.py",
+      "size": 0,
+      "mtime": 1762938477.4782765,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\config\\settings.py",
+      "size": 3223,
+      "mtime": 1764416381.690499,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "dotenv",
+        "json",
+        "os",
+        "pathlib",
+        "pydantic",
+        "typing"
+      ],
+      "functions": [
+        "_strpath",
+        "parse_origins"
+      ],
+      "classes": [
+        "Settings"
+      ]
+    },
+    {
+      "path": "app\\core\\live_schema.py",
+      "size": 6483,
+      "mtime": 1763236265.2268107,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "math",
+        "typing"
+      ],
+      "functions": [
+        "_clamp_float",
+        "_clamp_int",
+        "_to_bool",
+        "_to_float",
+        "_to_int",
+        "normalize_live_payload"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\core\\live_writer.py",
+      "size": 5597,
+      "mtime": 1763237810.9490814,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "datetime",
+        "hashlib",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "functions": [
+        "_compute_checksum",
+        "_ensure_payload_from_obj",
+        "_now_utc_iso",
+        "_to_path",
+        "write_policy"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\core\\policy_engine.py",
+      "size": 28841,
+      "mtime": 1764497968.3876789,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.analytics.metrics",
+        "app.core.live_writer",
+        "csv",
+        "dataclasses",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "typing"
+      ],
+      "functions": [
+        "_clamp",
+        "_env_bool",
+        "_env_float",
+        "_env_int",
+        "_generate_policy_version",
+        "_get_num",
+        "_load_model_quality_from_file",
+        "_now_utc_iso",
+        "_to_path",
+        "adjust_params_from_metrics",
+        "b",
+        "build_base_defaults_from_env",
+        "build_policy",
+        "classify_stability_mode",
+        "compute_core_metrics",
+        "f",
+        "i",
+        "normalize_live_payload",
+        "selfcal_once"
+      ],
+      "classes": [
+        "BaseDefaults",
+        "CoreMetrics"
+      ]
+    },
+    {
+      "path": "app\\core\\__init__.py",
+      "size": 0,
+      "mtime": 1762938474.2432754,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\daemons\\signal_loop.py",
+      "size": 3473,
+      "mtime": 1762944476.8431726,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "app.services.aggregator",
+        "app.services.writer",
+        "pathlib",
+        "threading",
+        "time",
+        "typing"
+      ],
+      "functions": [
+        "_persist",
+        "_read_last",
+        "_should_write",
+        "run_loop"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\data\\news_store.py",
+      "size": 1313,
+      "mtime": 1758418592.0,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "app.config",
+        "pandas",
+        "pathlib",
+        "requests"
+      ],
+      "functions": [
+        "build_store",
+        "fetch_te_range",
+        "load_store"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\data\\__init__.py",
+      "size": 0,
+      "mtime": 1762938509.3583162,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\ingest\\deals_adapter.py",
+      "size": 5041,
+      "mtime": 1764233049.7305222,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "csv",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "typing"
+      ],
+      "functions": [
+        "_month_key",
+        "_parse_time",
+        "_read_deals",
+        "_row_to_jsonl",
+        "_to_float",
+        "_to_int",
+        "run"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\ingest\\quality_check.py",
+      "size": 1408,
+      "mtime": 1764233049.7305222,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "datetime",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "functions": [
+        "scan_jsonl_month"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\ingest\\__init__.py",
+      "size": 0,
+      "mtime": 1762938469.728205,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\ml\\features.py",
+      "size": 10298,
+      "mtime": 1771084996.4083118,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "numpy",
+        "pandas",
+        "typing"
+      ],
+      "functions": [
+        "_best_series_from_df",
+        "_ensure_utc_index",
+        "_extract_field",
+        "_ta_atr",
+        "_ta_cci",
+        "_ta_ema",
+        "_ta_rsi",
+        "_time_cyc",
+        "_to_numeric_series",
+        "make_features",
+        "make_labels"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\ml\\model.py",
+      "size": 11705,
+      "mtime": 1767104737.725503,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "app.config",
+        "app.ml.features",
+        "app.ml.registry",
+        "datetime",
+        "json",
+        "numpy",
+        "pandas",
+        "pathlib",
+        "sklearn.metrics",
+        "sklearn.model_selection",
+        "sklearn.preprocessing",
+        "typing",
+        "xgboost",
+        "yfinance"
+      ],
+      "functions": [
+        "_align_features",
+        "_best_yf_symbol",
+        "_ensure_utc_index",
+        "_fetch_prices",
+        "_flatten_yf_columns",
+        "_load_mapping",
+        "predict_direction",
+        "switch_active_model",
+        "train_and_save"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\ml\\registry.py",
+      "size": 2747,
+      "mtime": 1771077771.7040186,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "app.config",
+        "joblib",
+        "json",
+        "pathlib",
+        "xgboost"
+      ],
+      "functions": [
+        "get_active_model_path",
+        "list_models",
+        "load_active_model",
+        "load_active_model_any",
+        "save_model_binary",
+        "set_active_model"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\ml\\_init_.py",
+      "size": 20,
+      "mtime": 1760176636.0,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\models\\live_config.py",
+      "size": 2073,
+      "mtime": 1763233770.5684156,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "datetime",
+        "pydantic",
+        "typing"
+      ],
+      "functions": [],
+      "classes": [
+        "LiveConfigPayload",
+        "LiveExplain",
+        "LiveParams",
+        "LivePolicy",
+        "LiveScope"
+      ]
+    },
+    {
+      "path": "app\\models\\policy.py",
+      "size": 2164,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "pydantic",
+        "typing"
+      ],
+      "functions": [],
+      "classes": [
+        "Config",
+        "ConfigScope",
+        "PolicyBody",
+        "PolicyExplain",
+        "PolicyParams"
+      ]
+    },
+    {
+      "path": "app\\models\\__init__.py",
+      "size": 0,
+      "mtime": 1762938458.3639243,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\routes\\data.py",
+      "size": 495,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "app.config",
+        "app.services.aggregator",
+        "fastapi"
+      ],
+      "functions": [
+        "calendar",
+        "price"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\routes\\signals.py",
+      "size": 4462,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "app.services.aggregator",
+        "app.services.writer",
+        "datetime",
+        "fastapi",
+        "glob",
+        "pathlib",
+        "pydantic",
+        "typing"
+      ],
+      "functions": [
+        "_fnum",
+        "_latest_ini_path",
+        "_parse_simple_ini",
+        "_read",
+        "generate_signal",
+        "latest_signal",
+        "list_signals",
+        "signal_config"
+      ],
+      "classes": [
+        "GenerateReq",
+        "GenerateResp"
+      ]
+    },
+    {
+      "path": "app\\routes\\train.py",
+      "size": 856,
+      "mtime": 1760176636.0,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "app.ml.model",
+        "app.ml.registry",
+        "fastapi",
+        "traceback"
+      ],
+      "functions": [
+        "activate",
+        "active_model",
+        "list_all",
+        "start_train"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\routes\\_init_.py",
+      "size": 20,
+      "mtime": 1760176636.0,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\selfcal\\decision_rules.py",
+      "size": 9254,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "math",
+        "typing"
+      ],
+      "functions": [
+        "_clamp",
+        "_limit_bool",
+        "_limit_float",
+        "_limit_int",
+        "_prev_int",
+        "_prev_num",
+        "decide",
+        "to_dict"
+      ],
+      "classes": [
+        "Metrics",
+        "Policy"
+      ]
+    },
+    {
+      "path": "app\\selfcal\\reporting.py",
+      "size": 4345,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "typing"
+      ],
+      "functions": [
+        "_append_jsonl_rotating",
+        "_ensure_dir",
+        "_size_mb",
+        "_today_key",
+        "_utc_iso",
+        "append_audit_entry",
+        "append_policy_report",
+        "read_last_lines"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\selfcal\\__init__.py",
+      "size": 0,
+      "mtime": 1762938487.7708366,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\services\\aggregator.py",
+      "size": 7133,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "app.ml.model",
+        "datetime",
+        "json",
+        "math",
+        "numpy",
+        "pandas",
+        "requests",
+        "time",
+        "yfinance"
+      ],
+      "functions": [
+        "_ema",
+        "_impact_to_num",
+        "_rsi",
+        "_safe_hist",
+        "_tech_score",
+        "_upper",
+        "_yf_symbol",
+        "fetch_price_snapshot",
+        "generate_direction_confidence",
+        "get_news_phase_and_impact"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\services\\backtest.py",
+      "size": 11128,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "argparse",
+        "dataclasses",
+        "json",
+        "math",
+        "numpy",
+        "os",
+        "pandas",
+        "typing"
+      ],
+      "functions": [
+        "_detect_regime",
+        "_find_col",
+        "atr",
+        "backtest",
+        "ema",
+        "load_csv",
+        "rsi"
+      ],
+      "classes": [
+        "BTParams",
+        "BTResult",
+        "GovernorParams",
+        "RegimeParams"
+      ]
+    },
+    {
+      "path": "app\\services\\calibrator.py",
+      "size": 16401,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "MetaTrader5",
+        "__future__",
+        "argparse",
+        "backtest",
+        "copy",
+        "itertools",
+        "json",
+        "math",
+        "numpy",
+        "os",
+        "random",
+        "typing",
+        "writer"
+      ],
+      "functions": [
+        "_grid",
+        "_mkparams",
+        "_mt5_env",
+        "_random_space",
+        "clone_cfg",
+        "main",
+        "monte_carlo",
+        "objective",
+        "run_calibration",
+        "save_unified_set",
+        "walk_forward"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\services\\signal_daemon.py",
+      "size": 2899,
+      "mtime": 1764412475.7450902,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "app.services.aggregator",
+        "app.services.writer",
+        "datetime",
+        "os",
+        "time",
+        "traceback"
+      ],
+      "functions": [
+        "_env_bool",
+        "_env_float",
+        "_env_int",
+        "_now_ts",
+        "main"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\services\\writer.py",
+      "size": 21875,
+      "mtime": 1767105359.5010803,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "app.services.aggregator",
+        "ctypes",
+        "importlib",
+        "json",
+        "os",
+        "pathlib",
+        "random",
+        "sys",
+        "time",
+        "typing"
+      ],
+      "functions": [
+        "__init__",
+        "_as_bool",
+        "_as_float",
+        "_as_int",
+        "_atomic_write_bytes",
+        "_ensure_dir",
+        "_get_live_float",
+        "_get_news_weights_cached",
+        "_latest_ini_dict",
+        "_latest_news_bucket_from_decisions",
+        "_live_config_paths",
+        "_load_news_weights_from_file",
+        "_map_bucket_to_weight",
+        "_mt5_common_files",
+        "_news_weights_path",
+        "_pid_exists",
+        "_read_live_config_cached",
+        "_resolve_decisions_paths",
+        "_to_crlf",
+        "_write_utf16le_bom_crlf_atomic",
+        "acquire",
+        "release",
+        "resolve_ai_dir",
+        "resolve_news_bucket_and_weight",
+        "write_ini_signal"
+      ],
+      "classes": [
+        "SingleInstance"
+      ]
+    },
+    {
+      "path": "app\\services\\writer_guard.py",
+      "size": 1753,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "json",
+        "os",
+        "pathlib",
+        "time",
+        "traceback"
+      ],
+      "functions": [
+        "atomic_write_text",
+        "write_ini_signal_safe"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\services\\_init_.py",
+      "size": 20,
+      "mtime": 1760176636.0,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\services\\__init__.py",
+      "size": 0,
+      "mtime": 1758995712.0,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "app\\utils\\mirror_service.py",
+      "size": 385,
+      "mtime": 1762937818.064378,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "json",
+        "os",
+        "pathlib",
+        "typing"
+      ],
+      "functions": [
+        "atomic_copy_text"
+      ],
+      "classes": []
+    },
+    {
+      "path": "app\\utils\\__init__.py",
+      "size": 0,
+      "mtime": 1762938449.3962443,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "artifacts\\best_result.json",
+      "size": 1887,
+      "mtime": 1760216298.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\best_result_20251005_154036.json",
+      "size": 1893,
+      "mtime": 1760216298.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\best_result_20251005_181414.json",
+      "size": 1893,
+      "mtime": 1760216298.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\best_result_20251005_192823.json",
+      "size": 1887,
+      "mtime": 1760216298.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\best_result_20251005_204054.json",
+      "size": 1890,
+      "mtime": 1760216298.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\best_result_20251005_220843.json",
+      "size": 1887,
+      "mtime": 1760216298.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\best_result_partial.json",
+      "size": 1887,
+      "mtime": 1760216298.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\ingest_report_20251109.txt",
+      "size": 259,
+      "mtime": 1762707441.3310902,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251007_193501.json",
+      "size": 5180,
+      "mtime": 1760216436.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251007_201610.json",
+      "size": 5166,
+      "mtime": 1760216436.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251008_075124.json",
+      "size": 5910,
+      "mtime": 1760216436.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251011_003856.json",
+      "size": 3252,
+      "mtime": 1760216436.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251011_044616.json",
+      "size": 6482,
+      "mtime": 1760216436.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251011_113104.json",
+      "size": 6987,
+      "mtime": 1760216436.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251011_131922.json",
+      "size": 6984,
+      "mtime": 1760216436.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_005350.json",
+      "size": 6717,
+      "mtime": 1760309632.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_014100.json",
+      "size": 6717,
+      "mtime": 1760312462.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_022816.json",
+      "size": 6717,
+      "mtime": 1760315298.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_031502.json",
+      "size": 6717,
+      "mtime": 1760318104.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_040414.json",
+      "size": 6722,
+      "mtime": 1760321056.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_045850.json",
+      "size": 6722,
+      "mtime": 1760324332.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_055018.json",
+      "size": 6722,
+      "mtime": 1760327420.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_064128.json",
+      "size": 6722,
+      "mtime": 1760330490.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_072957.json",
+      "size": 6722,
+      "mtime": 1760333398.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_081612.json",
+      "size": 6716,
+      "mtime": 1760336174.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_090427.json",
+      "size": 6720,
+      "mtime": 1760339068.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_095056.json",
+      "size": 6720,
+      "mtime": 1760341858.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_103728.json",
+      "size": 6720,
+      "mtime": 1760344650.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_112338.json",
+      "size": 6720,
+      "mtime": 1760347420.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_121213.json",
+      "size": 6715,
+      "mtime": 1760350334.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_125911.json",
+      "size": 6715,
+      "mtime": 1760353152.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_134623.json",
+      "size": 6715,
+      "mtime": 1760355984.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_143445.json",
+      "size": 6715,
+      "mtime": 1760358886.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_152237.json",
+      "size": 6715,
+      "mtime": 1760361758.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_160954.json",
+      "size": 6709,
+      "mtime": 1760364596.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_165716.json",
+      "size": 6711,
+      "mtime": 1760367438.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_174544.json",
+      "size": 6711,
+      "mtime": 1760370346.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_183943.json",
+      "size": 6711,
+      "mtime": 1760373584.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_193305.json",
+      "size": 6711,
+      "mtime": 1760376786.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_215501.json",
+      "size": 6720,
+      "mtime": 1760385302.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251013_231527.json",
+      "size": 6720,
+      "mtime": 1760390128.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251014_025715.json",
+      "size": 6719,
+      "mtime": 1760403436.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251018_140142.json",
+      "size": 6705,
+      "mtime": 1760788906.708536,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251019_174303.json",
+      "size": 6705,
+      "mtime": 1760888584.218606,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251020_000539.json",
+      "size": 6705,
+      "mtime": 1760911539.4688692,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251020_062734.json",
+      "size": 6720,
+      "mtime": 1760934454.3262112,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251020_202059.json",
+      "size": 6697,
+      "mtime": 1760984459.834508,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251020_225508.json",
+      "size": 6697,
+      "mtime": 1760993709.0438576,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251021_052314.json",
+      "size": 6713,
+      "mtime": 1761016994.3294244,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251021_064244.json",
+      "size": 6711,
+      "mtime": 1761021764.9700146,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251021_125924.json",
+      "size": 6702,
+      "mtime": 1761044364.1845026,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251021_191555.json",
+      "size": 6707,
+      "mtime": 1761066955.2233045,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251026_144749.json",
+      "size": 6715,
+      "mtime": 1761486469.307997,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251026_145315.json",
+      "size": 6715,
+      "mtime": 1761486795.6396115,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\wf_results_20251027_194456.json",
+      "size": 6715,
+      "mtime": 1761590696.2419474,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "artifacts\\run_20251008_170746\\wf_results_20251008_215659.json",
+      "size": 8274,
+      "mtime": 1760216444.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "calibration_out\\best_result.json",
+      "size": 1828,
+      "mtime": 1758980246.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "logs\\server_log.txt",
+      "size": 4025,
+      "mtime": 1760472462.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "logs\\_check_tmp\\dbg.json",
+      "size": 1149,
+      "mtime": 1762948809.8736281,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "logs\\_check_tmp\\healthz.json",
+      "size": 108,
+      "mtime": 1762948806.057065,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "logs\\_check_tmp\\root.json",
+      "size": 394,
+      "mtime": 1762948806.1099565,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "logs\\_check_tmp\\selfcal_once.json",
+      "size": 1122,
+      "mtime": 1762948806.2560701,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "logs\\_check_tmp\\sig_gen.json",
+      "size": 346,
+      "mtime": 1762948808.969731,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "logs\\_check_tmp\\summary.json",
+      "size": 927,
+      "mtime": 1762948810.0374668,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "logs\\_check_tmp\\test_read.json",
+      "size": 2589,
+      "mtime": 1762948809.9854596,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "models\\active_model.json",
+      "size": 66,
+      "mtime": 1771077653.528582,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "models\\active_model.meta.json",
+      "size": 1206,
+      "mtime": 1764515448.9590075,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "models\\mapping_XAUUSD.json",
+      "size": 25,
+      "mtime": 1771077653.529582,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "models\\mapping_XAUUSDr.json",
+      "size": 25,
+      "mtime": 1771077653.529582,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\.package-lock.json",
+      "size": 12789,
+      "mtime": 1758478822.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\amdefine\\package.json",
+      "size": 496,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\amdefine\\README.md",
+      "size": 6132,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\ansi-regex\\package.json",
+      "size": 841,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\ansi-regex\\readme.md",
+      "size": 2565,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\ansi-styles\\package.json",
+      "size": 1054,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\ansi-styles\\readme.md",
+      "size": 4327,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\chalk\\package.json",
+      "size": 996,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\chalk\\readme.md",
+      "size": 11809,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\cli-progress\\CHANGES.md",
+      "size": 9816,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\cli-progress\\LICENSE.md",
+      "size": 1093,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\cli-progress\\package.json",
+      "size": 1104,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\cli-progress\\README.md",
+      "size": 14354,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\color-convert\\CHANGELOG.md",
+      "size": 1417,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\color-convert\\package.json",
+      "size": 827,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\color-convert\\README.md",
+      "size": 2853,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\color-name\\package.json",
+      "size": 607,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\color-name\\README.md",
+      "size": 384,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\commander\\CHANGELOG.md",
+      "size": 14931,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\commander\\package.json",
+      "size": 1132,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\commander\\Readme.md",
+      "size": 25220,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\dayjs\\CHANGELOG.md",
+      "size": 77898,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\dayjs\\locale.json",
+      "size": 5033,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\dayjs\\package.json",
+      "size": 2526,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\dayjs\\README.md",
+      "size": 7266,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\debug\\package.json",
+      "size": 1419,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\debug\\README.md",
+      "size": 22496,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\dukascopy-node\\package.json",
+      "size": 2356,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\dukascopy-node\\README.md",
+      "size": 172902,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\emoji-regex\\LICENSE-MIT.txt",
+      "size": 1077,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\emoji-regex\\package.json",
+      "size": 1278,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\emoji-regex\\README.md",
+      "size": 2691,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\fastest-validator\\CHANGELOG.md",
+      "size": 18522,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\fastest-validator\\package.json",
+      "size": 2273,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\fastest-validator\\README.md",
+      "size": 44298,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\fs-extra\\package.json",
+      "size": 1463,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\fs-extra\\README.md",
+      "size": 9629,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\graceful-fs\\package.json",
+      "size": 1031,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\graceful-fs\\README.md",
+      "size": 4741,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\has-flag\\package.json",
+      "size": 696,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\has-flag\\readme.md",
+      "size": 1600,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\is-fullwidth-code-point\\package.json",
+      "size": 737,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\is-fullwidth-code-point\\readme.md",
+      "size": 843,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\jsonfile\\package.json",
+      "size": 762,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\jsonfile\\README.md",
+      "size": 6444,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\long\\package.json",
+      "size": 791,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\long\\README.md",
+      "size": 9049,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\lzma-purejs-requirejs\\.travis.yml",
+      "size": 58,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\lzma-purejs-requirejs\\FORMAT.md",
+      "size": 4419,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\lzma-purejs-requirejs\\package.json",
+      "size": 696,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\lzma-purejs-requirejs\\README.md",
+      "size": 5310,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\lzma-purejs-requirejs\\node_modules\\commander\\package.json",
+      "size": 512,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\lzma-purejs-requirejs\\node_modules\\commander\\Readme.md",
+      "size": 6014,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\ms\\license.md",
+      "size": 1077,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\ms\\package.json",
+      "size": 705,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\ms\\readme.md",
+      "size": 2037,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\node-fetch\\LICENSE.md",
+      "size": 1079,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\node-fetch\\package.json",
+      "size": 2345,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\node-fetch\\README.md",
+      "size": 19782,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\python-struct\\package.json",
+      "size": 930,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\python-struct\\README.md",
+      "size": 2794,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\string-width\\package.json",
+      "size": 941,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\string-width\\readme.md",
+      "size": 1396,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\strip-ansi\\package.json",
+      "size": 798,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\strip-ansi\\readme.md",
+      "size": 1599,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\supports-color\\package.json",
+      "size": 817,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\supports-color\\readme.md",
+      "size": 2294,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\tr46\\package.json",
+      "size": 732,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\tr46\\lib\\mappingTable.json",
+      "size": 260049,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\universalify\\package.json",
+      "size": 857,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\universalify\\README.md",
+      "size": 2012,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\webidl-conversions\\LICENSE.md",
+      "size": 1323,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\webidl-conversions\\package.json",
+      "size": 511,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\webidl-conversions\\README.md",
+      "size": 5480,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\whatwg-url\\LICENSE.txt",
+      "size": 1088,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\whatwg-url\\package.json",
+      "size": 886,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "node_modules\\whatwg-url\\README.md",
+      "size": 5136,
+      "mtime": 1758459162.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "runtime\\last_promote.txt",
+      "size": 32,
+      "mtime": 1760182002.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "runtime\\live_config.ini",
+      "size": 238,
+      "mtime": 1762599591.7964976,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "runtime\\live_config.json",
+      "size": 2828,
+      "mtime": 1771079996.191964,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "runtime\\live_config_backup_20251011_220607.json",
+      "size": 659,
+      "mtime": 1760216496.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "runtime\\news_weights.json",
+      "size": 374,
+      "mtime": 1764498041.7777214,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "runtime\\selfcal_state.json",
+      "size": 996,
+      "mtime": 1771079996.191964,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "runtime\\status.json",
+      "size": 326,
+      "mtime": 1760216496.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "runtime\\tester_bt.ini",
+      "size": 362,
+      "mtime": 1760270346.0,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "runtime\\logs\\sync_state.json",
+      "size": 30,
+      "mtime": 1771079254.3392336,
+      "sha1": null,
+      "py": false,
+      "imports": null,
+      "functions": null,
+      "classes": null
+    },
+    {
+      "path": "tools\\autotrain_job.py",
+      "size": 11347,
+      "mtime": 1764516836.2623026,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "hyperopt",
+        "json",
+        "numpy",
+        "os",
+        "pandas",
+        "pathlib",
+        "sklearn.metrics",
+        "sklearn.model_selection",
+        "sys",
+        "typing",
+        "xgboost"
+      ],
+      "functions": [
+        "_build_model",
+        "_load_feature_store",
+        "_log",
+        "_prepare_xy",
+        "main",
+        "objective"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\bt_ea_like.py",
+      "size": 9002,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "argparse",
+        "json",
+        "math",
+        "numpy",
+        "pandas",
+        "pathlib"
+      ],
+      "functions": [
+        "atr",
+        "ema",
+        "main",
+        "rsi",
+        "run_bt"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\build_feature_store.py",
+      "size": 17428,
+      "mtime": 1764511613.760422,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "argparse",
+        "json",
+        "numpy",
+        "pandas",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "functions": [
+        "_add_news_features",
+        "_add_regime_features",
+        "_add_rolling_features",
+        "_add_time_features",
+        "_add_volatility_features",
+        "_bucket_spread",
+        "_bucket_vol",
+        "_build_base_df",
+        "_clip_series",
+        "_ensure_datetime",
+        "_load_jsonl_files",
+        "_log",
+        "_map_dir",
+        "_map_impact",
+        "_map_reg",
+        "_normalize_news",
+        "_rolling_stats",
+        "_safe_num",
+        "build_feature_store",
+        "engineer_features",
+        "main"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\build_signal_csv.py",
+      "size": 1920,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "argparse",
+        "datetime",
+        "numpy",
+        "pandas",
+        "pathlib"
+      ],
+      "functions": [
+        "main",
+        "make_signals"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\check_signals_stats.py",
+      "size": 1709,
+      "mtime": 1771079993.9104507,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "pandas"
+      ],
+      "functions": [
+        "eligible_mask"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\convert_mt5_csv.py",
+      "size": 3475,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "pandas",
+        "pathlib",
+        "sys"
+      ],
+      "functions": [
+        "_auto_read_csv",
+        "_normalize_columns",
+        "convert"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\data_fetch.py",
+      "size": 2305,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "argparse",
+        "os",
+        "pandas",
+        "pathlib",
+        "sys",
+        "yfinance"
+      ],
+      "functions": [
+        "load_from_csv",
+        "load_from_yahoo",
+        "main"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\diag_signals.py",
+      "size": 13937,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "MetaTrader5",
+        "__future__",
+        "argparse",
+        "dataclasses",
+        "math",
+        "numpy",
+        "pandas",
+        "pathlib",
+        "random",
+        "sys",
+        "time",
+        "typing",
+        "yfinance"
+      ],
+      "functions": [
+        "_ensure_utc_idx",
+        "_fmt_pct",
+        "_mkdir",
+        "_rsi",
+        "clean_price_df",
+        "load_from_csv",
+        "load_from_mt5",
+        "load_from_yf",
+        "main",
+        "make_features",
+        "pct",
+        "resolve_mt5_symbol",
+        "run_diag",
+        "score"
+      ],
+      "classes": [
+        "P"
+      ]
+    },
+    {
+      "path": "tools\\generate_ai_replay_csv_xgb.py",
+      "size": 7417,
+      "mtime": 1771085905.3354516,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "app.config",
+        "app.ml.features",
+        "app.ml.model",
+        "app.ml.registry",
+        "argparse",
+        "json",
+        "numpy",
+        "pandas",
+        "pathlib"
+      ],
+      "functions": [
+        "build_signals",
+        "load_mapping",
+        "main",
+        "read_mt5_prices_csv"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\optimize_auto.py",
+      "size": 51947,
+      "mtime": 1762935812.3009815,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "MetaTrader5",
+        "__future__",
+        "app.ml.features",
+        "argparse",
+        "dataclasses",
+        "hyperopt",
+        "json",
+        "math",
+        "multiprocessing",
+        "numpy",
+        "os",
+        "pandas",
+        "pathlib",
+        "random",
+        "signal",
+        "sys",
+        "time",
+        "typing",
+        "warnings",
+        "yfinance"
+      ],
+      "functions": [
+        "_atr",
+        "_current_relax",
+        "_ensure_utc_idx",
+        "_eval_candidate",
+        "_log",
+        "_mkdir",
+        "_now_iso",
+        "_obj",
+        "_random_candidate",
+        "_rsi",
+        "_rsi_local",
+        "_safe_float",
+        "_safe_range",
+        "aggregate_results",
+        "can_promote",
+        "clean_price_df",
+        "data_driven_ranges",
+        "load_from_csv",
+        "load_from_mt5",
+        "load_from_yf",
+        "load_or_fetch_price",
+        "load_spread_by_hour",
+        "lots",
+        "main",
+        "make_features",
+        "make_grid_logger",
+        "objective_hyperopt",
+        "objective_random",
+        "relax_params",
+        "resolve_mt5_symbol",
+        "run_bt",
+        "score",
+        "score_objective",
+        "slice_df",
+        "split_walk_forward",
+        "spread_for_hour",
+        "walk_forward_optimize",
+        "write_live_config",
+        "write_status"
+      ],
+      "classes": [
+        "P"
+      ]
+    },
+    {
+      "path": "tools\\optimize_full.py",
+      "size": 31650,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.ml.features",
+        "argparse",
+        "dataclasses",
+        "itertools",
+        "json",
+        "math",
+        "numpy",
+        "os",
+        "pandas",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "functions": [
+        "__init__",
+        "_can_open",
+        "_deal_profit",
+        "_fallback_atr",
+        "_fallback_rsi",
+        "_log",
+        "_regime_params",
+        "_rg_adjust_risk",
+        "_risk_governor_blocks",
+        "_risk_to_lots",
+        "_step_close_manage",
+        "compute_metrics",
+        "grid_presets",
+        "in_news_window",
+        "load_news_csv",
+        "load_price_csv",
+        "main",
+        "make_features",
+        "make_labels",
+        "run",
+        "run_grid",
+        "save_partial",
+        "write_live_config"
+      ],
+      "classes": [
+        "Backtester",
+        "EngineParams",
+        "Metrics",
+        "Trade"
+      ]
+    },
+    {
+      "path": "tools\\project_audit.py",
+      "size": 19824,
+      "mtime": 1771087924.207456,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "argparse",
+        "ast",
+        "dataclasses",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "runpy",
+        "sys",
+        "time",
+        "traceback",
+        "typing"
+      ],
+      "functions": [
+        "detect_circular_import_risk",
+        "detect_hardcoded_paths",
+        "detect_pandas_column_pitfalls",
+        "detect_registry_schema",
+        "detect_xgb_pickle_risk",
+        "dfs",
+        "extract_defs_from_ast",
+        "extract_imports_from_ast",
+        "is_venv_path",
+        "looks_like_abs_path",
+        "main",
+        "mod_name",
+        "normalize_win_path",
+        "now_iso",
+        "parse_py_ast",
+        "read_text",
+        "rel",
+        "run_import_checks",
+        "safe_json_load",
+        "scan_project",
+        "sec",
+        "write_report"
+      ],
+      "classes": [
+        "FileInfo",
+        "Finding"
+      ]
+    },
+    {
+      "path": "tools\\promote_live.py",
+      "size": 3429,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "argparse",
+        "json",
+        "os",
+        "pathlib",
+        "shutil",
+        "sys"
+      ],
+      "functions": [
+        "copy_to",
+        "find_common_files_dir",
+        "load_cfg",
+        "main",
+        "save_cfg"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\replay_signals.py",
+      "size": 1297,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "argparse",
+        "datetime",
+        "os",
+        "pandas",
+        "time"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "tools\\run_calibration.py",
+      "size": 465,
+      "mtime": 1760176636.0,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "app.services.calibrator",
+        "os",
+        "sys"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "tools\\run_topn.py",
+      "size": 6308,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.services.backtest",
+        "app.services.calibrator",
+        "app.services.writer",
+        "argparse",
+        "itertools",
+        "json",
+        "os",
+        "random",
+        "typing"
+      ],
+      "functions": [
+        "_grid",
+        "_random_space",
+        "main",
+        "run_params"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\selfcal_runner.py",
+      "size": 3200,
+      "mtime": 1763281262.3504603,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.core.policy_engine",
+        "dotenv",
+        "json",
+        "os",
+        "pathlib",
+        "sys",
+        "time",
+        "typing"
+      ],
+      "functions": [
+        "_env_bool",
+        "_env_int",
+        "_load_env",
+        "main",
+        "run_once"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\sync_ai_signals.py",
+      "size": 851,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "os",
+        "shutil",
+        "time"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "path": "tools\\sync_deals_to_jsonl.py",
+      "size": 10571,
+      "mtime": 1764956464.735275,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.config",
+        "csv",
+        "dataclasses",
+        "datetime",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "functions": [
+        "_append_jsonl",
+        "_deal_to_jsonl_obj",
+        "_direction_from_type",
+        "_dt_to_iso",
+        "_ensure_logs_dir",
+        "_load_live_policy_meta",
+        "_load_new_deals",
+        "_load_state",
+        "_month_key",
+        "_parse_ts",
+        "_save_state",
+        "_to_float",
+        "_to_int",
+        "main"
+      ],
+      "classes": [
+        "DealRow"
+      ]
+    },
+    {
+      "path": "tools\\sync_jsonl_from_mt5.py",
+      "size": 3158,
+      "mtime": 1763799284.9051838,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "dotenv",
+        "glob",
+        "os",
+        "pathlib",
+        "shutil"
+      ],
+      "functions": [
+        "copy_if_newer",
+        "ensure_dir",
+        "find_source_files",
+        "log",
+        "sync_jsonl"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\train_model_xgb.py",
+      "size": 11830,
+      "mtime": 1764422184.301965,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "datetime",
+        "dotenv",
+        "glob",
+        "json",
+        "numpy",
+        "os",
+        "pandas",
+        "pathlib",
+        "sklearn.metrics",
+        "sklearn.model_selection",
+        "xgboost"
+      ],
+      "functions": [
+        "_find_latest_feature_store",
+        "_get_paths",
+        "_glob_latest",
+        "_infer_target",
+        "_load_feature_store",
+        "_prepare_xy",
+        "_save_model",
+        "_train_xgb",
+        "_update_active_model",
+        "main"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\update_news_weights.py",
+      "size": 1778,
+      "mtime": 1764453165.7740273,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.analytics.news_performance",
+        "dotenv",
+        "os",
+        "pathlib",
+        "sys"
+      ],
+      "functions": [
+        "main"
+      ],
+      "classes": []
+    },
+    {
+      "path": "tools\\walk_forward.py",
+      "size": 15049,
+      "mtime": 1764233049.7189808,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "__future__",
+        "app.services.backtest",
+        "app.services.writer",
+        "argparse",
+        "collections",
+        "csv",
+        "itertools",
+        "json",
+        "math",
+        "numpy",
+        "os",
+        "pandas",
+        "random",
+        "typing"
+      ],
+      "functions": [
+        "agg_score",
+        "build_walk_forward_splits",
+        "evaluate_window",
+        "grid_enumerate",
+        "main",
+        "objective",
+        "params_to_set_map",
+        "random_space_draw",
+        "score_forward_row",
+        "summarize_all",
+        "write_csv"
+      ],
+      "classes": []
+    },
+    {
+      "path": "web\\main.py",
+      "size": 2974,
+      "mtime": 1758741702.0,
+      "sha1": null,
+      "py": true,
+      "imports": [
+        "datetime",
+        "fastapi",
+        "os",
+        "pydantic"
+      ],
+      "functions": [
+        "build_ini_text",
+        "clear_signal",
+        "health",
+        "write_ini_file",
+        "write_signal"
+      ],
+      "classes": [
+        "SignalIn"
+      ]
+    },
+    {
+      "path": "web\\__init__.py",
+      "size": 0,
+      "mtime": 1758712506.0,
+      "sha1": null,
+      "py": true,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    }
+  ]
+}

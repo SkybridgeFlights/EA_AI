@@ -1,0 +1,16 @@
+stage: &id001
+  name: company
+  dd: 12.0
+  pf: 1.2
+  wm: -8.0
+  tr: 200
+attempts:
+- stage_cfg: *id001
+  valid_trials: 0
+- stage_cfg:
+    name: company_relax1
+    dd: 13.5
+    pf: 1.17
+    wm: -9.0
+    tr: 180
+  valid_trials: 273

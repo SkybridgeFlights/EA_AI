@@ -1,0 +1,44 @@
+{
+  "selected_by": "no_config_passed_gate(mc_dd_p95<= 12.0); picked min(mc_dd_p95) then max(mc_net_p05)",
+  "constraints_used": {
+    "dd_limit": 12.0,
+    "pf_limit": 1.2
+  },
+  "best_row": {
+    "rank": 4.0,
+    "base_net_profit": 7498.581574105388,
+    "base_pf": 1.253225127027418,
+    "base_max_dd_pct": -7.6862119285304065,
+    "base_worst_month_pct": -5.321474483425503,
+    "base_trades": 703.0,
+    "mc_iters": 300.0,
+    "mc_net_p05": 5943.7632563705965,
+    "mc_net_med": 7159.509736444012,
+    "mc_dd_p95": 13.950098152045623,
+    "mc_pf_p05": 1.2091296850566635,
+    "mc_pass_rate": 0.8233333333333334
+  },
+  "params": {
+    "InpMAfast": 29,
+    "InpMAslow": 89,
+    "InpRSI_Period": 11,
+    "InpRSI_BuyMax": 61,
+    "InpRSI_SellMin": 54,
+    "InpATR_Period": 23,
+    "InpATR_SL_Mult": 1.6,
+    "InpRR": 3.0,
+    "InpMaxSpreadPts": 350,
+    "InpRiskPct": 0.55,
+    "MaxTradesPerDay": 9,
+    "DailyLossPct": 3.5,
+    "UseTrailingStop": true,
+    "TS_StartPts": 525,
+    "TS_StepPts": 50,
+    "UseBreakEven": true,
+    "BE_TriggerPts": 170,
+    "BE_OffsetPts": 0,
+    "MinTradeGapSec": 330
+  },
+  "symbol": "XAUUSDr",
+  "timeframe": "H1"
+}

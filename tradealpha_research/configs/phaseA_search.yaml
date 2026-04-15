@@ -1,0 +1,139 @@
+# configs/phaseA_search.yaml
+run:
+  symbol: "XAUUSDr"
+  timeframe: "H1"
+  utc: true
+  start: "2021-01-01"
+  end: "2025-12-31"
+
+costs:
+  spread_points_model: "fixed"     # fixed | from_data (لاحقًا)
+  fixed_spread_points: 220         # اجعلها قريبة من متوسط Exness Raw Spread على الذهب
+  slippage_points: 25              # تقدير محافظ
+  commission_per_lot: 7.0
+
+execution:
+  trade_on_closed_bar: true
+  min_trade_gap_sec: 60            # baseline (لكننا نبحث MinTradeGapSec أيضًا)
+
+risk:
+  initial_balance: 10000
+
+constraints:
+  max_dd_pct: 12.0
+  min_trades: 200
+  min_pf: 1.20
+  worst_month_pct: -8.0
+
+search_space:
+  # ===== Signals =====
+  InpMAfast:
+    type: "int"
+    low: 8
+    high: 55
+
+  InpMAslow:
+    type: "int"
+    low: 20
+    high: 200
+
+  InpRSI_Period:
+    type: "int"
+    low: 7
+    high: 28
+
+  InpRSI_BuyMax:
+    type: "int"
+    low: 45
+    high: 65
+
+  InpRSI_SellMin:
+    type: "int"
+    low: 35
+    high: 55
+
+  # ===== ATR / SL / TP =====
+  InpATR_Period:
+    type: "int"
+    low: 7
+    high: 28
+
+  InpATR_SL_Mult:
+    type: "float"
+    low: 1.2
+    high: 3.0
+    step: 0.1
+
+  InpRR:
+    type: "float"
+    low: 1.2
+    high: 3.2
+    step: 0.1
+
+  # ===== Spread gate =====
+  InpMaxSpreadPts:
+    type: "int"
+    low: 120
+    high: 350
+    step: 10
+
+  # ===== Risk & Limits =====
+  InpRiskPct:
+    type: "float"
+    low: 0.15
+    high: 1.00
+    step: 0.05
+
+  MaxTradesPerDay:
+    type: "int"
+    low: 2
+    high: 10
+
+  DailyLossPct:
+    type: "float"
+    low: 1.5
+    high: 4.0
+    step: 0.25
+
+  # ===== BE / TS (kept but not emphasized) =====
+  UseTrailingStop:
+    type: "bool"
+
+  TS_StartPts:
+    type: "int"
+    low: 150
+    high: 600
+    step: 25
+
+  TS_StepPts:
+    type: "int"
+    low: 50
+    high: 250
+    step: 10
+
+  UseBreakEven:
+    type: "bool"
+
+  BE_TriggerPts:
+    type: "int"
+    low: 50
+    high: 250
+    step: 10
+
+  BE_OffsetPts:
+    type: "int"
+    low: 0
+    high: 60
+    step: 5
+
+  # ===== Execution =====
+  MinTradeGapSec:
+    type: "int"
+    low: 60
+    high: 900
+    step: 30
+
+rules:
+  - "InpMAslow >= InpMAfast + 10"
+  - "InpRSI_SellMin <= InpRSI_BuyMax - 5"
+  - "TS_StepPts <= TS_StartPts"

@@ -1,0 +1,108 @@
+run:
+  symbol: XAUUSDr
+  timeframe: H1
+  utc: true
+  start: '2021-01-01'
+  end: '2025-12-31'
+costs:
+  spread_points_model: fixed
+  fixed_spread_points: 220
+  slippage_points: 25
+  commission_per_lot: 7.0
+execution:
+  trade_on_closed_bar: true
+  min_trade_gap_sec: 60
+risk:
+  initial_balance: 10000
+constraints:
+  max_dd_pct: 16.5
+  min_trades: 140
+  min_pf: 1.1199999999999999
+  worst_month_pct: -11.0
+search_space:
+  InpMAfast:
+    type: int
+    low: 8
+    high: 26
+  InpMAslow:
+    type: int
+    low: 85
+    high: 140
+  InpRSI_Period:
+    type: int
+    low: 9
+    high: 20
+  InpRSI_BuyMax:
+    type: int
+    low: 61
+    high: 65
+  InpRSI_SellMin:
+    type: int
+    low: 35
+    high: 38
+  InpATR_Period:
+    type: int
+    low: 7
+    high: 11
+  InpATR_SL_Mult:
+    type: float
+    low: 1.9000000000000001
+    high: 2.1
+    step: 0.1
+  InpRR:
+    type: float
+    low: 1.2000000000000002
+    high: 1.4000000000000001
+    step: 0.1
+  InpMaxSpreadPts:
+    type: int
+    low: 150
+    high: 350
+    step: 10
+  InpRiskPct:
+    type: float
+    low: 0.7000000000000001
+    high: 0.9
+    step: 0.05
+  MaxTradesPerDay:
+    type: int
+    low: 6
+    high: 10
+  DailyLossPct:
+    type: float
+    low: 2.25
+    high: 4.0
+    step: 0.25
+  UseTrailingStop:
+    type: bool
+  TS_StartPts:
+    type: int
+    low: 150
+    high: 600
+    step: 25
+  TS_StepPts:
+    type: int
+    low: 50
+    high: 130
+    step: 10
+  UseBreakEven:
+    type: bool
+  BE_TriggerPts:
+    type: int
+    low: 120
+    high: 210
+    step: 10
+  BE_OffsetPts:
+    type: int
+    low: 15
+    high: 25
+    step: 5
+  MinTradeGapSec:
+    type: int
+    low: 60
+    high: 900
+    step: 30
+rules:
+- InpMAslow >= InpMAfast + 10
+- InpRSI_SellMin <= InpRSI_BuyMax - 5
+- TS_StepPts <= TS_StartPts
